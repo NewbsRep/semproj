@@ -3,4 +3,5 @@
     <string name="el_pastas">Įveskite el. pašto adresą</string>
     <string name="pass_text">Įveskite slaptažodį</string>
     <string name="login">Prisijunkite</string>
+    <string name="home_screen">HOME SCREEN</string>
 </resources>
