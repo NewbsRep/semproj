@@ -18,7 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignTop="@+id/emailField"
-            android:text="@string/el_pastas"
+            android:text="@string/mailText"
             android:textSize="15sp" />
 
         <EditText
@@ -39,7 +39,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignTop="@+id/passField"
-            android:text="@string/pass_text"
+            android:text="@string/passText"
             android:textSize="15sp" />
 
         <EditText
