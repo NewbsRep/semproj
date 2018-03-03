@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Login_Activity extends AppCompatActivity {
 
@@ -16,6 +17,13 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setContentView(R.layout.activity_home_screen_);
+            }
+        });
+        TextView register = (TextView) findViewById(R.id.registerTV);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.activity_register);
             }
         });
 
