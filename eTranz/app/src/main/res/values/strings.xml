@@ -3,7 +3,10 @@
     <string name="mailText">Įveskite el. pašto adresą</string>
     <string name="passText">Įveskite slaptažodį</string>
     <string name="loginText">Prisijunkite</string>
+    <string name="registerText">Neturite paskyros? Prisiregistruokite!</string>
+    <!---->
     <string name="home_screen">HOME SCREEN</string>
+    <!---->
     <string name="register">Registruotis!</string>
     <string name="passwordRepeat">Pakartokite įvestą slaptažodį</string>
 </resources>
