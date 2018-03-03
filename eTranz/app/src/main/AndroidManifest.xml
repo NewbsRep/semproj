@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".HomeScreen_Activity"></activity>
-        <activity android:name=".Register"></activity>
+        <activity android:name=".registerActivity"></activity>
     </application>
 
 </manifest>
