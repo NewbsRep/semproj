@@ -77,6 +77,15 @@
             android:text="@string/register"
             android:layout_marginTop="34dp"
             app:srcCompat="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/registerTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/passField"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="51dp"
+            android:text="@string/registerText" />
     </RelativeLayout>
 
 </LinearLayout>

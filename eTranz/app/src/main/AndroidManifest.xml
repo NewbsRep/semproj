@@ -22,9 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".HomeScreen_Activity" />
         <activity android:name=".Register" />
         <activity android:name=".Profile"></activity>
+=======
+        <activity android:name=".HomeScreen_Activity"></activity>
+        <activity android:name=".registerActivity"></activity>
+>>>>>>> d9e16346834282f408db656b07e7bbb14a1507bb
     </application>
 
 </manifest>
