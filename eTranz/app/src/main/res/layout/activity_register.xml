@@ -54,7 +54,7 @@
 
     <EditText
         android:id="@+id/etPasswordRepeat"
-        android:layout_width="0dp"
+        android:layout_width="match_constraint"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
@@ -72,8 +72,6 @@
         android:id="@+id/etName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:text="@string/register"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/registerName"
@@ -95,7 +93,6 @@
         app:layout_constraintEnd_toEndOf="@+id/etName"
         app:layout_constraintStart_toStartOf="@+id/etName"
         app:layout_constraintTop_toBottomOf="@+id/etName" />
->>>>>>> c8c8700dbc4e2a0c3440a94b9ea64b5afd7aa135
 
 
 </android.support.constraint.ConstraintLayout>
