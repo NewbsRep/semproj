@@ -5,7 +5,9 @@
     //activity_login
     <string name="mailText">Įveskite el. pašto adresą</string>
     <string name="passText">Įveskite slaptažodį</string>
-    <string name="loginText">Prisijunkite</string>
+    <string name="loginText">Prisijungti</string>
+    <string name="registerName">Jūsų vardas</string>
+    <string name="registerBirthDate">Jūsų gimimo data</string>
     <string name="registerText">Neturite paskyros? Prisiregistruokite!</string>
 
     //activity_home_screen
