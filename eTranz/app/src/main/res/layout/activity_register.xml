@@ -54,7 +54,7 @@
 
     <EditText
         android:id="@+id/etPasswordRepeat"
-        android:layout_width="0dp"
+        android:layout_width="match_constraint"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
