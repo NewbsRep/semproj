@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/nav_account"
-        android:title="@string/myProfile"
-        android:icon="@mipmap/ic_account_circle_black_24dp"/>
+    <item
+        android:id="@+id/nav_account"
+        android:icon="@mipmap/ic_account_circle_black_24dp"
+        android:title="@string/myProfile" />
 
     <item android:id="@+id/nav_settings"
         android:title="@string/settings"
