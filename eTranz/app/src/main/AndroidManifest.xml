@@ -24,7 +24,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Profile"></activity>
-        <activity android:name=".HomeScreen_Activity"></activity>
+        <activity android:name=".HomeScreen_Activity"
+            android:theme="@style/Theme.AppCompat.Light">
+        </activity>
         <activity android:name=".registerActivity"></activity>
     </application>
 

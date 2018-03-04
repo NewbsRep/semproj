@@ -1,14 +1,26 @@
 <resources>
+    // GENERAL
     <string name="appName">eTranz</string>
-    <string name="mailText">Įveskite savo el. pašto adresą</string>
+
+    //activity_login
+    <string name="mailText">Įveskite el. pašto adresą</string>
     <string name="passText">Įveskite slaptažodį</string>
     <string name="loginText">Prisijungti</string>
     <string name="registerName">Jūsų vardas</string>
     <string name="registerBirthDate">Jūsų gimimo data</string>
     <string name="registerText">Neturite paskyros? Prisiregistruokite!</string>
-    <!---->
-    <string name="home_screen">HOME SCREEN</string>
-    <!---->
+
+    //activity_home_screen
+    <string name="home_MainLayout">Main Layout</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    //activity_register
     <string name="register">Registruotis!</string>
     <string name="passwordRepeat">Pakartokite įvestą slaptažodį</string>
+
+    //navigation_menu
+    <string name="myProfile">Mano profilis</string>
+    <string name="settings">Nustatymai</string>
+    <string name="logout">Atsijungti</string>
 </resources>
