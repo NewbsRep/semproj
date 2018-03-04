@@ -17,9 +17,6 @@ public class HomeScreen_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen_);
 
-        //Intent intent = getIntent();
-
-
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
 

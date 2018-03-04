@@ -86,7 +86,8 @@
             android:layout_below="@+id/passField"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="51dp"
-            android:text="@string/registerText" />
+            android:text="@string/registerText"
+            android:onClick="registerButtonPressed"/>
     </RelativeLayout>
 
 </LinearLayout>
