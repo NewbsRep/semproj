@@ -72,8 +72,9 @@
         android:id="@+id/etName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:text="@string/register"
         android:layout_marginTop="8dp"
-        android:capitalize="words"
         android:ems="10"
         android:hint="@string/registerName"
         android:inputType="textPersonName"
@@ -87,7 +88,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:allowUndo="false"
         android:ems="10"
         android:hint="@string/registerBirthDate"
         android:inputType="date"
@@ -95,6 +95,7 @@
         app:layout_constraintEnd_toEndOf="@+id/etName"
         app:layout_constraintStart_toStartOf="@+id/etName"
         app:layout_constraintTop_toBottomOf="@+id/etName" />
+>>>>>>> c8c8700dbc4e2a0c3440a94b9ea64b5afd7aa135
 
 
 </android.support.constraint.ConstraintLayout>
