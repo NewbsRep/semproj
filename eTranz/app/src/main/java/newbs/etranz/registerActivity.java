@@ -26,15 +26,7 @@ public class registerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        firebaseAuth = FirebaseAuth.getInstance();
-        eMail = (EditText) findViewById(R.id.etEmail);
-        name = (EditText) findViewById(R.id.etName);
-        dateOfBirth = (EditText) findViewById(R.id.etBirthDate);
-        password = (EditText) findViewById(R.id.etPasswordReg);
-        btnRegister = (Button) findViewById(R.id.btnRegister);
-        hasAcc = (TextView) findViewById(R.id.tvHaveAcc);
-
+		initializeViews();
         hasAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +73,13 @@ public class registerActivity extends AppCompatActivity {
     }
 
     private void initializeViews(){
-
+		setContentView(R.layout.activity_register);
+        firebaseAuth = FirebaseAuth.getInstance();
+        eMail = (EditText) findViewById(R.id.etEmail);
+        name = (EditText) findViewById(R.id.etName);
+        dateOfBirth = (EditText) findViewById(R.id.etBirthDate);
+        password = (EditText) findViewById(R.id.etPasswordReg);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
+        hasAcc = (TextView) findViewById(R.id.tvHaveAcc);
     }
 }
