@@ -44,7 +44,7 @@ public class registerActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(noEmptyFields()) {
+                if(noEmptyFields() == true) {
                     String mail = eMail.getText().toString().trim();
                     String pass = password.getText().toString().trim();
 
@@ -73,10 +73,10 @@ public class registerActivity extends AppCompatActivity {
 
         if(mail.isEmpty() || usrName.isEmpty() || bDay.isEmpty() || paswd.isEmpty()) {
             Toast.makeText(this, "Prašome užpildyti visus laukus", Toast.LENGTH_SHORT).show();
-            return true;
+            return false;
         }
         else
-            return false;
+            return true;
     }
 
     private void initializeViews(){
