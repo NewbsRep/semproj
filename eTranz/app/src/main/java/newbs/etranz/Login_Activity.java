@@ -22,7 +22,6 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     public void registerButtonPressed(View view){
-        Intent intent = new Intent(this, registerActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(this, registerActivity.class));
     }
 }
