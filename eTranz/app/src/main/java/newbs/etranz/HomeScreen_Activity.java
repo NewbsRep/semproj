@@ -8,16 +8,19 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class HomeScreen_Activity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen_);
-
+        initializeObj();
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
 
@@ -40,5 +43,13 @@ public class HomeScreen_Activity extends AppCompatActivity {
     public void accountSettingsBP(View view){
         Intent intent = new Intent(this, Profile.class);
         startActivity(intent);
+    }
+
+    public void initializeObj(){
+        firebaseAuth = firebaseAuth.getInstance();
+    }
+
+
+    public void logOut(){
     }
 }

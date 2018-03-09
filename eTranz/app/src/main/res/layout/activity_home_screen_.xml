@@ -19,6 +19,7 @@
             android:text="@string/home_MainLayout"
             android:textAlignment="center"
             android:textSize="24sp" />
+
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

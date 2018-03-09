@@ -48,14 +48,14 @@
         android:hint="@string/mailText"
         android:inputType="textEmailAddress"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/etPasswordReg"
+        app:layout_constraintBottom_toTopOf="@+id/etPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/etPasswordReg"
+        android:id="@+id/etPassword"
         android:layout_width="323dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="48dp"

@@ -1,6 +1,5 @@
 package newbs.etranz;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -78,7 +77,7 @@ public class registerActivity extends AppCompatActivity {
         eMail = (EditText) findViewById(R.id.etEmail);
         name = (EditText) findViewById(R.id.etName);
         dateOfBirth = (EditText) findViewById(R.id.etBirthDate);
-        password = (EditText) findViewById(R.id.etPasswordReg);
+        password = (EditText) findViewById(R.id.etPassword);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         hasAcc = (TextView) findViewById(R.id.tvHaveAcc);
     }
