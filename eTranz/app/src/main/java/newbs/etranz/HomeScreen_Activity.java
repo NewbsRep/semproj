@@ -1,10 +1,13 @@
 package newbs.etranz;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -16,6 +19,8 @@ public class HomeScreen_Activity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+    private NavigationView navigationView;
+
     FirebaseAuth firebaseObj;
 
     @Override
@@ -24,30 +29,53 @@ public class HomeScreen_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen_);
         initializeObj();
         loggedInAs();
+
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
 
+        navigationView = findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                //Toast.makeText(HomeScreen_Activity.this, "Pressed item id: " + item.getItemId(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HomeScreen_Activity.this, "nav_account  id: " + R.id.nav_logout, Toast.LENGTH_SHORT).show();
+
+                switch (item.getItemId()){
+                    case R.id.nav_account:
+                        goToProfile();
+                        return true;
+                    case R.id.nav_settings:
+                        goToSettings();
+                        return true;
+                    case R.id.nav_logout:
+                        logOut();
+                        return true;
+                }
+
+                return true;
+            }
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+         getMenuInflater().inflate(R.menu.navigation_menu, menu);
+         return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item))
             return true;
 
         return super.onOptionsItemSelected(item);
     }
-
-    public void accountSettingsBP(View view){
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
-    }
-
 
     public void loggedInAs(){
         FirebaseUser usr = firebaseObj.getCurrentUser();
@@ -58,11 +86,22 @@ public class HomeScreen_Activity extends AppCompatActivity {
         }
     }
 
-    public void initializeObj(){
+    public void initializeObj() {
         firebaseObj = firebaseObj.getInstance();
     }
 
+    public void goToProfile(){
+        startActivity(new Intent(HomeScreen_Activity.this, Profile_Activity.class));
+    }
+
+    public void goToSettings(){
+        startActivity(new Intent(HomeScreen_Activity.this, Settings_Activity.class));
+    }
 
     public void logOut(){
+        finish();
+        firebaseObj.signOut();
+        Toast.makeText(HomeScreen_Activity.this, "Sėkmingai atsijungta", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(HomeScreen_Activity.this, Login_Activity.class));
     }
 }
