@@ -1,29 +1,101 @@
 package newbs.etranz;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login_Activity extends AppCompatActivity {
+    EditText etMail;
+    EditText etPassword;
+    Button btnLogin;
+    TextView tvRegister;
+    FirebaseAuth firebaseObj;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initializeObj();
+        checkUserStatus();
+        tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login_Activity.this ,registerActivity.class));
+            }
+        });
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validateUser(etMail.getText().toString(), etPassword.getText().toString());
+            }
+        });
 
     }
 
-    public void loginButtonPressed(View view){
-        Intent intent = new Intent(this, HomeScreen_Activity.class);
-        startActivity(intent);
+    public void checkUserStatus(){
+        FirebaseUser usr = firebaseObj.getCurrentUser();
+        if(usr != null){
+            finish();
+            startActivity(new Intent(Login_Activity.this, HomeScreen_Activity.class));
+        }
     }
 
-    public void registerButtonPressed(View view){
-        Intent intent = new Intent(this, registerActivity.class);
-        startActivity(intent);
+    public boolean checkForEmptyFields(){
+        if(etMail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Užpildykite visus laukelius", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+
+    public void validateUser(String mail, String password){
+        if(!checkForEmptyFields()) {
+            final ProgressDialog pd = new ProgressDialog(Login_Activity.this);
+            pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pd.setMessage("Vyksta prisijungimas");
+            pd.show();
+
+            firebaseObj.signInWithEmailAndPassword(mail, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        pd.dismiss();
+                        Toast.makeText(Login_Activity.this, "Prisijungimas sėkmingas", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(Login_Activity.this, HomeScreen_Activity.class));
+                    } else {
+                        Toast.makeText(Login_Activity.this, "Neteisingi prisijungimo duomenys", Toast.LENGTH_SHORT).show();
+                        pd.cancel();
+                    }
+                }
+            });
+        }
+    }
+
+
+    public void initializeObj(){
+        etMail = findViewById(R.id.etMail);
+        etPassword = findViewById(R.id.etPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+        tvRegister = findViewById(R.id.tvRegister);
+        firebaseObj = FirebaseAuth.getInstance();
     }
 
 }
