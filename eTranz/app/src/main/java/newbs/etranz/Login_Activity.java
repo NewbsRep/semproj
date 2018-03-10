@@ -82,6 +82,7 @@ public class Login_Activity extends AppCompatActivity {
                         startActivity(new Intent(Login_Activity.this, HomeScreen_Activity.class));
                     } else {
                         Toast.makeText(Login_Activity.this, "Neteisingi prisijungimo duomenys", Toast.LENGTH_SHORT).show();
+                        pd.cancel();
                     }
                 }
             });

@@ -17,13 +17,13 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class registerActivity extends AppCompatActivity {
 
-    private EditText eMail, name, dateOfBirth, password;
+    private EditText eMail, name, dateOfBirth, password, passwordRepeat;
     private Button btnRegister;
     private TextView hasAcc;
     private FirebaseAuth firebaseAuth;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 		initializeViews();
         hasAcc.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +39,14 @@ public class registerActivity extends AppCompatActivity {
                 if(noEmptyFields() == true) {
                     String mail = eMail.getText().toString().trim();
                     String pass = password.getText().toString().trim();
+
+                    /*
+                    String passRepeat = passwordRepeat.getText().toString().trim();
+                    if (pass != passRepeat){
+                        Toast.makeText(registerActivity.this, "Slaptažodžiai nesutampa", Toast.LENGTH_SHORT).show();
+                        onCreate(savedInstanceState);
+                    }
+                    */
 
                     firebaseAuth.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -78,6 +86,7 @@ public class registerActivity extends AppCompatActivity {
         name = (EditText) findViewById(R.id.etName);
         dateOfBirth = (EditText) findViewById(R.id.etBirthDate);
         password = (EditText) findViewById(R.id.etPassword);
+        passwordRepeat = (EditText) findViewById(R.id.etPasswordRepeat);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         hasAcc = (TextView) findViewById(R.id.tvHaveAcc);
     }

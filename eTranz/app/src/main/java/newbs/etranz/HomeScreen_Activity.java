@@ -7,20 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class HomeScreen_Activity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-    FirebaseAuth firebaseAuth;
+    FirebaseAuth firebaseObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen_);
         initializeObj();
+        loggedInAs();
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
 
@@ -45,8 +48,18 @@ public class HomeScreen_Activity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    public void loggedInAs(){
+        FirebaseUser usr = firebaseObj.getCurrentUser();
+
+        if(usr != null){
+            String email = firebaseObj.getCurrentUser().getEmail().trim();
+            Toast.makeText(HomeScreen_Activity.this, "Prisijungta kaip " + email.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void initializeObj(){
-        firebaseAuth = firebaseAuth.getInstance();
+        firebaseObj = firebaseObj.getInstance();
     }
 
 
