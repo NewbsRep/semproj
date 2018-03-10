@@ -79,6 +79,7 @@ public class Login_Activity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         pd.dismiss();
                         Toast.makeText(Login_Activity.this, "Prisijungimas sėkmingas", Toast.LENGTH_SHORT).show();
+                        finish();
                         startActivity(new Intent(Login_Activity.this, HomeScreen_Activity.class));
                     } else {
                         Toast.makeText(Login_Activity.this, "Neteisingi prisijungimo duomenys", Toast.LENGTH_SHORT).show();

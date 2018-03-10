@@ -7,9 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,9 +38,6 @@ public class HomeScreen_Activity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                //Toast.makeText(HomeScreen_Activity.this, "Pressed item id: " + item.getItemId(), Toast.LENGTH_SHORT).show();
-                //Toast.makeText(HomeScreen_Activity.this, "nav_account  id: " + R.id.nav_logout, Toast.LENGTH_SHORT).show();
-
                 switch (item.getItemId()){
                     case R.id.nav_account:
                         goToProfile();
@@ -61,12 +56,6 @@ public class HomeScreen_Activity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-         getMenuInflater().inflate(R.menu.navigation_menu, menu);
-         return true;
     }
 
     @Override
