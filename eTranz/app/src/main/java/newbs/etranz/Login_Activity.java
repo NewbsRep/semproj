@@ -1,7 +1,10 @@
 package newbs.etranz;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -82,7 +85,20 @@ public class Login_Activity extends AppCompatActivity {
                         finish();
                         startActivity(new Intent(Login_Activity.this, HomeScreen_Activity.class));
                     } else {
-                        Toast.makeText(Login_Activity.this, "Neteisingi prisijungimo duomenys", Toast.LENGTH_SHORT).show();
+                        boolean connected = false;
+                        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED){
+                            connected = true;
+                        }
+
+                        if (connected == true){
+                            Toast.makeText(Login_Activity.this, "Neteisingi prisijungimo duomenys", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(Login_Activity.this, "Nėra interneto ryšio", Toast.LENGTH_SHORT).show();
+                        }
+                        
                         pd.cancel();
                     }
                 }
