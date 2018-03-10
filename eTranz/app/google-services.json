@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "260771130650",
+    "firebase_url": "https://tranzlogin-28185.firebaseio.com",
+    "project_id": "tranzlogin-28185",
+    "storage_bucket": "tranzlogin-28185.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260771130650:android:dbc54b6e092e2853",
+        "android_client_info": {
+          "package_name": "newbs.etranz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260771130650-dnoi4qq4sau9f6kohh5ccno69cpgrv1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIa47n9pTmfiHxBtpbA_M2cWj5_9V3asQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
