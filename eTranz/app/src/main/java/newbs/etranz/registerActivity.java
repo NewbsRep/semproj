@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -59,7 +60,7 @@ public class registerActivity extends AppCompatActivity {
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                String date = year + " m. " + determineMonth(month) + " " + day;
+                String date = year + getString(R.string.DATE_FORMAT) + determineMonth(month) + day;
                 dateOfBirth.setText(date);
             }
         };
@@ -77,11 +78,9 @@ public class registerActivity extends AppCompatActivity {
                             if(task.isSuccessful()) {
                                 finish();
                                 startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
-                                Toast.makeText(registerActivity.this, "Registracija sėkminga", Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                Toast.makeText(registerActivity.this, "Įvyko klaida", Toast.LENGTH_SHORT).show();
-                            }
+                                Toast.makeText(registerActivity.this, getString(R.string.REGISTRATION_SUCCESS), Toast.LENGTH_SHORT).show();
+                            } else
+                                Toast.makeText(registerActivity.this, getString(R.string.MISTAKE_OCCURRED), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -116,7 +115,7 @@ public class registerActivity extends AppCompatActivity {
             case 11:
                 return getString(R.string.MONTH_DECEMBER);
         }
-        return "error";
+        return getString(R.string.ERROR);
     }
 
     private boolean noEmptyFields(){
@@ -147,12 +146,12 @@ public class registerActivity extends AppCompatActivity {
         String pass = password.getText().toString();
         String passRepeat = passwordRepeat.getText().toString();
         if(passRepeat.isEmpty()) {
-            Toast.makeText(this, "Pakartokite įvestą slaptažodį", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.passwordRepeat), Toast.LENGTH_SHORT).show();
             return false;
         }
         if(pass.equals(passRepeat))
             return true;
-        Toast.makeText(this, "Neteisingai pakartotas slaptažodis", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.PASSWORD_REPEAT_INCORRECT), Toast.LENGTH_SHORT).show();
         return false;
     }
 
