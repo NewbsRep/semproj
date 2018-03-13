@@ -19,6 +19,19 @@
     <string name="register">Registruotis!</string>
     <string name="passwordRepeat">Pakartokite įvestą slaptažodį</string>
     <string name="hasAccText">Turite paskyrą? Prisijunkite</string>
+    <string name="MONTH_JANUARY">sausio </string>
+    <string name="MONTH_FEBRUARY">vasario </string>
+    <string name="MONTH_MARCH">kovo </string>
+    <string name="MONTH_APRIL">balandžio </string>
+    <string name="MONTH_MAY">gegužės </string>
+    <string name="MONTH_JUNE">birželio </string>
+    <string name="MONTH_JULY">liepos </string>
+    <string name="MONTH_AUGUST">rugpjūčio </string>
+    <string name="MONTH_SEPTEMBER">rugsėjo </string>
+    <string name="MONTH_OCTOBER">spalio </string>
+    <string name="MONTH_NOVEMBER">lapkričio </string>
+    <string name="MONTH_DECEMBER">gruodžio </string>
+    <string name="DATE_FORMAT"> m. </string>
 
     //navigation_menu
     <string name="myProfile">Mano profilis</string>
