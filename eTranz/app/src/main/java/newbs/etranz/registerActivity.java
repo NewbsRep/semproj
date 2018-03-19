@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 
 public class registerActivity extends AppCompatActivity {
 
@@ -21,6 +28,9 @@ public class registerActivity extends AppCompatActivity {
     private Button btnRegister;
     private TextView hasAcc;
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private ImageView profilePic;
+    private DatePicker datePicker;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -47,11 +57,11 @@ public class registerActivity extends AppCompatActivity {
                         onCreate(savedInstanceState);
                     }
                     */
-
                     firebaseAuth.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
+                                uploadUsrData();
                                 startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
                                 Toast.makeText(registerActivity.this, "Registracija sėkminga", Toast.LENGTH_SHORT).show();
                             }
@@ -89,5 +99,16 @@ public class registerActivity extends AppCompatActivity {
         passwordRepeat = (EditText) findViewById(R.id.etPasswordRepeat);
         btnRegister = (Button) findViewById(R.id.btnRegister);
         hasAcc = (TextView) findViewById(R.id.tvHaveAcc);
+        profilePic = (ImageView) findViewById(R.id.ivProfilePic);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+    }
+
+    private void uploadUsrData()
+    {
+        DatabaseReference dbRef = firebaseDatabase.getReference(firebaseAuth.getUid());
+        String usrName = name.getText().toString();
+        int bDay = Integer.parseInt(dateOfBirth.getText().toString());
+        UserData userData = new UserData(usrName, bDay);
+        dbRef.setValue(userData);
     }
 }

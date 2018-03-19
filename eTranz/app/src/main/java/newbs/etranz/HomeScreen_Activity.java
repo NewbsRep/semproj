@@ -69,7 +69,6 @@ public class HomeScreen_Activity extends AppCompatActivity {
 
     public void loggedInAs(){
         FirebaseUser usr = firebaseObj.getCurrentUser();
-
         if(usr != null){
             String email = firebaseObj.getCurrentUser().getEmail().trim();
             Toast.makeText(HomeScreen_Activity.this, "Prisijungta kaip " + email.toString(), Toast.LENGTH_SHORT).show();
