@@ -143,16 +143,18 @@ public class registerActivity extends AppCompatActivity {
 
     private void uploadUsrData()
     {
-        StorageReference storageReference = firebaseStorage.getReference();
-        StorageReference usrStorage = storageReference.child(firebaseAuth.getUid()).child("Images").child("ProfilePic");
+        if(!imagePath.equals(null)){
+            StorageReference storageReference = firebaseStorage.getReference();
+            StorageReference usrStorage = storageReference.child(firebaseAuth.getUid()).child("Images").child("ProfilePic");
+            UploadTask uploadTask = usrStorage.putFile(imagePath);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(registerActivity.this, "Serverio klaida", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
         DatabaseReference dbRef = firebaseDatabase.getReference(firebaseAuth.getUid());
-        UploadTask uploadTask = usrStorage.putFile(imagePath);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(registerActivity.this, "Serverio klaida", Toast.LENGTH_SHORT).show();
-            }
-        });
         String usrName = name.getText().toString();
         int bDay = Integer.parseInt(dateOfBirth.getText().toString());
         UserData userData = new UserData(usrName, bDay);
