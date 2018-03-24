@@ -19,6 +19,7 @@
     <string name="register">Registruotis!</string>
     <string name="passwordRepeat">Pakartokite įvestą slaptažodį</string>
     <string name="hasAccText">Turite paskyrą? Prisijunkite</string>
+    <string name="profileText">Pasirinkite profilio nuotrauką</string>
 
     //navigation_menu
     <string name="myProfile">Mano profilis</string>

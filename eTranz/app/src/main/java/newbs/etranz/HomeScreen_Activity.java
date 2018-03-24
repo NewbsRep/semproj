@@ -26,6 +26,7 @@ public class HomeScreen_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen_);
         initializeObj();
+        checkUserStatus();
         loggedInAs();
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -68,7 +69,6 @@ public class HomeScreen_Activity extends AppCompatActivity {
 
     public void loggedInAs(){
         FirebaseUser usr = firebaseObj.getCurrentUser();
-
         if(usr != null){
             String email = firebaseObj.getCurrentUser().getEmail().trim();
             Toast.makeText(HomeScreen_Activity.this, "Prisijungta kaip " + email.toString(), Toast.LENGTH_SHORT).show();
@@ -85,6 +85,14 @@ public class HomeScreen_Activity extends AppCompatActivity {
 
     public void goToSettings(){
         startActivity(new Intent(HomeScreen_Activity.this, Settings_Activity.class));
+    }
+
+    public void checkUserStatus(){
+        FirebaseUser usr = firebaseObj.getCurrentUser();
+        if(usr == null){
+            finish();
+            startActivity(new Intent(HomeScreen_Activity.this, Login_Activity.class));
+        }
     }
 
     public void logOut(){
