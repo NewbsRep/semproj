@@ -32,6 +32,7 @@
     <string name="MONTH_NOVEMBER">lapkričio&#160;</string>
     <string name="MONTH_DECEMBER">gruodžio&#160;</string>
     <string name="DATE_FORMAT">&#160;m.&#160;</string>
+    <string name="WORD_DAY">&#160;d.</string>
     <string name="ERROR">klaida</string>
     <string name="REGISTRATION_SUCCESS">Registracija sėkminga</string>
     <string name="MISTAKE_OCCURRED">Įvyko klaida</string>
