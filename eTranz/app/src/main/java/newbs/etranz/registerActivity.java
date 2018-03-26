@@ -1,5 +1,7 @@
 package newbs.etranz;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -30,12 +32,16 @@ import com.google.firebase.storage.UploadTask;
 import java.io.IOException;
 import java.util.Date;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class registerActivity extends AppCompatActivity {
 
     private EditText eMail, name, dateOfBirth, password, passwordRepeat;
     private Button btnRegister;
     private TextView hasAcc;
     private FirebaseAuth firebaseAuth;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseStorage firebaseStorage;
     private ImageView profilePic;
@@ -60,6 +66,7 @@ public class registerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		initializeViews();
         setContentView(R.layout.activity_register);
 		initializeObj();
         hasAcc.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +76,29 @@ public class registerActivity extends AppCompatActivity {
             }
         });
 
+        dateOfBirth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(registerActivity.this,
+                        dateSetListener, year, month, day);
+                dialog.getDatePicker().setMaxDate(new Date().getTime());
+                dialog.show();
+            }
+        });
+        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                String date = year + getString(R.string.DATE_FORMAT) + determineMonth(month) + day
+                        + getString(R.string.WORD_DAY);
+                dateOfBirth.setText(date);
+            }
+        };
+      
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,32 +109,24 @@ public class registerActivity extends AppCompatActivity {
             }
         });
 
-
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(noEmptyFields() == true) {
+                if(noEmptyFields() && passwordMatches()) {
                     String mail = eMail.getText().toString().trim();
                     String pass = password.getText().toString().trim();
-
-                    /*
-                    String passRepeat = passwordRepeat.getText().toString().trim();
-                    if (pass != passRepeat){
-                        Toast.makeText(registerActivity.this, "Slaptažodžiai nesutampa", Toast.LENGTH_SHORT).show();
-                        onCreate(savedInstanceState);
-                    }
-                    */
 
                     firebaseAuth.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
-                                uploadUsrData();
-                                Toast.makeText(registerActivity.this, "Registracija sėkminga", Toast.LENGTH_SHORT).show();
+                                finish();
                                 startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
-                            }
-                            else{
-                                Toast.makeText(registerActivity.this, "Įvyko klaida", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(registerActivity.this, getString(R.string.REGISTRATION_SUCCESS), Toast.LENGTH_SHORT).show();
+                            } else
+                                Toast.makeText(registerActivity.this, getString(R.string.MISTAKE_OCCURRED), Toast.LENGTH_SHORT).show();
+                                uploadUsrData();
+                                startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
                             }
                         }
                     });
@@ -113,18 +135,71 @@ public class registerActivity extends AppCompatActivity {
         });
     }
 
+    private String determineMonth(int month) {
+        switch(month) {
+            case 0:
+                return getString(R.string.MONTH_JANUARY);
+            case 1:
+                return getString(R.string.MONTH_FEBRUARY);
+            case 2:
+                return getString(R.string.MONTH_MARCH);
+            case 3:
+                return getString(R.string.MONTH_APRIL);
+            case 4:
+                return getString(R.string.MONTH_MAY);
+            case 5:
+                return getString(R.string.MONTH_JUNE);
+            case 6:
+                return getString(R.string.MONTH_JULY);
+            case 7:
+                return getString(R.string.MONTH_AUGUST);
+            case 8:
+                return getString(R.string.MONTH_SEPTEMBER);
+            case 9:
+                return getString(R.string.MONTH_OCTOBER);
+            case 10:
+                return getString(R.string.MONTH_NOVEMBER);
+            case 11:
+                return getString(R.string.MONTH_DECEMBER);
+        }
+        return getString(R.string.ERROR);
+    }
+
     private boolean noEmptyFields(){
         String mail = eMail.getText().toString();
         String usrName = name.getText().toString();
         String bDay = dateOfBirth.getText().toString();
         String paswd = password.getText().toString();
+            if (mail.isEmpty()) {
+                Toast.makeText(this, "Nenurodytas el. paštas", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if (usrName.isEmpty()) {
+                Toast.makeText(this, "Nenurodytas vardas", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if (bDay.isEmpty()) {
+                Toast.makeText(this, "Nenurodyta gimimo data", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            if (paswd.isEmpty()) {
+                Toast.makeText(this, "Nenurodytas slaptažodis", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            return true;
+    }
 
-        if(mail.isEmpty() || usrName.isEmpty() || bDay.isEmpty() || paswd.isEmpty()) {
-            Toast.makeText(this, "Prašome užpildyti visus laukus", Toast.LENGTH_SHORT).show();
+    private boolean passwordMatches() {
+        String pass = password.getText().toString();
+        String passRepeat = passwordRepeat.getText().toString();
+        if(passRepeat.isEmpty()) {
+            Toast.makeText(this, getString(R.string.passwordRepeat), Toast.LENGTH_SHORT).show();
             return false;
         }
-        else
+        if(pass.equals(passRepeat))
             return true;
+        Toast.makeText(this, getString(R.string.PASSWORD_REPEAT_INCORRECT), Toast.LENGTH_SHORT).show();
+        return false;
     }
 
     private void initializeObj(){

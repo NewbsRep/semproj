@@ -22,6 +22,24 @@
     <string name="register">Registruotis!</string>
     <string name="passwordRepeat">Pakartokite įvestą slaptažodį</string>
     <string name="hasAccText">Turite paskyrą? Prisijunkite</string>
+    <string name="MONTH_JANUARY">sausio&#160;</string>
+    <string name="MONTH_FEBRUARY">vasario&#160;</string>
+    <string name="MONTH_MARCH">kovo&#160;</string>
+    <string name="MONTH_APRIL">balandžio&#160;</string>
+    <string name="MONTH_MAY">gegužės&#160;</string>
+    <string name="MONTH_JUNE">birželio&#160;</string>
+    <string name="MONTH_JULY">liepos&#160;</string>
+    <string name="MONTH_AUGUST">rugpjūčio&#160;</string>
+    <string name="MONTH_SEPTEMBER">rugsėjo&#160;</string>
+    <string name="MONTH_OCTOBER">spalio&#160;</string>
+    <string name="MONTH_NOVEMBER">lapkričio&#160;</string>
+    <string name="MONTH_DECEMBER">gruodžio&#160;</string>
+    <string name="DATE_FORMAT">&#160;m.&#160;</string>
+    <string name="WORD_DAY">&#160;d.</string>
+    <string name="ERROR">klaida</string>
+    <string name="REGISTRATION_SUCCESS">Registracija sėkminga</string>
+    <string name="MISTAKE_OCCURRED">Įvyko klaida</string>
+    <string name="PASSWORD_REPEAT_INCORRECT">Neteisingai pakartotas slaptažodis</string>
     <string name="profileText">Pasirinkite profilio nuotrauką</string>
 
     //navigation_menu

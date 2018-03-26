@@ -37,7 +37,8 @@
         android:text="@string/register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="OnClick" />
 
     <EditText
         android:id="@+id/etEmail"
@@ -107,14 +108,18 @@
         android:id="@+id/etBirthDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:editable="false"
+        android:clickable="true"
+        android:focusable="false"
         android:ems="10"
         android:hint="@string/registerBirthDate"
-        android:inputType="date"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/etName"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/etName"
-        app:layout_constraintTop_toBottomOf="@+id/etName" />
+        app:layout_constraintTop_toBottomOf="@+id/etName"
+        tools:ignore="Deprecated" />
 
     <TextView
         android:id="@+id/tvHaveAcc"
