@@ -8,12 +8,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class HomeScreen_Activity extends AppCompatActivity {
+
+    TextView tv_PostATrip;
+    TextView tv_SearchForATrip;
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -28,6 +33,20 @@ public class HomeScreen_Activity extends AppCompatActivity {
         initializeObj();
         checkUserStatus();
         loggedInAs();
+
+        tv_PostATrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeScreen_Activity.this, PostATrip_Activity.class));
+            }
+        });
+
+        tv_SearchForATrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeScreen_Activity.this, SearchForATrip_Activity.class));
+            }
+        });
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close);
@@ -77,6 +96,9 @@ public class HomeScreen_Activity extends AppCompatActivity {
 
     public void initializeObj() {
         firebaseObj = firebaseObj.getInstance();
+
+        tv_PostATrip = findViewById(R.id.tv_PostATrip);
+        tv_SearchForATrip = findViewById(R.id.tv_SearchForATrip);
     }
 
     public void goToProfile(){

@@ -17,21 +17,26 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".Login_Activity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Profile_Activity"
-            android:theme="@style/Theme.AppCompat.Light"></activity>
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".HomeScreen_Activity"
             android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".registerActivity" />
-        <activity android:name=".Settings_Activity"
+        <activity
+            android:name=".Settings_Activity"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity android:name=".PostATrip_Activity"
+            android:theme="@style/Theme.AppCompat.Light"/>
+        <activity android:name=".SearchForATrip_Activity"
             android:theme="@style/Theme.AppCompat.Light"></activity>
     </application>
 
