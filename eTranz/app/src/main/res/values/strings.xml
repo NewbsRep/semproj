@@ -15,6 +15,9 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
+    <string name="post_a_trip">PASKELBTI SAVO KELIONĘ</string>
+    <string name="search_for_a_trip">IEŠKOTI KELIONĖS</string>
+
     //activity_register
     <string name="register">Registruotis!</string>
     <string name="passwordRepeat">Pakartokite įvestą slaptažodį</string>
