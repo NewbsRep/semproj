@@ -20,9 +20,9 @@ public class HomeScreen_Activity extends AppCompatActivity {
     TextView tv_PostATrip;
     TextView tv_SearchForATrip;
 
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
-    private NavigationView navigationView;
+    DrawerLayout mDrawerLayout;
+    ActionBarDrawerToggle mToggle;
+    NavigationView navigationView;
 
     FirebaseAuth firebaseObj;
 
