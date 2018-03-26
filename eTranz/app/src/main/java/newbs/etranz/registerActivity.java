@@ -45,7 +45,7 @@ public class registerActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseStorage firebaseStorage;
     private ImageView profilePic;
-    private DatePicker datePicker;
+//    private DatePicker datePicker;
     private static int PICK_IMAGE = 123;
     Uri imagePath;
 
@@ -66,9 +66,9 @@ public class registerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-		initializeViews();
+//		initializeViews();
         setContentView(R.layout.activity_register);
-		initializeObj();
+        initializeObj();
         hasAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +98,7 @@ public class registerActivity extends AppCompatActivity {
                 dateOfBirth.setText(date);
             }
         };
-      
+
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,18 +112,18 @@ public class registerActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(noEmptyFields() && passwordMatches()) {
+                if (noEmptyFields() && passwordMatches()) {
                     String mail = eMail.getText().toString().trim();
                     String pass = password.getText().toString().trim();
 
                     firebaseAuth.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()) {
+                            if (task.isSuccessful()) {
                                 finish();
                                 startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
                                 Toast.makeText(registerActivity.this, getString(R.string.REGISTRATION_SUCCESS), Toast.LENGTH_SHORT).show();
-                            } else
+                            } else {
                                 Toast.makeText(registerActivity.this, getString(R.string.MISTAKE_OCCURRED), Toast.LENGTH_SHORT).show();
                                 uploadUsrData();
                                 startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
