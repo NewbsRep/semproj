@@ -40,14 +40,11 @@
         <activity
             android:name=".Settings_Activity"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity android:name=".PostATrip_Activity"
-            android:theme="@style/Theme.AppCompat.Light"/>
         <activity android:name=".SearchForATrip_Activity"
             android:theme="@style/Theme.AppCompat.Light"></activity>
         <activity android:name=".New_Trip_Activity"
             android:label="@string/newTripAB"
             android:theme="@style/Theme.AppCompat.Light" />
->>>>>>> TripLO
     </application>
 
 </manifest>
