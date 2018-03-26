@@ -45,7 +45,6 @@ public class registerActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseStorage firebaseStorage;
     private ImageView profilePic;
-//    private DatePicker datePicker;
     private static int PICK_IMAGE = 123;
     Uri imagePath;
 
@@ -66,7 +65,6 @@ public class registerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//		initializeViews();
         setContentView(R.layout.activity_register);
         initializeObj();
         hasAcc.setOnClickListener(new View.OnClickListener() {

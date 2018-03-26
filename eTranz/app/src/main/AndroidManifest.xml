@@ -22,12 +22,14 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".Login_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Profile_Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".HomeScreen_Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light"
             android:launchMode="singleTask">
             <intent-filter>
@@ -36,18 +38,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".registerActivity" />
+        <activity android:name=".registerActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Settings_Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity android:name=".PostATrip_Activity"
-            android:theme="@style/Theme.AppCompat.Light"/>
         <activity android:name=".SearchForATrip_Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light"></activity>
         <activity android:name=".New_Trip_Activity"
+            android:screenOrientation="portrait"
             android:label="@string/newTripAB"
             android:theme="@style/Theme.AppCompat.Light" />
->>>>>>> TripLO
     </application>
 
 </manifest>
