@@ -22,9 +22,4 @@ public class Profile_Activity extends AppCompatActivity {
         });*/
         //getActionBar().setTitle("Profilis");
     }
-
-    public void logoutButtonPressed(View view){
-        Intent intent = new Intent(this, Login_Activity.class);
-        startActivity(intent);
-    }
 }

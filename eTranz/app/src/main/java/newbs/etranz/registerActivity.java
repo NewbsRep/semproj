@@ -154,11 +154,11 @@ public class registerActivity extends AppCompatActivity {
                 }
             });
         }
-        DatabaseReference dbRef = firebaseDatabase.getReference(firebaseAuth.getUid());
+        DatabaseReference dbRef = firebaseDatabase.getReference();
         String usrName = name.getText().toString();
         int bDay = Integer.parseInt(dateOfBirth.getText().toString());
         UserData userData = new UserData(usrName, bDay);
-        dbRef.setValue(userData).addOnFailureListener(new OnFailureListener() {
+        dbRef.child("users").child(firebaseAuth.getUid()).setValue(userData).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(registerActivity.this, "Duomenų bazės klaida", Toast.LENGTH_SHORT).show();
