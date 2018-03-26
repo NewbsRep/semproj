@@ -8,23 +8,67 @@
     android:id="@+id/drawer_layout">
 
     <LinearLayout
+        android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/iv_postATrip"
+            android:contentDescription="@string/post_a_trip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/search_for_a_trip" />
+
+        <ImageView
+            android:id="@+id/iv_SearchForATrip"
+            android:contentDescription="@string/search_for_a_trip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/post_a_trip" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_PostATrip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/home_MainLayout"
-            android:textAlignment="center"
-            android:textSize="24sp" />
+            android:layout_weight="0.44"
+            android:gravity="center"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="2.0"
+            android:shadowDy="1.8"
+            android:shadowRadius="2.3"
+            android:text="@string/post_a_trip"
+            android:textColor="@android:color/white"
+            android:textSize="32sp" />
 
-        <FrameLayout
+        <TextView
+            android:id="@+id/tv_SearchForATrip"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/main_container" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.56"
+            android:gravity="center"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="2.0"
+            android:shadowDy="1.8"
+            android:shadowRadius="2.3"
+            android:text="@string/search_for_a_trip"
+            android:textColor="@android:color/white"
+            android:textSize="32sp" />
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

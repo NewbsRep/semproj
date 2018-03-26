@@ -31,7 +31,7 @@ public class Profile_Activity extends AppCompatActivity {
         });*/
         //getActionBar().setTitle("Profilis");
     }
-
+  
     private void initializeViews() {
         setContentView(R.layout.activity_profile);
         firebaseAuth = FirebaseAuth.getInstance();

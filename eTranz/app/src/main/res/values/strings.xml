@@ -15,6 +15,9 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
+    <string name="post_a_trip">PASKELBTI SAVO KELIONĘ</string>
+    <string name="search_for_a_trip">IEŠKOTI KELIONĖS</string>
+
     //activity_register
     <string name="register">Registruotis!</string>
     <string name="passwordRepeat">Pakartokite įvestą slaptažodį</string>
@@ -37,9 +40,33 @@
     <string name="REGISTRATION_SUCCESS">Registracija sėkminga</string>
     <string name="MISTAKE_OCCURRED">Įvyko klaida</string>
     <string name="PASSWORD_REPEAT_INCORRECT">Neteisingai pakartotas slaptažodis</string>
+    <string name="profileText">Pasirinkite profilio nuotrauką</string>
 
     //navigation_menu
     <string name="myProfile">Mano profilis</string>
     <string name="settings">Nustatymai</string>
     <string name="logout">Atsijungti</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_new__trip_">New_Trip_Activity</string>
+
+    <string name="textFrom">Iš kur išvykstate</string>
+    <string name="textTo">Į kur vykstate</string>
+    <string name="textDate">Išvykimo data</string>
+    <string name="textTime">Išvykimo laikas</string>
+    <string name="textSpaces">Laisvų vietų skaičius</string>
+    <string name="textPrice">Kaina vienam žmogui</string>
+    <string name="newTripAB">Pridėti kelionę</string>
 </resources>

@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     tools:context="newbs.etranz.Profile_Activity">
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="338dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:onClick="logoutButtonPressed"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="120dp"

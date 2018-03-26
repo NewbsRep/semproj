@@ -33,7 +33,6 @@ public class Login_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initializeObj();
-        checkUserStatus();
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,14 +47,6 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void checkUserStatus(){
-        FirebaseUser usr = firebaseObj.getCurrentUser();
-        if(usr != null){
-            finish();
-            startActivity(new Intent(Login_Activity.this, HomeScreen_Activity.class));
-        }
     }
 
     public boolean checkForEmptyFields(){
