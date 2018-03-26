@@ -8,12 +8,12 @@ import java.util.Date;
 
 public class UserData {
     public String usrName;
-    public int birthDay;
+    public int birthDay, rating;
 
     public UserData(String usrName, int birthDay)
     {
         this.usrName = usrName;
         this.birthDay = birthDay;
+        this.rating = 0;
     }
-
 }
