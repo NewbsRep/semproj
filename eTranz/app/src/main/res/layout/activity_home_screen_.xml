@@ -12,15 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="@android:color/black"
         android:weightSum="1">
 
         <ImageView
             android:id="@+id/iv_postATrip"
-            android:contentDescription="@string/post_a_trip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.50"
+            android:contentDescription="@string/post_a_trip"
             android:scaleType="fitXY"
+            android:alpha="0.70"
             app:srcCompat="@drawable/search_for_a_trip" />
 
         <ImageView
@@ -30,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.50"
             android:scaleType="fitXY"
+            android:alpha="0.60"
             app:srcCompat="@drawable/post_a_trip" />
 
     </LinearLayout>
@@ -48,9 +51,9 @@
             android:layout_weight="0.44"
             android:gravity="center"
             android:shadowColor="@android:color/black"
-            android:shadowDx="2.0"
-            android:shadowDy="1.8"
-            android:shadowRadius="2.3"
+            android:shadowDx="2.5"
+            android:shadowDy="2.3"
+            android:shadowRadius="2.8"
             android:text="@string/post_a_trip"
             android:textColor="@android:color/white"
             android:textSize="32sp" />
@@ -63,9 +66,9 @@
             android:layout_weight="0.56"
             android:gravity="center"
             android:shadowColor="@android:color/black"
-            android:shadowDx="2.0"
-            android:shadowDy="1.8"
-            android:shadowRadius="2.3"
+            android:shadowDx="2.5"
+            android:shadowDy="2.3"
+            android:shadowRadius="2.8"
             android:text="@string/search_for_a_trip"
             android:textColor="@android:color/white"
             android:textSize="32sp" />
