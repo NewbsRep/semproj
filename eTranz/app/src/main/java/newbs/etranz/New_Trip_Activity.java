@@ -33,7 +33,6 @@ public class New_Trip_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_a_trip);
         setContentView(R.layout.activity_new__trip_);
         initializeObj();
         showDateDialog();
