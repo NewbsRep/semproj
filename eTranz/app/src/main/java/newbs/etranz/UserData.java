@@ -8,9 +8,10 @@ import java.util.Date;
 
 public class UserData {
     public String usrName;
-    public int birthDay, rating;
+    public String birthDay;
+    public int rating;
 
-    public UserData(String usrName, int birthDay)
+    public UserData(String usrName, String birthDay)
     {
         this.usrName = usrName;
         this.birthDay = birthDay;

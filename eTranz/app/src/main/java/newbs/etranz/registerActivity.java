@@ -132,12 +132,11 @@ public class registerActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 finish();
+                                uploadUsrData();
                                 startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
                                 Toast.makeText(registerActivity.this, getString(R.string.REGISTRATION_SUCCESS), Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(registerActivity.this, getString(R.string.MISTAKE_OCCURRED), Toast.LENGTH_SHORT).show();
-                                uploadUsrData();
-                                startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
                             }
                         }
                     });
@@ -229,7 +228,7 @@ public class registerActivity extends AppCompatActivity {
 
     private void uploadUsrData()
     {
-        if(Uri.EMPTY.equals(imagePath)){
+        if(imagePath != null && !imagePath.equals(Uri.EMPTY)){
             StorageReference storageReference = firebaseStorage.getReference();
             StorageReference usrStorage = storageReference.child(firebaseAuth.getUid()).child("Images").child("ProfilePic");
             UploadTask uploadTask = usrStorage.putFile(imagePath);
@@ -242,7 +241,7 @@ public class registerActivity extends AppCompatActivity {
         }
         DatabaseReference dbRef = firebaseDatabase.getReference();
         String usrName = name.getText().toString();
-        int bDay = Integer.parseInt(dateOfBirth.getText().toString());
+        String bDay = dateOfBirth.getText().toString();
         UserData userData = new UserData(usrName, bDay);
         dbRef.child("users").child(firebaseAuth.getUid()).setValue(userData).addOnFailureListener(new OnFailureListener() {
             @Override
