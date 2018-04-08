@@ -47,7 +47,7 @@ public class HomeScreen_Activity extends AppCompatActivity {
         tv_SearchForATrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeScreen_Activity.this, SearchForATrip_Activity.class));
+                startActivity(new Intent(HomeScreen_Activity.this, TripSearch_Activity.class));
             }
         });
 

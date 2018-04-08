@@ -10,33 +10,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/etPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/toSpinner"
+            android:layout_width="214dp"
+            android:layout_height="45dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="number"
-            android:hint="@string/textPrice"
+            app:hintText="@string/textTo"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etFreeSpace" />
+            app:layout_constraintTop_toBottomOf="@+id/fromSpinner" />
 
-        <EditText
-            android:id="@+id/etFreeSpace"
-            android:layout_width="wrap_content"
-            android:layout_height="43dp"
+        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+            android:id="@+id/fromSpinner"
+            android:layout_width="214dp"
+            android:layout_height="45dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="@string/textSpaces"
-            android:inputType="numberDecimal"
+            android:layout_marginTop="16dp"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            app:hintText="@string/textFrom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etTime" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/etTime"
@@ -44,42 +42,16 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:ems="10"
+            android:focusable="false"
             android:hint="@string/textTime"
+            android:textColorHint="#000000"
             android:inputType="time"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
-            android:focusable="false"
             app:layout_constraintTop_toBottomOf="@+id/etDate" />
-
-        <EditText
-            android:id="@+id/etTo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/textTo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etFrom" />
-
-        <EditText
-            android:id="@+id/etFrom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="@string/textFrom"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/etDate"
@@ -87,15 +59,140 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="128dp"
             android:ems="10"
+            android:focusable="false"
             android:hint="@string/textDate"
             android:inputType="date"
-            android:focusable="false"
+            android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etTo" />
+            app:layout_constraintTop_toBottomOf="@+id/toSpinner" />
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="80dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="0€"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvSeats"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.716"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toSpinner" />
+
+        <TextView
+            android:id="@+id/tvSeats"
+            android:layout_width="80dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/etDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.714"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivPriceDec"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/ivSeatDec"
+            app:layout_constraintEnd_toStartOf="@+id/tvPrice"
+            app:layout_constraintHorizontal_bias="0.988"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toSpinner"
+            app:srcCompat="@drawable/ic_remove_circle_outline_black_48dp" />
+
+        <ImageView
+            android:id="@+id/ivPriceInc"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/ivSeatInc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tvPrice"
+            app:layout_constraintTop_toBottomOf="@+id/toSpinner"
+            app:srcCompat="@drawable/ic_add_circle_black_48dp" />
+
+        <ImageView
+            android:id="@+id/ivSeatDec"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/etDate"
+            app:layout_constraintEnd_toStartOf="@+id/tvSeats"
+            app:layout_constraintHorizontal_bias="0.994"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_remove_circle_outline_black_48dp" />
+
+        <ImageView
+            android:id="@+id/ivSeatInc"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/etDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tvSeats"
+            app:srcCompat="@drawable/ic_add_circle_black_48dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/textPrice"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/ivPriceDec"
+            app:layout_constraintHorizontal_bias="0.585"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toSpinner" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/textSpaces"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/etDate"
+            app:layout_constraintEnd_toStartOf="@+id/ivSeatDec"
+            app:layout_constraintHorizontal_bias="0.592"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintVertical_bias="0.632" />
+
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>
