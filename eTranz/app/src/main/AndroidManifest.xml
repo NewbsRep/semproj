@@ -13,7 +13,8 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
-    <application
+    <application xmlns:tools="http://schemas.android.com/tools"
+        tools:replace="android:label"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/appName"
@@ -44,7 +45,7 @@
             android:name=".Settings_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
-        <activity android:name=".SearchForATrip_Activity"
+        <activity android:name=".TripSearch_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light"></activity>
         <activity android:name=".New_Trip_Activity"
