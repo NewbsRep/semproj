@@ -21,7 +21,7 @@ public class Profile_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeViews();
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         /*Button logoutBtn = (Button) findViewById(R.id.btnLogout);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
