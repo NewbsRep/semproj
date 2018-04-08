@@ -49,6 +49,7 @@ public class New_Trip_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new__trip_);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initializeObj();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(New_Trip_Activity.this, android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.cities));

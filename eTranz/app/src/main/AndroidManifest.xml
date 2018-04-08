@@ -26,6 +26,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".Profile_Activity"
+            android:parentActivityName=".HomeScreen_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity
@@ -40,16 +41,21 @@
             </intent-filter>
         </activity>
         <activity android:name=".registerActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".Login_Activity"/>
         <activity
             android:name=".Settings_Activity"
+            android:parentActivityName=".HomeScreen_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light" />
         <activity android:name=".TripSearch_Activity"
+            android:parentActivityName=".HomeScreen_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light"></activity>
         <activity android:name=".New_Trip_Activity"
             android:screenOrientation="portrait"
+            android:parentActivityName=".HomeScreen_Activity"
             android:label="@string/newTripAB"
             android:theme="@style/Theme.AppCompat.Light" />
     </application>
