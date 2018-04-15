@@ -8,7 +8,13 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
-    <application
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application xmlns:tools="http://schemas.android.com/tools"
+        tools:replace="android:label"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/appName"
@@ -17,22 +23,41 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".Login_Activity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Profile_Activity"
+            android:parentActivityName=".HomeScreen_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".HomeScreen_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".registerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light"
+            android:parentActivityName=".Login_Activity"/>
         <activity
-            android:name=".Profile_Activity"
+            android:name=".Settings_Activity"
+            android:parentActivityName=".HomeScreen_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity android:name=".TripSearch_Activity"
+            android:parentActivityName=".HomeScreen_Activity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light"></activity>
-        <activity
-            android:name=".HomeScreen_Activity"
-            android:theme="@style/Theme.AppCompat.Light"></activity>
-        <activity android:name=".registerActivity" />
-        <activity android:name=".Settings_Activity"
-            android:theme="@style/Theme.AppCompat.Light"></activity>
+        <activity android:name=".New_Trip_Activity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".HomeScreen_Activity"
+            android:label="@string/newTripAB"
+            android:theme="@style/Theme.AppCompat.Light" />
     </application>
 
 </manifest>

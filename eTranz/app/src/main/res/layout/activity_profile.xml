@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     tools:context="newbs.etranz.Profile_Activity">
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="338dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:onClick="logoutButtonPressed"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="120dp"
@@ -27,15 +14,16 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/picture" />
+        app:srcCompat="@drawable/profilepic" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvName"
         android:layout_width="193dp"
         android:layout_height="37dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="31dp"
         android:text="Name"
+        android:visibility="invisible"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +31,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvEmail"
         android:layout_width="193dp"
         android:layout_height="38dp"
         android:layout_marginEnd="16dp"
@@ -51,7 +39,8 @@
         android:text="Email"
         android:textAlignment="center"
         android:textSize="24sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
 </android.support.constraint.ConstraintLayout>
