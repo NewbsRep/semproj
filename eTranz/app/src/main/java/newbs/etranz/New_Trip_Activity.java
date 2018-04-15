@@ -40,8 +40,7 @@ public class New_Trip_Activity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     static final int TIME_ID = 0;
     static final int DATE_ID = 1;
-    SearchableSpinner fromSpinner;
-    SearchableSpinner toSpinner;
+    SearchableSpinner fromSpinner, toSpinner;
     int seatCounter;
     double price;
 
