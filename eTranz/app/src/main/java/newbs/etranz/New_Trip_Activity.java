@@ -36,16 +36,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class New_Trip_Activity extends AppCompatActivity {
-    EditText etDate, etTime;
-    ImageView seatInc, seatDec, priceInc, priceDec;
-    TextView tvPrice, tvSeats;
-    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    static final int TIME_ID = 0;
-    static final int DATE_ID = 1;
-    SearchableSpinner fromSpinner, toSpinner;
-    int seatCounter;
-    double price;
-    String ogDate;
+    private EditText etDate, etTime;
+    private ImageView seatInc, seatDec, priceInc, priceDec;
+    private TextView tvPrice, tvSeats;
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private static final int TIME_ID = 0;
+    private static final int DATE_ID = 1;
+    private SearchableSpinner fromSpinner, toSpinner;
+    private int seatCounter;
+    private double price;
+    private String ogDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -21,11 +21,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Login_Activity extends AppCompatActivity {
-    EditText etMail;
-    EditText etPassword;
-    Button btnLogin;
-    TextView tvRegister;
-    FirebaseAuth firebaseObj;
+    private EditText etMail;
+    private EditText etPassword;
+    private Button btnLogin;
+    private TextView tvRegister;
+    private FirebaseAuth firebaseObj;
 
 
     @Override

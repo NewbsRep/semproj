@@ -19,15 +19,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class HomeScreen_Activity extends AppCompatActivity {
-
-    TextView tv_PostATrip;
-    TextView tv_SearchForATrip;
-
-    DrawerLayout mDrawerLayout;
-    ActionBarDrawerToggle mToggle;
-    NavigationView navigationView;
-
-    FirebaseAuth firebaseObj;
+    private TextView tv_PostATrip;
+    private TextView tv_SearchForATrip;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+    private NavigationView navigationView;
+    private FirebaseAuth firebaseObj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

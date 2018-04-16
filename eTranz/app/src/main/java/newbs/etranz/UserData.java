@@ -7,9 +7,9 @@ import java.util.Date;
  */
 
 public class UserData {
-    public String usrName;
-    public String birthDay;
-    public int rating;
+    private String usrName;
+    private String birthDay;
+    private int rating;
 
     public UserData(String usrName, String birthDay)
     {
