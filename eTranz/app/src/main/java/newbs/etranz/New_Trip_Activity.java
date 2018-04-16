@@ -148,6 +148,10 @@ public class New_Trip_Activity extends AppCompatActivity {
     }
 
     public void uploadData() {
+        final ProgressDialog pd = new ProgressDialog(New_Trip_Activity.this);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Kelionė išsaugoma...");
+        pd.show();
         String seats = tvSeats.getText().toString();
         String price = tvPrice.getText().toString();
         String date = etDate.getText().toString();
@@ -155,6 +159,7 @@ public class New_Trip_Activity extends AppCompatActivity {
 
         if (fromSpinner.equals(null) || toSpinner.equals(null) || seats.equals("0") || price.isEmpty() ||
         date.isEmpty() || time.isEmpty()){
+            pd.cancel();
             Toast.makeText(this, this.getResources().getText(R.string.emptyFieldMsg), Toast.LENGTH_SHORT).show();
         }
         else {
@@ -163,10 +168,11 @@ public class New_Trip_Activity extends AppCompatActivity {
             Trip_Data data = new Trip_Data(from, to, seats, price, date, time);
             DatabaseReference ref = firebaseDatabase.getReference();
             String key = ref.child("trips").push().getKey();
-            Task upload = ref.child("trips").child(key).setValue(data);
+            Task upload = ref.child("trips").child(date).child(key).setValue(data);
             upload.addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
+                    pd.cancel();
                     Toast.makeText(New_Trip_Activity.this, "Skelbimas pridėtas", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(New_Trip_Activity.this, HomeScreen_Activity.class));
                 }
@@ -174,6 +180,7 @@ public class New_Trip_Activity extends AppCompatActivity {
             upload.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    pd.cancel();
                     Toast.makeText(New_Trip_Activity.this, "Duomenų bazės klaida", Toast.LENGTH_SHORT).show();
                 }
             });
