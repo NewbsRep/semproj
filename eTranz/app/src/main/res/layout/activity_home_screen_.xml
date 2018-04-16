@@ -79,6 +79,7 @@
         android:layout_height="match_parent"
         android:id="@+id/navigation_view"
         app:menu="@menu/navigation_menu"
+        android:foregroundGravity="center"
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"/>
 

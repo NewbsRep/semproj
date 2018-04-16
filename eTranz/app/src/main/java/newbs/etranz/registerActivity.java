@@ -124,6 +124,7 @@ public class registerActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                uploadUsrData();
                                 finish();
                                 uploadUsrData();
                                 startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
@@ -221,7 +222,7 @@ public class registerActivity extends AppCompatActivity {
 
     private void uploadUsrData()
     {
-        if(imagePath != null && !imagePath.equals(Uri.EMPTY)){
+        if(!Uri.EMPTY.equals(imagePath)){
             StorageReference storageReference = firebaseStorage.getReference();
             StorageReference usrStorage = storageReference.child(firebaseAuth.getUid()).child("Images").child("ProfilePic");
             UploadTask uploadTask = usrStorage.putFile(imagePath);
