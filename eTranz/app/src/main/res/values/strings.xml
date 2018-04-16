@@ -66,7 +66,114 @@
     <string name="textTo">Į kur vykstate</string>
     <string name="textDate">Išvykimo data</string>
     <string name="textTime">Išvykimo laikas</string>
-    <string name="textSpaces">Laisvų vietų skaičius</string>
-    <string name="textPrice">Kaina vienam žmogui</string>
+    <string name="textSpaces">Vietų skaičius</string>
+    <string name="textPrice">Kaina</string>
     <string name="newTripAB">Pridėti kelionę</string>
+    <string-array name="cities">
+        <item>Vilnius</item>
+        <item>Kaunas</item>
+        <item>Klaipėda</item>
+        <item>Šiauliai</item>
+        <item>Panevėžys</item>
+        <item>Alytus</item>
+        <item>Marijampolė</item>
+        <item>Mažeikiai</item>
+        <item>Jonava</item>
+        <item>Utena</item>
+        <item>Kėdainiai</item>
+        <item>Telšiai</item>
+        <item>Tauragė</item>
+        <item>Ukmergė</item>
+        <item>Visaginas</item>
+        <item>Plungė</item>
+        <item>Kretinga</item>
+        <item>Šilutė</item>
+        <item>Palanga</item>
+        <item>Radviliškis</item>
+        <item>Gargždai</item>
+        <item>Druskininkai</item>
+        <item>Rokiškis</item>
+        <item>Kuršėnai</item>
+        <item>Elektrėnai</item>
+        <item>Biržai</item>
+        <item>Grigiškės</item>
+        <item>Jurbarkas</item>
+        <item>Garliava</item>
+        <item>Lentvaris</item>
+        <item>Raseiniai</item>
+        <item>Vilkaviškis</item>
+        <item>Anykščiai</item>
+        <item>Prienai</item>
+        <item>Joniškis</item>
+        <item>Varėna</item>
+        <item>Kelmė</item>
+        <item>Kaišiadorys</item>
+        <item>Naujoji Akmenė</item>
+        <item>Pasvalys</item>
+        <item>Šalčininkai</item>
+        <item>Zarasai</item>
+        <item>Kupiškis</item>
+        <item>Kazlų Rūda</item>
+        <item>Molėtai</item>
+        <item>Širvintos</item>
+        <item>Skuodas</item>
+        <item>Pabradė</item>
+        <item>Šakiai</item>
+        <item>Ignalina</item>
+        <item>Švenčionėliai</item>
+        <item>Šilalė</item>
+        <item>Kybartai</item>
+        <item>Nemenčinė</item>
+        <item>Pakruojis</item>
+        <item>Vievis</item>
+        <item>Švenčionys</item>
+        <item>Trakai</item>
+        <item>Kalvarija</item>
+        <item>Lazdijai</item>
+        <item>Rietavas</item>
+        <item>Žiežmariai</item>
+        <item>Eišiškės</item>
+        <item>Neringa</item>
+        <item>Ariogala</item>
+        <item>Šeduva</item>
+        <item>Akmenė</item>
+        <item>Birštonas</item>
+        <item>Venta</item>
+        <item>Rūdiškės</item>
+        <item>Tytuvėnai</item>
+        <item>Vilkija</item>
+        <item>Viekšniai</item>
+        <item>Pagėgiai</item>
+        <item>Ežerėlis</item>
+        <item>Gelgaudiškis</item>
+        <item>Kudirkos Naumiestis</item>
+        <item>Skaudvilė</item>
+        <item>Žagarė</item>
+        <item>Ramygala</item>
+        <item>Salantai</item>
+        <item>Simnas</item>
+        <item>Linkuva</item>
+        <item>Veisiejai</item>
+        <item>Priekulė</item>
+        <item>Jieznas</item>
+        <item>Joniškėlis</item>
+        <item>Varniai</item>
+        <item>Baltoji Vokė</item>
+        <item>Daugai</item>
+        <item>Seda</item>
+        <item>Vabalninkas</item>
+        <item>Subačius</item>
+        <item>Virbalis</item>
+        <item>Obeliai</item>
+        <item>Dūkštas</item>
+        <item>Pandėlys</item>
+        <item>Užventis</item>
+        <item>Dusetos</item>
+        <item>Kavarskas</item>
+        <item>Smalininkai</item>
+        <item>Troškūnai</item>
+        <item>Panemunė</item>
+    </string-array>
+    <string name="emptyFieldMsg">Prašome užpildyti visus laukus</string>
+    <string name="search">Ieškoti</string>
 </resources>
