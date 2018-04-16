@@ -102,7 +102,8 @@ public class New_Trip_Activity extends AppCompatActivity {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
             ogDate = String.format("%d-%02d-%02d ", year, month, dayOfMonth);
-            String date = String.format("%d-%02d-%02d ", year, month + 1, dayOfMonth);
+            String date = year + getString(R.string.DATE_FORMAT) + determineMonth(month) + dayOfMonth
+                    + getString(R.string.WORD_DAY);
             etDate.setText(date);
         }
     };
@@ -190,6 +191,36 @@ public class New_Trip_Activity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private String determineMonth(int month) {
+        switch(month) {
+            case 0:
+                return getString(R.string.MONTH_JANUARY);
+            case 1:
+                return getString(R.string.MONTH_FEBRUARY);
+            case 2:
+                return getString(R.string.MONTH_MARCH);
+            case 3:
+                return getString(R.string.MONTH_APRIL);
+            case 4:
+                return getString(R.string.MONTH_MAY);
+            case 5:
+                return getString(R.string.MONTH_JUNE);
+            case 6:
+                return getString(R.string.MONTH_JULY);
+            case 7:
+                return getString(R.string.MONTH_AUGUST);
+            case 8:
+                return getString(R.string.MONTH_SEPTEMBER);
+            case 9:
+                return getString(R.string.MONTH_OCTOBER);
+            case 10:
+                return getString(R.string.MONTH_NOVEMBER);
+            case 11:
+                return getString(R.string.MONTH_DECEMBER);
+        }
+        return getString(R.string.ERROR);
     }
 
     public void seatCount(){
