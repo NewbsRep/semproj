@@ -35,6 +35,11 @@ public class Profile_Activity extends AppCompatActivity {
     private void initializeViews() {
         setContentView(R.layout.activity_profile);
         firebaseAuth = FirebaseAuth.getInstance();
+
+        name = (TextView) findViewById(R.id.tvName) ;
+        name.setText(firebaseAuth.getCurrentUser().getDisplayName());
+        name.setVisibility(View.VISIBLE);
+
         email = (TextView) findViewById(R.id.tvEmail);
         email.setText(firebaseAuth.getCurrentUser().getEmail());
         email.setVisibility(View.VISIBLE);
