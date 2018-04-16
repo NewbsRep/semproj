@@ -40,25 +40,21 @@ import java.net.URI;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeScreen_Activity extends AppCompatActivity {
-
-    TextView tv_PostATrip;
-    TextView tv_SearchForATrip;
-
-    TextView tv_ProfileName;
-    CircleImageView civ_ProfilePicture;
-
-    boolean isSignedIn = true;
-
-    DrawerLayout mDrawerLayout;
-    ActionBarDrawerToggle mToggle;
-    NavigationView navigationView;
-
-    FirebaseAuth firebaseAuth;
-    FirebaseDatabase firebaseDatabase;
-    FirebaseStorage firebaseStorage;
-    DatabaseReference databaseReference;
-
-    StorageReference storageReference;
+    private TextView tv_PostATrip;
+    private TextView tv_SearchForATrip;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+    private NavigationView navigationView;
+    private TextView tv_ProfileName;
+    private CircleImageView civ_ProfilePicture;
+  
+    private boolean isSignedIn = true;
+  
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseStorage firebaseStorage;
+    private DatabaseReference databaseReference;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

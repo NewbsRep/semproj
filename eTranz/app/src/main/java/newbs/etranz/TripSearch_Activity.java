@@ -17,11 +17,11 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.Calendar;
 
 public class TripSearch_Activity extends AppCompatActivity {
-    SearchableSpinner fromSpinner, toSpinner;
-    Button searchButton;
-    EditText etDate, etTime;
-    static final int TIME_ID = 0;
-    static final int DATE_ID = 1;
+    private SearchableSpinner fromSpinner, toSpinner;
+    private Button searchButton;
+    private EditText etDate, etTime;
+    private static final int TIME_ID = 0;
+    private static final int DATE_ID = 1;
 
 
     protected Dialog onCreateDialog(int id) {

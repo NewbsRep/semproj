@@ -49,7 +49,7 @@ public class registerActivity extends AppCompatActivity {
     private FirebaseStorage firebaseStorage;
     private ImageView profilePic;
     private static int PICK_IMAGE = 123;
-    Uri imagePath;
+    private Uri imagePath;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
