@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
@@ -43,6 +45,7 @@ public class New_Trip_Activity extends AppCompatActivity {
     SearchableSpinner fromSpinner, toSpinner;
     int seatCounter;
     double price;
+    String ogDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +101,8 @@ public class New_Trip_Activity extends AppCompatActivity {
     protected DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            String date = String.format("%d-%02d-%02d ", year, month, dayOfMonth);
+            ogDate = String.format("%d-%02d-%02d ", year, month, dayOfMonth);
+            String date = String.format("%d-%02d-%02d ", year, month + 1, dayOfMonth);
             etDate.setText(date);
         }
     };
@@ -165,10 +169,11 @@ public class New_Trip_Activity extends AppCompatActivity {
         else {
             String from = fromSpinner.getSelectedItem().toString();
             String to = toSpinner.getSelectedItem().toString();
-            Trip_Data data = new Trip_Data(from, to, seats, price, date, time);
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            Trip_Data data = new Trip_Data(from, to, seats, price, date, time, uid);
             DatabaseReference ref = firebaseDatabase.getReference();
             String key = ref.child("trips").push().getKey();
-            Task upload = ref.child("trips").child(date).child(key).setValue(data);
+            Task upload = ref.child("trips").child(ogDate).child(key).setValue(data);
             upload.addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
