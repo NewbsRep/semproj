@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -65,19 +66,11 @@ public class registerActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK){
-            finish();
-            startActivity(new Intent(registerActivity.this, Login_Activity.class));
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        getSupportActionBar().setTitle("Registracija");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initializeObj();
         hasAcc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +126,7 @@ public class registerActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 uploadUsrData();
                                 finish();
+                                uploadUsrData();
                                 startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
                                 Toast.makeText(registerActivity.this, getString(R.string.REGISTRATION_SUCCESS), Toast.LENGTH_SHORT).show();
                             } else {

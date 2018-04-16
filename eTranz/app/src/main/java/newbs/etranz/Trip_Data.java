@@ -13,13 +13,15 @@ public class Trip_Data {
     String price;
     String departure;
     String departureTime;
+    String uid;
 
-    public Trip_Data(String fromCity, String toCity, String freeSpace, String price, String departure, String departureTime) {
+    public Trip_Data(String fromCity, String toCity, String freeSpace, String price, String departure, String departureTime, String uuid) {
         this.fromCity = fromCity;
         this.toCity = toCity;
         this.freeSpace = freeSpace;
         this.price = price;
         this.departure = departure;
         this.departureTime = departureTime;
+        this.uid = uuid;
     }
 }
