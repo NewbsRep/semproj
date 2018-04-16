@@ -183,6 +183,7 @@ public class HomeScreen_Activity extends AppCompatActivity {
                     Glide.with(HomeScreen_Activity.this)
                             .using(new FirebaseImageLoader())
                             .load(storageReference)
+                            .error(R.drawable.profile_img)
                             .fitCenter()
                             .into(civ_ProfilePicture);
                 } catch (Exception ex){

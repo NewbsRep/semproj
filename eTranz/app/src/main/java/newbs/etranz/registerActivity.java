@@ -222,7 +222,7 @@ public class registerActivity extends AppCompatActivity {
 
     private void uploadUsrData()
     {
-        if(!Uri.EMPTY.equals(imagePath)){
+        if(imagePath != null && !imagePath.equals(Uri.EMPTY)){
             StorageReference storageReference = firebaseStorage.getReference();
             StorageReference usrStorage = storageReference.child(firebaseAuth.getUid()).child("Images").child("ProfilePic");
             UploadTask uploadTask = usrStorage.putFile(imagePath);
