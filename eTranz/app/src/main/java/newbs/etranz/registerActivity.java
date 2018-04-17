@@ -1,6 +1,5 @@
 package newbs.etranz;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,9 +8,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -25,7 +21,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -36,7 +31,6 @@ import java.io.IOException;
 import java.util.Date;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class registerActivity extends AppCompatActivity {
 
@@ -208,7 +202,7 @@ public class registerActivity extends AppCompatActivity {
 
     private void initializeObj(){
         firebaseAuth = FirebaseAuth.getInstance();
-        eMail = (EditText) findViewById(R.id.etEmail);
+        eMail = (EditText) findViewById(R.id.etEmailPsw);
         name = (EditText) findViewById(R.id.etName);
         dateOfBirth = (EditText) findViewById(R.id.etBirthDate);
         password = (EditText) findViewById(R.id.etPassword);

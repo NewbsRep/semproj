@@ -23,10 +23,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Login_Activity extends AppCompatActivity {
-    private EditText etMail;
-    private EditText etPassword;
+    private EditText etMail, etPassword;
     private Button btnLogin;
-    private TextView tvRegister;
+    private TextView tvRegister, tvPassRemind;
     private FirebaseAuth firebaseObj;
 
 
@@ -52,6 +51,13 @@ public class Login_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 validateUser(etMail.getText().toString(), etPassword.getText().toString());
+            }
+        });
+
+        tvPassRemind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login_Activity.this, PassReset_Activity.class));
             }
         });
 
@@ -112,6 +118,7 @@ public class Login_Activity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         tvRegister = findViewById(R.id.tvRegister);
         firebaseObj = FirebaseAuth.getInstance();
+        tvPassRemind = findViewById(R.id.tvPassRemind);
     }
 
 }

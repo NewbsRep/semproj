@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="newbs.etranz">
 
     <supports-screens
@@ -14,50 +15,51 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application xmlns:tools="http://schemas.android.com/tools"
-        tools:replace="android:label"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/appName"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/AppTheme"
+        tools:replace="android:label">
         <activity
             android:name=".Login_Activity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Profile_Activity"
             android:parentActivityName=".HomeScreen_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".HomeScreen_Activity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:launchMode="singleTask">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".registerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light"
-            android:parentActivityName=".Login_Activity"/>
+        <activity
+            android:name=".registerActivity"
+            android:parentActivityName=".Login_Activity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Settings_Activity"
             android:parentActivityName=".HomeScreen_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light" />
-        <activity android:name=".TripSearch_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TripSearch_Activity"
             android:parentActivityName=".HomeScreen_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light"></activity>
-        <activity android:name=".New_Trip_Activity"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".HomeScreen_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".New_Trip_Activity"
             android:label="@string/newTripAB"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:parentActivityName=".HomeScreen_Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PassReset_Activity"
+            ></activity>
     </application>
 
 </manifest>
