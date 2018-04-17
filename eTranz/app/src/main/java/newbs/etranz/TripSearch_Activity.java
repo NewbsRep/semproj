@@ -78,6 +78,7 @@ public class TripSearch_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Ieškoti kelionės");
         initializeObj();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSearch_Activity.this, android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.cities));

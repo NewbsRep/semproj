@@ -20,16 +20,16 @@
         android:label="@string/appName"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:theme="@style/AppTheme"
         tools:replace="android:label">
         <activity
             android:name=".Login_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" 
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Profile_Activity"
             android:parentActivityName=".HomeScreen_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".HomeScreen_Activity"
             android:launchMode="singleTask"
@@ -65,6 +65,7 @@
         <activity android:name=".UpdateProfile" />
         <activity android:name=".UpdatePassword" />
         <activity android:name=".UpdateEmail"></activity>
+        <activity android:name=".PassReset_Activity"></activity>
     </application>
 
 </manifest>
