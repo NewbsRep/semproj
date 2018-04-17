@@ -24,8 +24,8 @@
         tools:replace="android:label">
         <activity
             android:name=".Login_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:screenOrientation="portrait" 
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Profile_Activity"
             android:parentActivityName=".HomeScreen_Activity"
@@ -44,22 +44,28 @@
         <activity
             android:name=".registerActivity"
             android:parentActivityName=".Login_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".Settings_Activity"
             android:parentActivityName=".HomeScreen_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".TripSearch_Activity"
             android:parentActivityName=".HomeScreen_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
         <activity
             android:name=".New_Trip_Activity"
             android:label="@string/newTripAB"
             android:parentActivityName=".HomeScreen_Activity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".PassReset_Activity"
-            ></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity android:name=".UpdateProfile" />
+        <activity android:name=".UpdatePassword" />
+        <activity android:name=".UpdateEmail"></activity>
+        <activity android:name=".PassReset_Activity"></activity>
     </application>
 
 </manifest>
