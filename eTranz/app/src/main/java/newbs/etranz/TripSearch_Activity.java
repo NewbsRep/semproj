@@ -23,6 +23,8 @@ public class TripSearch_Activity extends AppCompatActivity {
     private EditText etDate, etTime;
     static final int TIME_ID = 0;
     static final int DATE_ID = 1;
+    public static final String EXTRA_FROM_CITY = "newbs.etranz.EXTRA_FROM_CITY";
+    public static final String EXTRA_TO_CITY = "newbs.etranz.EXTRA_TO_CITY";
 
 
     protected Dialog onCreateDialog(int id) {
@@ -98,6 +100,10 @@ public class TripSearch_Activity extends AppCompatActivity {
 
     private void openFoundTripListActivity() {
         Intent intent = new Intent(this, AvailableTrips_Activity.class);
+        String fromCity = fromSpinner.getSelectedItem().toString();
+        String toCity = toSpinner.getSelectedItem().toString();
+        intent.putExtra(EXTRA_FROM_CITY, fromCity);
+        intent.putExtra(EXTRA_TO_CITY, toCity);
         startActivity(intent);
     }
 
