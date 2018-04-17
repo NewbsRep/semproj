@@ -3,6 +3,7 @@ package newbs.etranz;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,9 +18,9 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.Calendar;
 
 public class TripSearch_Activity extends AppCompatActivity {
-    SearchableSpinner fromSpinner, toSpinner;
-    Button searchButton;
-    EditText etDate, etTime;
+    private SearchableSpinner fromSpinner, toSpinner;
+    private Button searchButton;
+    private EditText etDate, etTime;
     static final int TIME_ID = 0;
     static final int DATE_ID = 1;
 
@@ -86,6 +87,18 @@ public class TripSearch_Activity extends AppCompatActivity {
         toSpinner.setAdapter(adapter);
         showDateDialog();
         showTimeDialog();
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFoundTripListActivity();
+            }
+        });
+    }
+
+    private void openFoundTripListActivity() {
+        Intent intent = new Intent(this, AvailableTrips_Activity.class);
+        startActivity(intent);
     }
 
     private void initializeObj(){
