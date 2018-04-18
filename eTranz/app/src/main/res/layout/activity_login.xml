@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:launchMode="singleTop"
     tools:context="newbs.etranz.Login_Activity">
 
     <TextView
@@ -79,8 +78,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="88dp"
         android:text="@string/loginText"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/logo_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
