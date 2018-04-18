@@ -5,7 +5,7 @@
     android:id="@+id/navigation_header"
     android:layout_width="match_parent"
     android:layout_height="180dp"
-    android:background="@color/colorPrimary"
+    android:background="@color/primary"
     tools:context="newbs.etranz.HomeScreen_Activity">
 
     <TextView
