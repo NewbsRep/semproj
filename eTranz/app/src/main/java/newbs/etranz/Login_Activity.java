@@ -32,13 +32,10 @@ public class Login_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
         initializeObj();
-
-        if (Build.VERSION.SDK_INT >= 21){
-            Window window = this.getWindow();
-            window.setStatusBarColor(this.getResources().getColor(R.color.logo_default));
-        }
 
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
