@@ -20,7 +20,7 @@
         android:label="@string/appName"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/CustomTheme"
+        android:theme="@style/AppTheme"
         tools:replace="android:label">
         <activity
             android:name=".Login_Activity"
