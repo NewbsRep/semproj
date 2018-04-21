@@ -49,8 +49,8 @@ public class TripListAdapter extends BaseAdapter{
         //Set text for TextView
         tvFromCity.setText(mTripList.get(position).getFromCity());
         tvToCity.setText(mTripList.get(position).getToCity());
-        tvPrice.setText(mTripList.get(position).getPrice());
-        tvDriverUID.setText(mTripList.get(position).getUid());
+        tvPrice.setText("Kaina: " + mTripList.get(position).getPrice());
+        tvDriverUID.setText("Vairuotojas: " + mTripList.get(position).getUid());
 
         //Save trip id to tag
         v.setTag(mTripList.get(position).getUid());
