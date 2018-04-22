@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -19,7 +20,7 @@ import java.util.Calendar;
 public class TripSearch_Activity extends AppCompatActivity {
     private SearchableSpinner fromSpinner, toSpinner;
     private Button searchButton;
-    private EditText etDate, etTime;
+    private EditText etDate, etTime, erFrom, erTo, erDate, erTime;
     private static final int TIME_ID = 0;
     private static final int DATE_ID = 1;
 
@@ -43,6 +44,7 @@ public class TripSearch_Activity extends AppCompatActivity {
         etTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                erTime.setError(null);
                 showDialog(TIME_ID);
             }
         });
@@ -52,6 +54,7 @@ public class TripSearch_Activity extends AppCompatActivity {
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                erDate.setError(null);
                 showDialog(DATE_ID);
             }
         });
@@ -85,11 +88,35 @@ public class TripSearch_Activity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fromSpinner.setAdapter(adapter);
         toSpinner.setAdapter(adapter);
+        fromSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                        erFrom.setError(null);
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+        toSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                        erTo.setError(null);
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
         showDateDialog();
         showTimeDialog();
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                noEmptyFields();
+            }
+        });
     }
 
-    private void initializeObj(){
+    private void initializeObj() {
         fromSpinner = findViewById(R.id.fromSpinner);
         toSpinner = findViewById(R.id.toSpinner);
         fromSpinner.setTitle("Pasirinkite išvykimo miesta");
@@ -99,5 +126,33 @@ public class TripSearch_Activity extends AppCompatActivity {
         searchButton = findViewById(R.id.btnSearch);
         etDate = findViewById(R.id.etDate);
         etTime = findViewById(R.id.etTime);
+        erFrom = findViewById(R.id.erFrom);
+        erTo = findViewById(R.id.erTo);
+        erTime = findViewById(R.id.erTime);
+        erDate = findViewById(R.id.erDate);
     }
+
+    private boolean noEmptyFields() {
+        int posFrom = fromSpinner.getSelectedItemPosition();
+        int posTo = toSpinner.getSelectedItemPosition();
+        if (posFrom == -1) {
+            erFrom.setError(getResources().getString(R.string.emptyFieldMsg));
+            erFrom.requestFocus();
+            return false;
+        } else if (posTo == -1) {
+            erTo.setError(getResources().getString(R.string.emptyFieldMsg));
+            erTo.requestFocus();
+            return false;
+        } else if (etDate.getText().toString().isEmpty()) {
+            erDate.setError(getResources().getString(R.string.emptyFieldMsg));
+            erDate.requestFocus();
+            return false;
+        } else if (etTime.getText().toString().isEmpty()) {
+            erTime.setError(getResources().getString(R.string.emptyFieldMsg));
+            erTime.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
 }

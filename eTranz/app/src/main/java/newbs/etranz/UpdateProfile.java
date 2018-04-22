@@ -150,12 +150,18 @@ public class UpdateProfile extends AppCompatActivity {
     }
 
     private boolean noEmptyFields(){
-        String pass = newName.getText().toString();
-        String passRepeat = newBirth.getText().toString();
-        if (pass.isEmpty() || passRepeat.isEmpty()) {
-            Toast.makeText(this, "Nenurodyti kaikurie laukai", Toast.LENGTH_SHORT).show();
+        if (newName.getText().toString().isEmpty()){
+            newName.setError(getResources().getString(R.string.emptyFieldMsg));
+            newName.requestFocus();
             return false;
         }
-        return true;
+        else if(newBirth.getText().toString().isEmpty()){
+            newBirth.setError(getResources().getString(R.string.emptyFieldMsg));
+            newBirth.requestFocus();
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }

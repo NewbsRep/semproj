@@ -18,6 +18,7 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
+        android:hint="@string/mailText"
         app:layout_constraintBottom_toTopOf="@+id/btnResetPswd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -34,8 +35,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/resetBtnText"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/logo_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -50,7 +49,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/resetExpl"
-        android:textColor="@color/logo_default"
+        android:textColor="@color/text_color_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

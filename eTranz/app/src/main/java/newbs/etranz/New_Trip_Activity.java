@@ -9,9 +9,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -36,9 +39,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class New_Trip_Activity extends AppCompatActivity {
-    private EditText etDate, etTime;
+    private EditText etDate, etTime, etErrFrom, etErrTo, etSeats, etErrDate, etErrTime;
     private ImageView seatInc, seatDec, priceInc, priceDec;
-    private TextView tvPrice, tvSeats;
+    private TextView tvPrice;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private static final int TIME_ID = 0;
     private static final int DATE_ID = 1;
@@ -58,6 +61,25 @@ public class New_Trip_Activity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fromSpinner.setAdapter(adapter);
         toSpinner.setAdapter(adapter);
+
+        fromSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                        etErrFrom.setError(null);
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+        toSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                        etErrTo.setError(null);
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
         showDateDialog();
         showTimeDialog();
         seatCount();
@@ -69,6 +91,7 @@ public class New_Trip_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDialog(TIME_ID);
+                etErrTime.setError(null);
             }
         });
     }
@@ -78,6 +101,7 @@ public class New_Trip_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showDialog(DATE_ID);
+                etErrDate.setError(null);
             }
         });
     }
@@ -135,7 +159,7 @@ public class New_Trip_Activity extends AppCompatActivity {
 
     public void initializeObj() {
         etDate = findViewById(R.id.etDate);
-        tvSeats = findViewById(R.id.tvSeats);
+        etSeats = findViewById(R.id.etSeats);
         tvPrice = findViewById(R.id.tvPrice);
         etTime = findViewById(R.id.etTime);
         fromSpinner = findViewById(R.id.fromSpinner);
@@ -148,6 +172,10 @@ public class New_Trip_Activity extends AppCompatActivity {
         priceInc = findViewById(R.id.ivPriceInc);
         seatDec = findViewById(R.id.ivSeatDec);
         seatInc = findViewById(R.id.ivSeatInc);
+        etErrFrom = findViewById(R.id.etFromErr);
+        etErrTo = findViewById(R.id.etToErr);
+        etErrDate = findViewById(R.id.etDateErr);
+        etErrTime = findViewById(R.id.etTimeErr);
         seatCounter = 0;
         price = 0;
     }
@@ -157,20 +185,15 @@ public class New_Trip_Activity extends AppCompatActivity {
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Kelionė išsaugoma...");
         pd.show();
-        String seats = tvSeats.getText().toString();
+        String seats = etSeats.getText().toString();
         String price = tvPrice.getText().toString();
         String date = etDate.getText().toString();
         String time = etTime.getText().toString();
+        String from = fromSpinner.getSelectedItem().toString();
+        String to = toSpinner.getSelectedItem().toString();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        if (fromSpinner.equals(null) || toSpinner.equals(null) || seats.equals("0") || price.isEmpty() ||
-        date.isEmpty() || time.isEmpty()){
-            pd.cancel();
-            Toast.makeText(this, this.getResources().getText(R.string.emptyFieldMsg), Toast.LENGTH_SHORT).show();
-        }
-        else {
-            String from = fromSpinner.getSelectedItem().toString();
-            String to = toSpinner.getSelectedItem().toString();
-            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if(checkForEmoptyFields()) {
             Trip_Data data = new Trip_Data(from, to, seats, price, date, time, uid);
             DatabaseReference ref = firebaseDatabase.getReference();
             String key = ref.child("trips").push().getKey();
@@ -191,10 +214,13 @@ public class New_Trip_Activity extends AppCompatActivity {
                 }
             });
         }
+        else{
+            pd.cancel();
+        }
     }
 
     private String determineMonth(int month) {
-        switch(month) {
+        switch (month) {
             case 0:
                 return getString(R.string.MONTH_JANUARY);
             case 1:
@@ -223,33 +249,35 @@ public class New_Trip_Activity extends AppCompatActivity {
         return getString(R.string.ERROR);
     }
 
-    public void seatCount(){
+    private void seatCount() {
         seatInc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(seatCounter < 7)
+                etSeats.setError(null);
+                if (seatCounter < 7)
                     seatCounter++;
-                tvSeats.setText(String.valueOf(seatCounter));
+                etSeats.setText(String.valueOf(seatCounter));
             }
         });
 
         seatDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(seatCounter > 0)
+                etSeats.setError(null);
+                if (seatCounter > 0)
                     seatCounter--;
-                tvSeats.setText(String.valueOf(seatCounter));
+                etSeats.setText(String.valueOf(seatCounter));
             }
         });
     }
 
-    public void setPrice(){
+    private void setPrice() {
         final DecimalFormat format = new DecimalFormat("0.#");
         priceInc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                price+= 0.5;
-                String line = format.format(price)+"€";
+                price += 0.5;
+                String line = format.format(price) + "€";
                 tvPrice.setText(line);
             }
         });
@@ -257,11 +285,38 @@ public class New_Trip_Activity extends AppCompatActivity {
         priceDec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(price > 0)
-                    price-=0.5;
-                String line = format.format(price)+"€";
+                if (price > 0)
+                    price -= 0.5;
+                String line = format.format(price) + "€";
                 tvPrice.setText(line);
             }
         });
+    }
+
+    private boolean checkForEmoptyFields() {
+        int posFrom = fromSpinner.getSelectedItemPosition();
+        int posTo = toSpinner.getSelectedItemPosition();
+        if (posFrom == -1) {
+            etErrFrom.setError(getResources().getString(R.string.emptyFieldMsg));
+            etErrFrom.requestFocus();
+            return false;
+        } else if (posTo == -1) {
+            etErrTo.setError(getResources().getString(R.string.emptyFieldMsg));
+            etErrTo.requestFocus();
+            return false;
+        } else if (etSeats.getText().toString().equals("0")) {
+            etSeats.setError("Negali būti 0 laisvų vietų");
+            etSeats.requestFocus();
+            return false;
+        } else if (etDate.getText().toString().isEmpty()) {
+            etErrDate.setError(getResources().getString(R.string.emptyFieldMsg));
+            etErrDate.requestFocus();
+            return false;
+        } else if (etTime.getText().toString().isEmpty()) {
+            etErrTime.setError(getResources().getString(R.string.emptyFieldMsg));
+            etErrTime.requestFocus();
+            return false;
+        }
+        return true;
     }
 }
