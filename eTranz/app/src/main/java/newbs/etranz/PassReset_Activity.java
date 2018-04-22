@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
 
 public class PassReset_Activity extends AppCompatActivity {
     Button reset;
@@ -37,8 +40,9 @@ public class PassReset_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String mail  = email.getText().toString().trim();
-                if(mail.equals(null)){
-                    Toast.makeText(PassReset_Activity.this, R.string.resetEmptyMail, Toast.LENGTH_SHORT).show();
+                if(mail.isEmpty()){
+                    email.setError(getResources().getString(R.string.emptyFieldMsg));
+                    email.requestFocus();
                 }
                 else{
                     firebaseAuth.sendPasswordResetEmail(mail).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -50,7 +54,7 @@ public class PassReset_Activity extends AppCompatActivity {
                                 startActivity(new Intent(PassReset_Activity.this, Login_Activity.class));
                             }
                             else {
-                                Toast.makeText(PassReset_Activity.this, R.string.resetFail, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PassReset_Activity.this,R.string.resetFail, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

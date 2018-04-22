@@ -61,8 +61,14 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     public boolean checkForEmptyFields(){
-        if(etMail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Užpildykite visus laukelius", Toast.LENGTH_SHORT).show();
+        if(etMail.getText().toString().isEmpty()){
+            etMail.setError(getResources().getString(R.string.emptyFieldMsg));
+            etMail.requestFocus();
+            return true;
+        }
+        else if(etPassword.getText().toString().isEmpty()){
+            etPassword.setError(getResources().getString(R.string.emptyFieldMsg));
+            etPassword.requestFocus();
             return true;
         }
         else {
