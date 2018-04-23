@@ -40,30 +40,27 @@ import java.net.URI;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeScreen_Activity extends AppCompatActivity {
-
-    TextView tv_PostATrip;
-    TextView tv_SearchForATrip;
-
-    TextView tv_ProfileName;
-    CircleImageView civ_ProfilePicture;
-
-    boolean isSignedIn = true;
-
-    DrawerLayout mDrawerLayout;
-    ActionBarDrawerToggle mToggle;
-    NavigationView navigationView;
-
-    FirebaseAuth firebaseAuth;
-    FirebaseDatabase firebaseDatabase;
-    FirebaseStorage firebaseStorage;
-    DatabaseReference databaseReference;
-
-    StorageReference storageReference;
+    private TextView tv_PostATrip;
+    private TextView tv_SearchForATrip;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+    private NavigationView navigationView;
+    private TextView tv_ProfileName;
+    private CircleImageView civ_ProfilePicture;
+  
+    private boolean isSignedIn = true;
+  
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseStorage firebaseStorage;
+    private DatabaseReference databaseReference;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen_);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initializeObj();
         checkUserStatus();
         if(isSignedIn) setUpProfileSettings();
@@ -109,24 +106,12 @@ public class HomeScreen_Activity extends AppCompatActivity {
                 return true;
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.trip_add_menu, menu);
-        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(mToggle.onOptionsItemSelected(item)){
             return true;
-        }
-
-        if (item.getItemId() == R.id.btnAddTrip) {
-            startActivity(new Intent(this, New_Trip_Activity.class));
         }
         return super.onOptionsItemSelected(item);
     }
@@ -187,6 +172,7 @@ public class HomeScreen_Activity extends AppCompatActivity {
                     Glide.with(HomeScreen_Activity.this)
                             .using(new FirebaseImageLoader())
                             .load(storageReference)
+                            .error(R.drawable.profile_img)
                             .fitCenter()
                             .into(civ_ProfilePicture);
                 } catch (Exception ex){

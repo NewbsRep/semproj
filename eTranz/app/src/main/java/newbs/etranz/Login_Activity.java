@@ -23,23 +23,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Login_Activity extends AppCompatActivity {
-    EditText etMail;
-    EditText etPassword;
-    Button btnLogin;
-    TextView tvRegister;
-    FirebaseAuth firebaseObj;
+    private EditText etMail, etPassword;
+    private Button btnLogin;
+    private TextView tvRegister, tvPassRemind;
+    private FirebaseAuth firebaseObj;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
         initializeObj();
-
-        if (Build.VERSION.SDK_INT >= 21){
-            Window window = this.getWindow();
-            window.setStatusBarColor(this.getResources().getColor(R.color.logo_default));
-        }
 
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,11 +51,24 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
 
+        tvPassRemind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login_Activity.this, PassReset_Activity.class));
+            }
+        });
+
     }
 
     public boolean checkForEmptyFields(){
-        if(etMail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Užpildykite visus laukelius", Toast.LENGTH_SHORT).show();
+        if(etMail.getText().toString().isEmpty()){
+            etMail.setError(getResources().getString(R.string.emptyFieldMsg));
+            etMail.requestFocus();
+            return true;
+        }
+        else if(etPassword.getText().toString().isEmpty()){
+            etPassword.setError(getResources().getString(R.string.emptyFieldMsg));
+            etPassword.requestFocus();
             return true;
         }
         else {
@@ -112,6 +121,7 @@ public class Login_Activity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         tvRegister = findViewById(R.id.tvRegister);
         firebaseObj = FirebaseAuth.getInstance();
+        tvPassRemind = findViewById(R.id.tvPassRemind);
     }
 
 }
