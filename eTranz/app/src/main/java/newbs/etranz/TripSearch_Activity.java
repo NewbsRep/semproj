@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -24,16 +25,16 @@ import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import java.util.Calendar;
 
 public class TripSearch_Activity extends AppCompatActivity {
+
     public static final String EXTRA_FROM_CITY = "newbs.etranz.EXTRA_FROM_CITY";
     public static final String EXTRA_TO_CITY = "newbs.etranz.EXTRA_TO_CITY";
     public static final String EXTRA_DEPARTURE_DATE = "newbs.etranz.EXTRA_DEPARTURE_DATE";
-
     private SearchableSpinner fromSpinner, toSpinner;
     private Button searchButton;
-    private EditText etDate, etTime;
+    private EditText etDate, etTime, erFrom, erTo, erDate, erTime;
     private String searchDate; // January = 0
-    static final int TIME_ID = 0;
-    static final int DATE_ID = 1;
+    private static final int TIME_ID = 0;
+    private static final int DATE_ID = 1;
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference().child("trips");
@@ -58,6 +59,7 @@ public class TripSearch_Activity extends AppCompatActivity {
         etTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                erTime.setError(null);
                 showDialog(TIME_ID);
             }
         });
@@ -67,6 +69,7 @@ public class TripSearch_Activity extends AppCompatActivity {
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                erDate.setError(null);
                 showDialog(DATE_ID);
             }
         });
@@ -94,27 +97,43 @@ public class TripSearch_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trip_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Ieškoti kelionės");
         initializeObj();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(TripSearch_Activity.this, android.R.layout.simple_list_item_1,
                 getResources().getStringArray(R.array.cities));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         fromSpinner.setAdapter(adapter);
         toSpinner.setAdapter(adapter);
+        fromSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                        erFrom.setError(null);
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
+        toSpinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                        erTo.setError(null);
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+                    }
+                });
         showDateDialog();
         showTimeDialog();
-
+      
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                noEmptyFields();
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(fromSpinner.getSelectedItem() == null || toSpinner.getSelectedItem() == null
-                                || etDate.getText().toString().equals(""))
-                            Toast.makeText(getApplicationContext(), "Užpildykite visus laukelius",
-                                    Toast.LENGTH_SHORT).show();
-                        else if(!dataSnapshot.hasChild(searchDate))
-                            Toast.makeText(getApplicationContext(), "Pasirinktą dieną kelionių nerasta",
+                        if(!dataSnapshot.hasChild(searchDate))
+                            Toast.makeText(getApplicationContext(), "Pasirinktą dieną kelionių nerasta!",
                                     Toast.LENGTH_SHORT).show();
                         else openFoundTripListActivity();
                     }
@@ -140,7 +159,7 @@ public class TripSearch_Activity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void initializeObj(){
+    private void initializeObj() {
         fromSpinner = findViewById(R.id.fromSpinner);
         toSpinner = findViewById(R.id.toSpinner);
         fromSpinner.setTitle("Pasirinkite išvykimo miesta");
@@ -150,5 +169,33 @@ public class TripSearch_Activity extends AppCompatActivity {
         searchButton = findViewById(R.id.btnSearch);
         etDate = findViewById(R.id.etDate);
         etTime = findViewById(R.id.etTime);
+        erFrom = findViewById(R.id.erFrom);
+        erTo = findViewById(R.id.erTo);
+        erTime = findViewById(R.id.erTime);
+        erDate = findViewById(R.id.erDate);
     }
+
+    private boolean noEmptyFields() {
+        int posFrom = fromSpinner.getSelectedItemPosition();
+        int posTo = toSpinner.getSelectedItemPosition();
+        if (posFrom == -1) {
+            erFrom.setError(getResources().getString(R.string.emptyFieldMsg));
+            erFrom.requestFocus();
+            return false;
+        } else if (posTo == -1) {
+            erTo.setError(getResources().getString(R.string.emptyFieldMsg));
+            erTo.requestFocus();
+            return false;
+        } else if (etDate.getText().toString().isEmpty()) {
+            erDate.setError(getResources().getString(R.string.emptyFieldMsg));
+            erDate.requestFocus();
+            return false;
+        } else if (etTime.getText().toString().isEmpty()) {
+            erTime.setError(getResources().getString(R.string.emptyFieldMsg));
+            erTime.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
 }
