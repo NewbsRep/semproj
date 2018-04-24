@@ -11,10 +11,12 @@
         android:layout_height="match_parent"
         android:id="@+id/listView_trip"
         android:dividerHeight="14dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="0dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
         android:background="@drawable/list_view_background"
-        android:divider="#80fb333d">
+        android:divider="#00000000">
     </ListView>
 
 </android.support.constraint.ConstraintLayout>
