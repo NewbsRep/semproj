@@ -55,6 +55,7 @@
         <activity
             android:name=".New_Trip_Activity"
             android:label="@string/newTripAB"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".HomeScreen_Activity"
             android:screenOrientation="portrait" />
         <activity android:name=".AvailableTrips_Activity"></activity>
