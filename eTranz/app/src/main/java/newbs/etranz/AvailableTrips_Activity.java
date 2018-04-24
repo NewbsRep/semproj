@@ -24,7 +24,7 @@ public class AvailableTrips_Activity extends AppCompatActivity {
     private ListView lvTrip;
     private TripListAdapter adapter;
     private List<Trip_Data> mTripList;
-    private String fromCity, toCity, departureDate;
+    private String EXTRA_fromCity, EXTRA_toCity, departureDate;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference();
 
@@ -41,9 +41,12 @@ public class AvailableTrips_Activity extends AppCompatActivity {
                 if(dataSnapshot.child("trips").hasChild(departureDate)) {
                     fillAvailableTrips((Map<String, Object>) dataSnapshot.child("trips").child(departureDate).getValue(),
                             dataSnapshot.child("users"));
-                    displayTrips();
+                    if(mTripList.size() != 0)
+                        displayTrips();
+                    else
+                        Toast.makeText(getApplicationContext(), "Kelionių nerasta!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Kelionių nerasta", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Kelionių nerasta!", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(AvailableTrips_Activity.this, TripSearch_Activity.class));
                 }
             }
@@ -51,6 +54,7 @@ public class AvailableTrips_Activity extends AppCompatActivity {
             private void fillAvailableTrips(Map<String, Object> trips, DataSnapshot user) {
                 for(Map.Entry<String, Object> entry : trips.entrySet()) {
                     Map singleTrip = (Map) entry.getValue();
+
                     String uid = (String) singleTrip.get("uid");
                     Map userData = (Map) user.child(uid).getValue();
 
@@ -61,6 +65,8 @@ public class AvailableTrips_Activity extends AppCompatActivity {
                     String departure = (String) singleTrip.get("departure");
                     String departureTime = (String) singleTrip.get("departureTime");
                     String driver = (String) userData.get("usrName");
+
+                    if(fromCity.equals(EXTRA_fromCity) && toCity.equals(EXTRA_toCity))
                     mTripList.add(new Trip_Data(fromCity, toCity, freeSpace, price, departure,
                             departureTime, driver));
                 }
@@ -92,8 +98,8 @@ public class AvailableTrips_Activity extends AppCompatActivity {
 
         //Getting variables from TripSearch_Activity
         Intent intent = getIntent();
-        fromCity = intent.getStringExtra(TripSearch_Activity.EXTRA_FROM_CITY);
-        toCity = intent.getStringExtra(TripSearch_Activity.EXTRA_TO_CITY);
+        EXTRA_fromCity = intent.getStringExtra(TripSearch_Activity.EXTRA_FROM_CITY);
+        EXTRA_toCity = intent.getStringExtra(TripSearch_Activity.EXTRA_TO_CITY);
         departureDate = intent.getStringExtra(TripSearch_Activity.EXTRA_DEPARTURE_DATE);
 
         lvTrip = (ListView)findViewById(R.id.listView_trip);

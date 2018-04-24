@@ -13,10 +13,10 @@
         android:dividerHeight="14dp"
         android:paddingTop="0dp"
         android:paddingBottom="0dp"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="@drawable/list_view_background"
-        android:divider="#00000000">
+        android:divider="@color/transparent">
     </ListView>
 
 </android.support.constraint.ConstraintLayout>

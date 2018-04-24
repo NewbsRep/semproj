@@ -124,11 +124,12 @@ public class TripSearch_Activity extends AppCompatActivity {
                 });
         showDateDialog();
         showTimeDialog();
-      
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                noEmptyFields();
+                if(!noEmptyFields())
+                    return;
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

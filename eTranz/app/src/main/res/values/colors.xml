@@ -4,6 +4,7 @@
     <color name="colorPrimary">#1A3A85</color>
     <color name="colorPrimaryDark">#0d2459</color>
     <color name="colorAccent">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
 
     <color name="logo_default">#0A0561</color>
     <color name="foreground_material_light">#ffffff</color>
