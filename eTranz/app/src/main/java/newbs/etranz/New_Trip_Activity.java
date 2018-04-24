@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
@@ -40,10 +42,10 @@ public class New_Trip_Activity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     static final int TIME_ID = 0;
     static final int DATE_ID = 1;
-    SearchableSpinner fromSpinner;
-    SearchableSpinner toSpinner;
+    SearchableSpinner fromSpinner, toSpinner;
     int seatCounter;
     double price;
+    String ogDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +101,8 @@ public class New_Trip_Activity extends AppCompatActivity {
     protected DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            String date = String.format("%d-%02d-%02d ", year, month, dayOfMonth);
+            ogDate = String.format("%d-%02d-%02d ", year, month, dayOfMonth);
+            String date = String.format("%d-%02d-%02d ", year, month + 1, dayOfMonth);
             etDate.setText(date);
         }
     };
@@ -149,6 +152,10 @@ public class New_Trip_Activity extends AppCompatActivity {
     }
 
     public void uploadData() {
+        final ProgressDialog pd = new ProgressDialog(New_Trip_Activity.this);
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Kelionė išsaugoma...");
+        pd.show();
         String seats = tvSeats.getText().toString();
         String price = tvPrice.getText().toString();
         String date = etDate.getText().toString();
@@ -156,18 +163,21 @@ public class New_Trip_Activity extends AppCompatActivity {
 
         if (fromSpinner.equals(null) || toSpinner.equals(null) || seats.equals("0") || price.isEmpty() ||
         date.isEmpty() || time.isEmpty()){
+            pd.cancel();
             Toast.makeText(this, this.getResources().getText(R.string.emptyFieldMsg), Toast.LENGTH_SHORT).show();
         }
         else {
             String from = fromSpinner.getSelectedItem().toString();
             String to = toSpinner.getSelectedItem().toString();
-            Trip_Data data = new Trip_Data(from, to, seats, price, date, time);
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            Trip_Data data = new Trip_Data(from, to, seats, price, date, time, uid);
             DatabaseReference ref = firebaseDatabase.getReference();
             String key = ref.child("trips").push().getKey();
-            Task upload = ref.child("trips").child(key).setValue(data);
+            Task upload = ref.child("trips").child(ogDate).child(key).setValue(data);
             upload.addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
+                    pd.cancel();
                     Toast.makeText(New_Trip_Activity.this, "Skelbimas pridėtas", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(New_Trip_Activity.this, HomeScreen_Activity.class));
                 }
@@ -175,6 +185,7 @@ public class New_Trip_Activity extends AppCompatActivity {
             upload.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    pd.cancel();
                     Toast.makeText(New_Trip_Activity.this, "Duomenų bazės klaida", Toast.LENGTH_SHORT).show();
                 }
             });

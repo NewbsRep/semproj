@@ -72,6 +72,7 @@ public class registerActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Registracija");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initializeObj();
+
         hasAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -219,8 +220,7 @@ public class registerActivity extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
     }
 
-    private void uploadUsrData()
-    {
+    private void uploadUsrData() {
         if(imagePath != null && !imagePath.equals(Uri.EMPTY)){
             StorageReference storageReference = firebaseStorage.getReference();
             StorageReference usrStorage = storageReference.child(firebaseAuth.getUid()).child("Images").child("ProfilePic");

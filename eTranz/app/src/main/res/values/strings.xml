@@ -175,4 +175,5 @@
         <item>Panemunė</item>
     </string-array>
     <string name="emptyFieldMsg">Prašome užpildyti visus laukus</string>
+    <string name="search">Ieškoti</string>
 </resources>
