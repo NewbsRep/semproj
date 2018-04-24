@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="5dp"
+    android:background="#E0FFFFFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:paddingTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_departureDate"
+            android:text="0000-00-00 "
+            android:textSize="16dp"
+            android:textColor="#000"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_departureTime"
+            android:paddingLeft="30dp"
+            android:text="00:00"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="#d50000"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:id="@+id/tv_from_city"
+            android:text="Pradžia"
+            android:textSize="16dp"
+            android:textColor="#106b00"/>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:paddingTop="3dp"
+            android:src="@drawable/right_arrow"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:id="@+id/tv_to_city"
+            android:text="Pabaiga"
+            android:textSize="16dp"
+            android:textColor="#106b00"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_price"
+        android:text="Kaina"
+        android:textSize="18dp"
+        android:textColor="#0076f5"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_Driver"
+        android:text="Vairuotojas"
+        android:textSize="16dp"
+        android:textColor="#000"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_freeSpace"
+        android:text="Laisvos vietos"
+        android:textSize="16dp"
+        android:textColor="#000"/>
+
+
+
+</LinearLayout>

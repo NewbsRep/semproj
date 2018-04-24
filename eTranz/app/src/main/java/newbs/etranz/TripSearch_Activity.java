@@ -3,6 +3,7 @@ package newbs.etranz;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,17 +13,31 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.util.Calendar;
 
 public class TripSearch_Activity extends AppCompatActivity {
+
+    public static final String EXTRA_FROM_CITY = "newbs.etranz.EXTRA_FROM_CITY";
+    public static final String EXTRA_TO_CITY = "newbs.etranz.EXTRA_TO_CITY";
+    public static final String EXTRA_DEPARTURE_DATE = "newbs.etranz.EXTRA_DEPARTURE_DATE";
     private SearchableSpinner fromSpinner, toSpinner;
     private Button searchButton;
     private EditText etDate, etTime, erFrom, erTo, erDate, erTime;
+    private String searchDate; // January = 0
     private static final int TIME_ID = 0;
     private static final int DATE_ID = 1;
+
+    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = database.getReference().child("trips");
 
 
     protected Dialog onCreateDialog(int id) {
@@ -63,7 +78,8 @@ public class TripSearch_Activity extends AppCompatActivity {
     protected DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            String date = String.format("%d-%02d-%02d ", year, month, dayOfMonth);
+            String date = String.format("%d-%02d-%02d ", year, month + 1, dayOfMonth);
+            searchDate = String.format("%d-%02d-%02d ", year, month, dayOfMonth);
             etDate.setText(date);
         }
     };
@@ -108,12 +124,40 @@ public class TripSearch_Activity extends AppCompatActivity {
                 });
         showDateDialog();
         showTimeDialog();
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                noEmptyFields();
+            public void onClick(View view) {
+                if(!noEmptyFields())
+                    return;
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(!dataSnapshot.hasChild(searchDate))
+                            Toast.makeText(getApplicationContext(), "Pasirinktą dieną kelionių nerasta!",
+                                    Toast.LENGTH_SHORT).show();
+                        else openFoundTripListActivity();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Toast.makeText(getApplicationContext(), "Database error",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
+    }
+
+    private void openFoundTripListActivity() {
+        Intent intent = new Intent(this, AvailableTrips_Activity.class);
+        String fromCity = fromSpinner.getSelectedItem().toString();
+        String toCity = toSpinner.getSelectedItem().toString();
+        String departureDate = searchDate;
+        intent.putExtra(EXTRA_FROM_CITY, fromCity);
+        intent.putExtra(EXTRA_TO_CITY, toCity);
+        intent.putExtra(EXTRA_DEPARTURE_DATE, departureDate);
+        startActivity(intent);
     }
 
     private void initializeObj() {
