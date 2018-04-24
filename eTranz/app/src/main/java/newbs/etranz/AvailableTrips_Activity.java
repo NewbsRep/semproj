@@ -67,9 +67,12 @@ public class AvailableTrips_Activity extends AppCompatActivity {
                     String departureTime = (String) singleTrip.get("departureTime");
                     String driver = (String) userData.get("usrName");
 
-                    if(fromCity.equals(EXTRA_fromCity) && toCity.equals(EXTRA_toCity))
-                    mTripList.add(new Trip_Data(fromCity, toCity, freeSpace, price, departure,
-                            departureTime, driver));
+                    if(fromCity.equals(EXTRA_fromCity) && toCity.equals(EXTRA_toCity)) {
+                        Trip_Data availableTrip = new Trip_Data(fromCity, toCity, freeSpace, price, departure,
+                                departureTime, uid);
+                        availableTrip.setDriverName(driver);
+                        mTripList.add(availableTrip);
+                    }
                 }
             }
 

@@ -12,6 +12,8 @@ public class Trip_Data {
     private String departureTime;
     private String uid;
 
+    private String driverName;
+
     //Constructor
     public Trip_Data(String fromCity, String toCity, String freeSpace, String price, String departure, String departureTime, String uid) {
         this.fromCity = fromCity;
@@ -24,6 +26,14 @@ public class Trip_Data {
     }
 
     //Setter, getter
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
+    }
+
     public String getFromCity() {
         return fromCity;
     }
