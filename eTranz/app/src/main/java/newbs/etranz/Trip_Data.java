@@ -1,8 +1,5 @@
 package newbs.etranz;
 
-import java.sql.Time;
-import java.util.Date;
-
 /**
  * Created by visabr on 2018-03-26.
  */
@@ -13,17 +10,17 @@ public class Trip_Data {
     private String price;
     private String departure;
     private String departureTime;
-    private String uid;
+    private String driverName;
 
     //Constructor
-    public Trip_Data(String fromCity, String toCity, String freeSpace, String price, String departure, String departureTime, String uid) {
+    public Trip_Data(String fromCity, String toCity, String freeSpace, String price, String departure, String departureTime, String driverName) {
         this.fromCity = fromCity;
         this.toCity = toCity;
         this.freeSpace = freeSpace;
         this.price = price;
         this.departure = departure;
         this.departureTime = departureTime;
-        this.uid = uid;
+        this.driverName = driverName;
     }
 
     //Setter, getter
@@ -75,11 +72,11 @@ public class Trip_Data {
         this.departureTime = departureTime;
     }
 
-    public String getUid() {
-        return uid;
+    public String getDriverName() {
+        return driverName;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
     }
 }

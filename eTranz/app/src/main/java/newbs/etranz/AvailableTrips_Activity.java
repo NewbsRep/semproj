@@ -25,10 +25,8 @@ public class AvailableTrips_Activity extends AppCompatActivity {
     private TripListAdapter adapter;
     private List<Trip_Data> mTripList;
     private String fromCity, toCity, departureDate;
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference tripsReference = database.getReference().child("trips");
-    private DatabaseReference usersReference = database.getReference().child("users");
+    private DatabaseReference databaseReference = database.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +34,13 @@ public class AvailableTrips_Activity extends AppCompatActivity {
         initializeObjects();
 
         mTripList = new ArrayList<>();
-//        tripsReference = tripsReference.child(departureDate);
 
-        tripsReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(departureDate)) {
-                    fillAvailableTrips((Map<String, Object>) dataSnapshot.child(departureDate).getValue());
+                if(dataSnapshot.child("trips").hasChild(departureDate)) {
+                    fillAvailableTrips((Map<String, Object>) dataSnapshot.child("trips").child(departureDate).getValue(),
+                            dataSnapshot.child("users"));
                     displayTrips();
                 } else {
                     Toast.makeText(getApplicationContext(), "Kelionių nerasta", Toast.LENGTH_LONG).show();
@@ -50,16 +48,19 @@ public class AvailableTrips_Activity extends AppCompatActivity {
                 }
             }
 
-            private void fillAvailableTrips(Map<String, Object> trips) {
+            private void fillAvailableTrips(Map<String, Object> trips, DataSnapshot user) {
                 for(Map.Entry<String, Object> entry : trips.entrySet()) {
                     Map singleTrip = (Map) entry.getValue();
+                    String uid = (String) singleTrip.get("uid");
+                    Map userData = (Map) user.child(uid).getValue();
+
                     String fromCity = (String) singleTrip.get("fromCity");
                     String toCity = (String) singleTrip.get("toCity");
                     String freeSpace = (String) singleTrip.get("freeSpace");
                     String price = (String) singleTrip.get("price");
                     String departure = (String) singleTrip.get("departure");
                     String departureTime = (String) singleTrip.get("departureTime");
-                    String driver = (String) singleTrip.get("uid");
+                    String driver = (String) userData.get("usrName");
                     mTripList.add(new Trip_Data(fromCity, toCity, freeSpace, price, departure,
                             departureTime, driver));
                 }
@@ -80,7 +81,7 @@ public class AvailableTrips_Activity extends AppCompatActivity {
         lvTrip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), "Driver UID =" + view.getTag(),
+                Toast.makeText(getApplicationContext(), "Driver = " + view.getTag(),
                         Toast.LENGTH_SHORT).show();
             }
         });

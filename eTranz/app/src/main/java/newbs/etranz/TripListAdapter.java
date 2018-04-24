@@ -1,7 +1,6 @@
 package newbs.etranz;
 
 import android.content.Context;
-import android.view.ContextMenu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -45,15 +44,22 @@ public class TripListAdapter extends BaseAdapter{
         TextView tvToCity = (TextView)v.findViewById(R.id.tv_to_city);
         TextView tvPrice = (TextView)v.findViewById(R.id.tv_price);
         TextView tvDriverUID = (TextView)v.findViewById(R.id.tv_Driver);
+        TextView tvFreeSpace = (TextView)v.findViewById(R.id.tv_freeSpace);
+        TextView tvDepartureDate = (TextView)v.findViewById(R.id.tv_departureDate);
+        TextView tvDepartureTime = (TextView)v.findViewById(R.id.tv_departureTime);
 
         //Set text for TextView
         tvFromCity.setText(mTripList.get(position).getFromCity());
         tvToCity.setText(mTripList.get(position).getToCity());
         tvPrice.setText("Kaina: " + mTripList.get(position).getPrice());
-        tvDriverUID.setText("Vairuotojas: " + mTripList.get(position).getUid());
+        tvDriverUID.setText("Vairuotojas: " + mTripList.get(position).getDriverName());
+        tvFreeSpace.setText("Laisvų vietų: " + mTripList.get(position).getFreeSpace());
+        tvDepartureDate.setText(mTripList.get(position).getDeparture());
+        tvDepartureTime.setText(mTripList.get(position).getDepartureTime());
+
 
         //Save trip id to tag
-        v.setTag(mTripList.get(position).getUid());
+        v.setTag(mTripList.get(position).getDriverName());
 
         return v;
     }
