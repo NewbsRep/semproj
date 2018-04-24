@@ -185,15 +185,16 @@ public class New_Trip_Activity extends AppCompatActivity {
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Kelionė išsaugoma...");
         pd.show();
-        String seats = etSeats.getText().toString();
-        String price = tvPrice.getText().toString();
-        String date = etDate.getText().toString();
-        String time = etTime.getText().toString();
-        String from = fromSpinner.getSelectedItem().toString();
-        String to = toSpinner.getSelectedItem().toString();
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         if(checkForEmoptyFields()) {
+            String seats = etSeats.getText().toString();
+            String price = tvPrice.getText().toString();
+            String date = etDate.getText().toString();
+            String time = etTime.getText().toString();
+            String from = fromSpinner.getSelectedItem().toString();
+            String to = toSpinner.getSelectedItem().toString();
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
             Trip_Data data = new Trip_Data(from, to, seats, price, date, time, uid);
             DatabaseReference ref = firebaseDatabase.getReference();
             String key = ref.child("trips").push().getKey();
