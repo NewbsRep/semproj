@@ -57,7 +57,8 @@ public class UpdateEmail extends AppCompatActivity {
     private boolean noEmptyFields(){
         String email = newEmail.getText().toString();
         if (email.isEmpty()) {
-            Toast.makeText(this, "Nenurodytas el. paštas", Toast.LENGTH_SHORT).show();
+            newEmail.setError(getResources().getString(R.string.emptyFieldMsg));
+            newEmail.requestFocus();
             return false;
         }
         return true;

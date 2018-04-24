@@ -60,6 +60,7 @@ public class HomeScreen_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen_);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initializeObj();
         checkUserStatus();
         if(isSignedIn) setUpProfileSettings();
@@ -105,7 +106,6 @@ public class HomeScreen_Activity extends AppCompatActivity {
                 return true;
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

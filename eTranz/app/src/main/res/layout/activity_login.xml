@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:launchMode="singleTop"
     tools:context="newbs.etranz.Login_Activity">
 
     <TextView
@@ -16,7 +15,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/registerText"
-        android:textColor="@color/logo_default"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -46,7 +44,6 @@
         android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="@string/mailText"
-        android:textColorHint="@color/logo_default"
         android:textAlignment="center"
         android:inputType="textEmailAddress"
         android:textSize="20sp"
@@ -66,7 +63,6 @@
         android:ems="10"
         android:hint="@string/passText"
         android:textAlignment="center"
-        android:textColorHint="@color/logo_default"
         android:inputType="textPassword"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btnLogin"
@@ -79,8 +75,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="88dp"
         android:text="@string/loginText"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/logo_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -97,7 +91,6 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/passRemind"
-        android:textColor="@color/logo_default"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

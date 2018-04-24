@@ -56,13 +56,19 @@ public class UpdatePassword extends AppCompatActivity {
     }
 
     private boolean noEmptyFields(){
-        String pass = newPsw.getText().toString();
-        String passRepeat = newPswRepeat.getText().toString();
-        if (pass.isEmpty() || passRepeat.isEmpty()) {
-            Toast.makeText(this, "Nenurodytas slaptažodis", Toast.LENGTH_SHORT).show();
+        if (newPsw.getText().toString().isEmpty()){
+            newPsw.setError(getResources().getString(R.string.emptyFieldMsg));
+            newPsw.requestFocus();
             return false;
         }
-        return true;
+        else if(newPswRepeat.getText().toString().isEmpty()){
+            newPswRepeat.setError(getResources().getString(R.string.emptyFieldMsg));
+            newPswRepeat.requestFocus();
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     private boolean passwordMatches() {

@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -66,6 +67,7 @@ public class registerActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Registracija");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initializeObj();
+
         hasAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +88,7 @@ public class registerActivity extends AppCompatActivity {
                         dateSetListener, year, month, day);
                 dialog.getDatePicker().setMaxDate(new Date().getTime());
                 dialog.show();
+                dateOfBirth.setError(null);
             }
         });
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -164,26 +167,31 @@ public class registerActivity extends AppCompatActivity {
     }
 
     private boolean noEmptyFields(){
-        String mail = eMail.getText().toString();
-        String usrName = name.getText().toString();
-        String bDay = dateOfBirth.getText().toString();
-        String paswd = password.getText().toString();
-            if (mail.isEmpty()) {
-                Toast.makeText(this, "Nenurodytas el. paštas", Toast.LENGTH_SHORT).show();
+            if (eMail.getText().toString().isEmpty()) {
+                eMail.setError(getResources().getString(R.string.emptyFieldMsg));
+                eMail.requestFocus();
                 return false;
             }
-            if (usrName.isEmpty()) {
-                Toast.makeText(this, "Nenurodytas vardas", Toast.LENGTH_SHORT).show();
+            if (name.getText().toString().isEmpty()) {
+                name.setError(getResources().getString(R.string.emptyFieldMsg));
+                name.requestFocus();
                 return false;
             }
-            if (bDay.isEmpty()) {
-                Toast.makeText(this, "Nenurodyta gimimo data", Toast.LENGTH_SHORT).show();
+            if (dateOfBirth.getText().toString().isEmpty()) {
+                dateOfBirth.setError(getResources().getString(R.string.emptyFieldMsg));
+                dateOfBirth.requestFocus();
                 return false;
             }
-            if (paswd.isEmpty()) {
-                Toast.makeText(this, "Nenurodytas slaptažodis", Toast.LENGTH_SHORT).show();
+            if (password.getText().toString().isEmpty()) {
+                password.setError(getResources().getString(R.string.emptyFieldMsg));
+                password.requestFocus();
                 return false;
             }
+             if (passwordRepeat.getText().toString().isEmpty()) {
+                 passwordRepeat.setError(getResources().getString(R.string.emptyFieldMsg));
+                 passwordRepeat.requestFocus();
+                 return false;
+             }
             return true;
     }
 
@@ -205,6 +213,7 @@ public class registerActivity extends AppCompatActivity {
         eMail = (EditText) findViewById(R.id.etEmailPsw);
         name = (EditText) findViewById(R.id.etName);
         dateOfBirth = (EditText) findViewById(R.id.etBirthDate);
+        dateOfBirth.setInputType(EditorInfo.TYPE_NULL);
         password = (EditText) findViewById(R.id.etPassword);
         passwordRepeat = (EditText) findViewById(R.id.etPasswordRepeat);
         btnRegister = (Button) findViewById(R.id.btnRegister);
@@ -214,8 +223,7 @@ public class registerActivity extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
     }
 
-    private void uploadUsrData()
-    {
+    private void uploadUsrData() {
         if(imagePath != null && !imagePath.equals(Uri.EMPTY)){
             StorageReference storageReference = firebaseStorage.getReference();
             StorageReference usrStorage = storageReference.child(firebaseAuth.getUid()).child("Images").child("ProfilePic");

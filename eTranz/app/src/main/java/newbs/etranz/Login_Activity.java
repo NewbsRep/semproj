@@ -32,13 +32,10 @@ public class Login_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
         initializeObj();
-
-        if (Build.VERSION.SDK_INT >= 21){
-            Window window = this.getWindow();
-            window.setStatusBarColor(this.getResources().getColor(R.color.logo_default));
-        }
 
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,8 +61,14 @@ public class Login_Activity extends AppCompatActivity {
     }
 
     public boolean checkForEmptyFields(){
-        if(etMail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Užpildykite visus laukelius", Toast.LENGTH_SHORT).show();
+        if(etMail.getText().toString().isEmpty()){
+            etMail.setError(getResources().getString(R.string.emptyFieldMsg));
+            etMail.requestFocus();
+            return true;
+        }
+        else if(etPassword.getText().toString().isEmpty()){
+            etPassword.setError(getResources().getString(R.string.emptyFieldMsg));
+            etPassword.requestFocus();
             return true;
         }
         else {
