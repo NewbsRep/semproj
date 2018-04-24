@@ -10,17 +10,17 @@ public class Trip_Data {
     private String price;
     private String departure;
     private String departureTime;
-    private String driverName;
+    private String uid;
 
     //Constructor
-    public Trip_Data(String fromCity, String toCity, String freeSpace, String price, String departure, String departureTime, String driverName) {
+    public Trip_Data(String fromCity, String toCity, String freeSpace, String price, String departure, String departureTime, String uid) {
         this.fromCity = fromCity;
         this.toCity = toCity;
         this.freeSpace = freeSpace;
         this.price = price;
         this.departure = departure;
         this.departureTime = departureTime;
-        this.driverName = driverName;
+        this.uid = uid;
     }
 
     //Setter, getter
@@ -72,11 +72,11 @@ public class Trip_Data {
         this.departureTime = departureTime;
     }
 
-    public String getDriverName() {
-        return driverName;
+    public String getUid() {
+        return uid;
     }
 
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

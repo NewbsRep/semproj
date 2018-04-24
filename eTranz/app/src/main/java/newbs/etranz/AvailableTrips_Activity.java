@@ -31,6 +31,7 @@ public class AvailableTrips_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initializeObjects();
 
         mTripList = new ArrayList<>();

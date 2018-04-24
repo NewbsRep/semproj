@@ -52,14 +52,14 @@ public class TripListAdapter extends BaseAdapter{
         tvFromCity.setText(mTripList.get(position).getFromCity());
         tvToCity.setText(mTripList.get(position).getToCity());
         tvPrice.setText("Kaina: " + mTripList.get(position).getPrice());
-        tvDriverUID.setText("Vairuotojas: " + mTripList.get(position).getDriverName());
+        tvDriverUID.setText("Vairuotojas: " + mTripList.get(position).getUid());
         tvFreeSpace.setText("Laisvų vietų: " + mTripList.get(position).getFreeSpace());
         tvDepartureDate.setText(mTripList.get(position).getDeparture());
         tvDepartureTime.setText(mTripList.get(position).getDepartureTime());
 
 
         //Save trip id to tag
-        v.setTag(mTripList.get(position).getDriverName());
+        v.setTag(mTripList.get(position).getUid());
 
         return v;
     }

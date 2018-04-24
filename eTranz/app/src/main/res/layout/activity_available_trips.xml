@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/list_view_background"
     tools:context=".AvailableTrips_Activity">
 
     <ListView
@@ -15,7 +16,6 @@
         android:paddingBottom="0dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:background="@drawable/list_view_background"
         android:divider="@color/transparent">
     </ListView>
 
