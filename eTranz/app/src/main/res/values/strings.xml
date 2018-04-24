@@ -9,6 +9,7 @@
     <string name="registerName">Jūsų vardas</string>
     <string name="registerBirthDate">Jūsų gimimo data</string>
     <string name="registerText">Neturite paskyros? Užsiregistruokite</string>
+    <string name="passRemind">Pamiršote slaptažodį? Spauskite čia</string>
 
     //activity_home_screen
     <string name="home_MainLayout">Main Layout</string>
@@ -174,6 +175,11 @@
         <item>Troškūnai</item>
         <item>Panemunė</item>
     </string-array>
-    <string name="emptyFieldMsg">Prašome užpildyti visus laukus</string>
+    <string name="emptyFieldMsg">Laukelis negali būti tuščias</string>
     <string name="search">Ieškoti</string>
+    <string name="resetBtnText">Atstatyti slaptažodį</string>
+    <string name="resetExpl">Kad atstatytumėte slaptažodį, įveskite savo paskyros el. paštą, paspauskite mygtuką ir sekite instrukcijas kurias gausite į el. paštą</string>
+    <string name="resetEmptyMail">Prašome įvesti savo prisijungimo el. pašto adresą</string>
+    <string name="resetPassSuccess">Atstatymo instrukcijos išsiųstos, patikrinkite el. paštą</string>
+    <string name="resetFail">Įvyko klaida mėginkite dar kartą</string>
 </resources>

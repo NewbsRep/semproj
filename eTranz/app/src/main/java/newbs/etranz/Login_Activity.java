@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,18 +23,20 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Login_Activity extends AppCompatActivity {
-    EditText etMail;
-    EditText etPassword;
-    Button btnLogin;
-    TextView tvRegister;
-    FirebaseAuth firebaseObj;
+    private EditText etMail, etPassword;
+    private Button btnLogin;
+    private TextView tvRegister, tvPassRemind;
+    private FirebaseAuth firebaseObj;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
         initializeObj();
+
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,11 +51,24 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
 
+        tvPassRemind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login_Activity.this, PassReset_Activity.class));
+            }
+        });
+
     }
 
     public boolean checkForEmptyFields(){
-        if(etMail.getText().toString().isEmpty() || etPassword.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Užpildykite visus laukelius", Toast.LENGTH_SHORT).show();
+        if(etMail.getText().toString().isEmpty()){
+            etMail.setError(getResources().getString(R.string.emptyFieldMsg));
+            etMail.requestFocus();
+            return true;
+        }
+        else if(etPassword.getText().toString().isEmpty()){
+            etPassword.setError(getResources().getString(R.string.emptyFieldMsg));
+            etPassword.requestFocus();
             return true;
         }
         else {
@@ -104,6 +121,7 @@ public class Login_Activity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         tvRegister = findViewById(R.id.tvRegister);
         firebaseObj = FirebaseAuth.getInstance();
+        tvPassRemind = findViewById(R.id.tvPassRemind);
     }
 
 }

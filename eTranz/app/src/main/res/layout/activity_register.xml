@@ -22,7 +22,7 @@
         android:src="@drawable/profile_img"
         app:civ_border_color="#FF000000"
         app:civ_border_width="0.5dp"
-        app:layout_constraintBottom_toTopOf="@+id/etEmail"
+        app:layout_constraintBottom_toTopOf="@+id/etEmailPsw"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
         tools:ignore="OnClick" />
 
     <EditText
-        android:id="@+id/etEmail"
+        android:id="@+id/etEmailPsw"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -65,11 +65,11 @@
         android:hint="@string/passText"
         android:inputType="textPassword"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/etEmail"
+        app:layout_constraintEnd_toEndOf="@+id/etEmailPsw"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/etEmail"
+        app:layout_constraintStart_toStartOf="@+id/etEmailPsw"
         app:layout_constraintTop_toBottomOf="@+id/etBirthDate" />
 
     <EditText
@@ -100,9 +100,9 @@
         android:hint="@string/registerName"
         android:inputType="textPersonName"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/etEmail"
-        app:layout_constraintStart_toStartOf="@+id/etEmail"
-        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+        app:layout_constraintEnd_toEndOf="@+id/etEmailPsw"
+        app:layout_constraintStart_toStartOf="@+id/etEmailPsw"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailPsw" />
 
     <EditText
         android:id="@+id/etBirthDate"
@@ -111,7 +111,6 @@
         android:layout_marginTop="8dp"
         android:editable="false"
         android:clickable="true"
-        android:focusable="false"
         android:ems="10"
         android:hint="@string/registerBirthDate"
         android:textSize="14sp"
@@ -145,7 +144,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/profileText"
-        app:layout_constraintBottom_toTopOf="@+id/etEmail"
+        app:layout_constraintBottom_toTopOf="@+id/etEmailPsw"
         app:layout_constraintEnd_toStartOf="@+id/profile_image"
         app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
