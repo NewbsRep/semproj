@@ -58,7 +58,9 @@
             android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".HomeScreen_Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".AvailableTrips_Activity"></activity>
+        <activity android:name=".AvailableTrips_Activity"
+            android:parentActivityName=".TripSearch_Activity"
+            android:label="Rastos kelionės"></activity>
         <activity android:name=".UpdateProfile" />
         <activity android:name=".UpdatePassword" />
         <activity android:name=".UpdateEmail"></activity>
