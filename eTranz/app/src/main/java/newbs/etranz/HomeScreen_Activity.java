@@ -150,6 +150,12 @@ public class HomeScreen_Activity extends AppCompatActivity {
             finish();
             startActivity(new Intent(HomeScreen_Activity.this, Login_Activity.class));
         }
+        else if(!usr.isEmailVerified()){
+            isSignedIn = false;
+            finish();
+            firebaseAuth.signOut();
+            startActivity(new Intent(HomeScreen_Activity.this, Login_Activity.class));
+        }
     }
 
     public void setUpProfileSettings(){

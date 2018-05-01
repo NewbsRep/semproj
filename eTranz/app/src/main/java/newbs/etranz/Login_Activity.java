@@ -1,7 +1,10 @@
 package newbs.etranz;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -89,9 +92,7 @@ public class Login_Activity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         pd.dismiss();
-                        Toast.makeText(Login_Activity.this, "Prisijungimas sėkmingas", Toast.LENGTH_SHORT).show();
-                        finish();
-                        startActivity(new Intent(Login_Activity.this, HomeScreen_Activity.class));
+                        isEmailVerified();
                     } else {
                         boolean connected = false;
                         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -122,6 +123,54 @@ public class Login_Activity extends AppCompatActivity {
         tvRegister = findViewById(R.id.tvRegister);
         firebaseObj = FirebaseAuth.getInstance();
         tvPassRemind = findViewById(R.id.tvPassRemind);
+    }
+
+    protected void isEmailVerified(){
+        FirebaseUser user = firebaseObj.getCurrentUser();
+        if(user.isEmailVerified()){
+            Toast.makeText(Login_Activity.this, "Prisijungimas sėkmingas", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(new Intent(Login_Activity.this, HomeScreen_Activity.class));
+        }
+        else{
+            AlertDialog();
+        }
+    }
+
+    private void AlertDialog(){
+        new AlertDialog.Builder(this)
+                .setTitle("El. pašto adreso patvirtinimas")
+                .setMessage("Patvirtinkite el. pašto adresą, sekdami laiške gautomis instrukciijomis.")
+                .setNegativeButton("Negavau el. laiško", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sendEmailVerification();
+                        firebaseObj.signOut();
+                    }
+                })
+                .setPositiveButton("Gerai", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        firebaseObj.signOut();
+                    }
+                }).create().show();
+    }
+
+    private void  sendEmailVerification(){
+        FirebaseUser user = firebaseObj.getCurrentUser();
+        if(user != null){
+            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(Login_Activity.this, "Išsiųstas el. pašto patvirtinimo laiškas", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(Login_Activity.this, "Nepavyko išsiųsti el. pašto patvirtino laiško", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
 }

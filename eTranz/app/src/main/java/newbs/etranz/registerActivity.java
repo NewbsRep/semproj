@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -45,6 +46,7 @@ public class registerActivity extends AppCompatActivity {
     private ImageView profilePic;
     private static int PICK_IMAGE = 123;
     private Uri imagePath;
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -122,10 +124,7 @@ public class registerActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 uploadUsrData();
-                                finish();
-                                uploadUsrData();
-                                startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
-                                Toast.makeText(registerActivity.this, getString(R.string.REGISTRATION_SUCCESS), Toast.LENGTH_SHORT).show();
+                                sendEmailVerification();
                             } else {
                                 Toast.makeText(registerActivity.this, getString(R.string.MISTAKE_OCCURRED), Toast.LENGTH_SHORT).show();
                             }
@@ -245,5 +244,26 @@ public class registerActivity extends AppCompatActivity {
                 Toast.makeText(registerActivity.this, "Duomenų bazės klaida", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void  sendEmailVerification(){
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if(user != null){
+            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(registerActivity.this, "Registracija sėkminga," +
+                                " išsiųstas el. pašto patvirtinimo laiškas", Toast.LENGTH_SHORT).show();
+                        firebaseAuth.signOut();
+                        finish();
+                        startActivity(new Intent(registerActivity.this, HomeScreen_Activity.class));
+                    }
+                    else{
+                        Toast.makeText(registerActivity.this, "Nepavyko išsiųsti el. pašto patvirtino laiško", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 }
