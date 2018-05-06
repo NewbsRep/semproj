@@ -52,12 +52,12 @@ public class AvailableTrips_Activity extends AppCompatActivity {
                 }
             }
 
-            private void fillAvailableTrips(Map<String, Object> trips, DataSnapshot user) {
+            private void fillAvailableTrips(Map<String, Object> trips, DataSnapshot users) {
                 for(Map.Entry<String, Object> entry : trips.entrySet()) {
                     Map singleTrip = (Map) entry.getValue();
 
                     String uid = (String) singleTrip.get("uid");
-                    Map userData = (Map) user.child(uid).getValue();
+                    Map userData = (Map) users.child(uid).getValue();
 
                     String fromCity = (String) singleTrip.get("fromCity");
                     String toCity = (String) singleTrip.get("toCity");
@@ -91,7 +91,8 @@ public class AvailableTrips_Activity extends AppCompatActivity {
         lvTrip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), "Driver = " + view.getTag(),
+                Trip_Data a = (Trip_Data) view.getTag();
+                Toast.makeText(getApplicationContext(), "Driver = " + a.getUid(),
                         Toast.LENGTH_SHORT).show();
             }
         });

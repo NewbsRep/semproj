@@ -47,7 +47,7 @@
         <activity
             android:name=".Settings_Activity"
             android:parentActivityName=".HomeScreen_Activity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TripSearch_Activity"
             android:parentActivityName=".HomeScreen_Activity"
@@ -55,17 +55,22 @@
         <activity
             android:name=".New_Trip_Activity"
             android:label="@string/newTripAB"
-            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".HomeScreen_Activity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".AvailableTrips_Activity"
-            android:parentActivityName=".TripSearch_Activity"
-            android:label="Rastos kelionės"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".AvailableTrips_Activity"
+            android:label="Rastos kelionės"
+            android:parentActivityName=".TripSearch_Activity" />
         <activity android:name=".UpdateProfile" />
         <activity android:name=".UpdatePassword" />
-        <activity android:name=".UpdateEmail"></activity>
-        <activity android:name=".PassReset_Activity"
-            android:parentActivityName=".Login_Activity"></activity>
+        <activity android:name=".UpdateEmail" />
+        <activity
+            android:name=".PassReset_Activity"
+            android:parentActivityName=".Login_Activity" />
+        <activity
+            android:name=".Selected_Trip_Activity"
+            android:label="Kelionės informacija" />
     </application>
 
 </manifest>
