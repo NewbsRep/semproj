@@ -7,6 +7,11 @@
         android:title="@string/myProfile"
         android:icon="@mipmap/ic_account_circle_black_24dp" />
 
+    <item
+        android:id="@+id/nav_myTrips"
+        android:title="@string/myTrips"
+        android:icon="@mipmap/ic_directions_car_black_24dp" />
+
     <item android:id="@+id/nav_settings"
         android:title="@string/settings"
         android:icon="@mipmap/ic_settings_black_24dp" />
