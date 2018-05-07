@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -48,7 +50,20 @@ public class Profile_Activity extends AppCompatActivity {
         initializeViews();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-  
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+
+        return super.onKeyDown(keyCode, event);
+    }
+
     private void initializeViews() {
         setContentView(R.layout.activity_profile);
         firebaseAuth = FirebaseAuth.getInstance();
