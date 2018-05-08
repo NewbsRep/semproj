@@ -154,7 +154,9 @@ public class New_Trip_Activity extends AppCompatActivity {
         if (id == R.id.btnConfirm) {
             uploadData();
         }
-        return super.onOptionsItemSelected(item);
+
+        finish();
+        return true;
     }
 
     public void initializeObj() {

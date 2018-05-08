@@ -45,6 +45,7 @@
 
     //navigation_menu
     <string name="myProfile">Mano profilis</string>
+    <string name="myTrips">Mano kelionės</string>
     <string name="settings">Nustatymai</string>
     <string name="logout">Atsijungti</string>
     <string name="title_activity_login">Sign in</string>
@@ -182,4 +183,10 @@
     <string name="resetEmptyMail">Prašome įvesti savo prisijungimo el. pašto adresą</string>
     <string name="resetPassSuccess">Atstatymo instrukcijos išsiųstos, patikrinkite el. paštą</string>
     <string name="resetFail">Įvyko klaida mėginkite dar kartą</string>
+
+    <string name="title_activity_my_trips">Mano kelionės</string>
+    <string name="tab_text_1">Vairuoju</string>
+    <string name="tab_text_2">!Vairuoju</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

@@ -95,6 +95,9 @@ public class HomeScreen_Activity extends AppCompatActivity {
                     case R.id.nav_account:
                         goToProfile();
                         return true;
+                    case R.id.nav_myTrips:
+                        goToMyTrips();
+                        return true;
                     case R.id.nav_settings:
                         goToSettings();
                         return true;
@@ -120,6 +123,11 @@ public class HomeScreen_Activity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && mDrawerLayout.isDrawerOpen(GravityCompat.START)){
             mDrawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        }
+
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            moveTaskToBack(true);
             return true;
         }
 
@@ -199,6 +207,10 @@ public class HomeScreen_Activity extends AppCompatActivity {
 
     public void goToProfile(){
         startActivity(new Intent(HomeScreen_Activity.this, Profile_Activity.class));
+    }
+
+    public void goToMyTrips(){
+        startActivity(new Intent(HomeScreen_Activity.this, MyTrips_Activity.class));
     }
 
     public void goToSettings(){

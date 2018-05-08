@@ -20,7 +20,7 @@
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="CustomTheme" parent="Theme.AppCompat.Light.DarkActionBar" >
+    <style name="CustomTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@color/background</item>
         <item name="colorAccent">@color/accent</item>
         <item name="colorPrimary">@color/primary</item>
@@ -28,5 +28,14 @@
         <item name="buttonStyle">@style/Widget.AppCompat.Button.Colored</item>
         <item name="android:textColorPrimary">@color/textColor</item>
     </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
