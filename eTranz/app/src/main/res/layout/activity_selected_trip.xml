@@ -28,6 +28,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Vairuotojas"
+        android:textColor="@color/colorPrimary"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/civDriverPicture"
         app:layout_constraintTop_toTopOf="@+id/civDriverPicture" />
@@ -45,10 +46,8 @@
         android:id="@+id/ivCalendar"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/ivMapPin"
         app:layout_constraintTop_toBottomOf="@+id/ivMapPin"
         app:srcCompat="@drawable/ic_date_range_black_24dp" />
 
@@ -103,11 +102,9 @@
         android:id="@+id/tvDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="3dp"
         android:text="Data"
-        app:layout_constraintStart_toEndOf="@+id/ivCalendar"
+        app:layout_constraintStart_toStartOf="@+id/tvFromCity"
         app:layout_constraintTop_toTopOf="@+id/ivCalendar" />
 
     <TextView
@@ -167,13 +164,12 @@
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/ivPrice"
         app:layout_constraintTop_toBottomOf="@+id/ivPrice"
-        app:srcCompat="@drawable/ic_chat_bubble_outline_black_24dp" />
+        app:srcCompat="@drawable/ic_description_black_24dp" />
 
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="294dp"
         android:layout_height="77dp"
-        android:layout_marginTop="3dp"
         android:text="Papildoma informacija yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada "
         app:layout_constraintStart_toStartOf="@+id/tvPrice"
         app:layout_constraintTop_toTopOf="@+id/ivDescription" />
@@ -204,15 +200,15 @@
         android:id="@+id/tvFromCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="3dp"
         android:text="Pradžios miestas"
         app:layout_constraintStart_toEndOf="@+id/ivMapPin"
         app:layout_constraintTop_toTopOf="@+id/ivMapPin" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/ivArrowRight"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginLeft="8dp"
@@ -228,7 +224,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:text="Pabaigos miestas"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/ivArrowRight"
         app:layout_constraintTop_toTopOf="@+id/tvFromCity" />
 
 </android.support.constraint.ConstraintLayout>

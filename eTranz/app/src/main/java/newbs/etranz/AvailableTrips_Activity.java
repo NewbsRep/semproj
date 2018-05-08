@@ -28,6 +28,8 @@ public class AvailableTrips_Activity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference();
 
+    public static final String EXTRA_TRIP = "newbs.etranz.EXTRA_TRIP";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +37,10 @@ public class AvailableTrips_Activity extends AppCompatActivity {
         initializeObjects();
 
         mTripList = new ArrayList<>();
-
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                mTripList.clear();
                 if(dataSnapshot.child("trips").hasChild(departureDate)) {
                     fillAvailableTrips((Map<String, Object>) dataSnapshot.child("trips").child(departureDate).getValue(),
                             dataSnapshot.child("users"));
@@ -54,6 +56,7 @@ public class AvailableTrips_Activity extends AppCompatActivity {
 
             private void fillAvailableTrips(Map<String, Object> trips, DataSnapshot users) {
                 for(Map.Entry<String, Object> entry : trips.entrySet()) {
+                    String tripKey = entry.getKey();
                     Map singleTrip = (Map) entry.getValue();
 
                     String uid = (String) singleTrip.get("uid");
@@ -67,10 +70,12 @@ public class AvailableTrips_Activity extends AppCompatActivity {
                     String departureTime = (String) singleTrip.get("departureTime");
                     String driver = (String) userData.get("usrName");
 
-                    if(fromCity.equals(EXTRA_fromCity) && toCity.equals(EXTRA_toCity)) {
+                    int freeSeats = Integer.parseInt(freeSpace);
+                    if(fromCity.equals(EXTRA_fromCity) && toCity.equals(EXTRA_toCity) && freeSeats > 0) {
                         Trip_Data availableTrip = new Trip_Data(fromCity, toCity, freeSpace, price, departure,
                                 departureTime, uid);
                         availableTrip.setDriverName(driver);
+                        availableTrip.setTripKey(tripKey);
                         mTripList.add(availableTrip);
                     }
                 }
@@ -92,10 +97,18 @@ public class AvailableTrips_Activity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Trip_Data a = (Trip_Data) view.getTag();
-                Toast.makeText(getApplicationContext(), "Driver = " + a.getUid(),
-                        Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(getApplicationContext(), "Driver = " + a.getUid(),
+                        Toast.LENGTH_SHORT).show();*/
+                openSelectedTripActivity(a);
             }
         });
+    }
+
+    private void openSelectedTripActivity(Trip_Data extra) {
+        Intent intent = new Intent(this, Selected_Trip_Activity.class);
+        intent.putExtra("date", departureDate);
+        intent.putExtra(EXTRA_TRIP,  extra);
+        startActivity(intent);
     }
 
     private void initializeObjects() {
