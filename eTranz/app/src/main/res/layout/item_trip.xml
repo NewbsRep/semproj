@@ -5,7 +5,7 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingBottom="5dp"
-    android:background="#E0FFFFFF"
+    android:background="@drawable/listview_item_shadow"
     android:orientation="vertical">
 
     <LinearLayout

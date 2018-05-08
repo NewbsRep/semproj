@@ -22,7 +22,6 @@ public class TripListAdapter extends BaseAdapter{
 
     private Context mContext;
     private List<Trip_Data> mTripList;
-    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     //Constructor
 
 
@@ -69,6 +68,7 @@ public class TripListAdapter extends BaseAdapter{
         tvDepartureTime.setText(mTripList.get(position).getDepartureTime());
 
         //Set photo
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
         storageReference = storageReference.child(mTripList.get(position).getUid()).child("Images").child("ProfilePic");
         Glide.with(mContext)
                 .using(new FirebaseImageLoader())
@@ -78,7 +78,7 @@ public class TripListAdapter extends BaseAdapter{
                 .into(civProfilePic);
 
         //Save trip id to tag
-        v.setTag(mTripList.get(position).getUid());
+        v.setTag(mTripList.get(position));
 
         return v;
     }
