@@ -1,10 +1,13 @@
 package newbs.etranz;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by visabr on 2018-03-26.
  */
 
-public class Trip_Data {
+public class Trip_Data implements Parcelable{
     private String fromCity, toCity;
     private String freeSpace;
     private String price;
@@ -13,6 +16,7 @@ public class Trip_Data {
     private String uid;
 
     private String driverName;
+    private String tripKey;
 
     //Constructor
     public Trip_Data(String fromCity, String toCity, String freeSpace, String price, String departure, String departureTime, String uid) {
@@ -25,7 +29,39 @@ public class Trip_Data {
         this.uid = uid;
     }
 
+    protected Trip_Data(Parcel in) {
+        fromCity = in.readString();
+        toCity = in.readString();
+        freeSpace = in.readString();
+        price = in.readString();
+        departure = in.readString();
+        departureTime = in.readString();
+        uid = in.readString();
+        driverName = in.readString();
+        tripKey = in.readString();
+    }
+
+    public static final Creator<Trip_Data> CREATOR = new Creator<Trip_Data>() {
+        @Override
+        public Trip_Data createFromParcel(Parcel in) {
+            return new Trip_Data(in);
+        }
+
+        @Override
+        public Trip_Data[] newArray(int size) {
+            return new Trip_Data[size];
+        }
+    };
+
     //Setter, getter
+    public String getTripKey() {
+        return tripKey;
+    }
+
+    public void setTripKey(String tripKey) {
+        this.tripKey = tripKey;
+    }
+
     public String getDriverName() {
         return driverName;
     }
@@ -88,5 +124,23 @@ public class Trip_Data {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(fromCity);
+        parcel.writeString(toCity);
+        parcel.writeString(freeSpace);
+        parcel.writeString(price);
+        parcel.writeString(departure);
+        parcel.writeString(departureTime);
+        parcel.writeString(uid);
+        parcel.writeString(driverName);
+        parcel.writeString(tripKey);
     }
 }
