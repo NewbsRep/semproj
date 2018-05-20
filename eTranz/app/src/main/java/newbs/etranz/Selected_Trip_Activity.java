@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,7 +78,20 @@ public class Selected_Trip_Activity extends AppCompatActivity {
                 int passengerCounter = Integer.parseInt(stringPassengerCounter);
                 int freeSeats = Integer.parseInt(stringFreeSeats);
                 String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                if (freeSeats > 0 && (!trip.getUid().equals(userUid))) {
+                if (freeSeats > 0) {
+                    if(trip.getUid().equals(userUid)) { // Check if driver
+                        Toast.makeText(getApplicationContext(), "Jūs vairuotojas!", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    DataSnapshot help = dataSnapshot.child("trips").child(departureDate).child(trip.getTripKey()).child("passengers");
+                    ArrayList<String> passengers = (ArrayList<String>) help.getValue();
+                    for(int i = 0; i < passengers.size(); i++){
+                        String passenger = passengers.get(i);
+                        if(passenger.equals(userUid)) {
+                            Toast.makeText(getApplicationContext(), "Jūs jau užsirezervavę!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    }
                     Map<String, Object> passengerUpdates = new HashMap<>();
                     passengerUpdates.put(stringPassengerCounter, userUid);
                     databaseReference.child("trips").child(departureDate).child(trip.getTripKey()).child("passengers").updateChildren(passengerUpdates);
@@ -91,10 +105,8 @@ public class Selected_Trip_Activity extends AppCompatActivity {
                     tvFreeSeats.setText("" + freeSeats);
 
                     Toast.makeText(getApplicationContext(), "Sėkmingai rezervavote vietą!", Toast.LENGTH_LONG).show();
-                } else if (freeSeats <= 0)
+                } else
                     Toast.makeText(getApplicationContext(), "Nebėra laisvų vietų!", Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(getApplicationContext(), "Jūs vairuotojas!", Toast.LENGTH_LONG).show();
             }
 
             @Override
