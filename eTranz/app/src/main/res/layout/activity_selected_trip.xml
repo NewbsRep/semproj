@@ -38,6 +38,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="6dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/ivStarIcon"
         app:layout_constraintTop_toBottomOf="@+id/ivStarIcon"
         app:srcCompat="@drawable/car_icon" />
@@ -95,6 +96,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:text="Automobilis"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/ivDriversCar"
         app:layout_constraintStart_toEndOf="@+id/ivDriversCar" />
 
@@ -162,6 +164,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="10dp"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/ivPrice"
         app:layout_constraintTop_toBottomOf="@+id/ivPrice"
         app:srcCompat="@drawable/ic_description_black_24dp" />
@@ -170,6 +173,7 @@
         android:id="@+id/tvDescription"
         android:layout_width="294dp"
         android:layout_height="77dp"
+        android:visibility="invisible"
         android:text="Papildoma informacija yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada "
         app:layout_constraintStart_toStartOf="@+id/tvPrice"
         app:layout_constraintTop_toTopOf="@+id/ivDescription" />
