@@ -60,6 +60,7 @@ public class MyTrips_Activity extends AppCompatActivity {
         tabLayout.setupWithViewPager(mViewPager);
 
         updateListView();
+
     }
 
     public void updateListView(){
@@ -117,6 +118,22 @@ public class MyTrips_Activity extends AppCompatActivity {
             private void initializeListViews(){
                 lvDriverTrips = findViewById(R.id.listView_MyTrips_Driver);
                 lvPassengerTrips = findViewById(R.id.listView_MyTrips_Passenger);
+
+                lvDriverTrips.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Trip_Data a = (Trip_Data) view.getTag(); // Parselable Tag
+                        openSelectedTripActivity(a);
+                    }
+                });
+
+                lvPassengerTrips.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Trip_Data a = (Trip_Data) view.getTag(); // Parselable Tag
+                        openSelectedTripActivity(a);
+                    }
+                });
             }
 
             private void addTripToDriverList(DataSnapshot trip){
@@ -178,6 +195,7 @@ public class MyTrips_Activity extends AppCompatActivity {
         Intent intent = new Intent(this, Selected_Trip_Activity.class);
         intent.putExtra("date", extra.getDeparture());
         intent.putExtra(EXTRA_TRIP,  extra);
+        intent.putExtra("isFromMyTrips", false);
         startActivity(intent);
     }
 
