@@ -46,11 +46,6 @@ public class AvailableTrips_Activity extends AppCompatActivity {
         });
     }
 
-    protected void onResume() {
-        super.onResume();
-        updateListView();
-    }
-
     private void updateListView() {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
