@@ -28,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Profile_Activity extends AppCompatActivity {
 
-    public ImageButton btn;
+    public Button btn;
 
     private TextView name, rate, birth;
     private TextView email;
@@ -113,7 +113,7 @@ public class Profile_Activity extends AppCompatActivity {
             }
         });
 
-        btn = (ImageButton) findViewById(R.id.ibEdit);
+        btn = findViewById(R.id.bEdit);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

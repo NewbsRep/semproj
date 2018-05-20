@@ -154,8 +154,8 @@ public class New_Trip_Activity extends AppCompatActivity {
         if (id == R.id.btnConfirm) {
             uploadData();
         }
-
-        finish();
+        else if(id == android.R.id.home)
+            onBackPressed();
         return true;
     }
 

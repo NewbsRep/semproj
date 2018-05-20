@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,7 +32,6 @@ public class TripSearch_Activity extends AppCompatActivity {
     public static final String EXTRA_TO_CITY = "newbs.etranz.EXTRA_TO_CITY";
     public static final String EXTRA_DEPARTURE_DATE = "newbs.etranz.EXTRA_DEPARTURE_DATE";
     private SearchableSpinner fromSpinner, toSpinner;
-    private Button searchButton;
     private EditText etDate, etTime, erFrom, erTo, erDate, erTime;
     private String searchDate; // January = 0
     private static final int TIME_ID = 0;
@@ -74,6 +74,25 @@ public class TripSearch_Activity extends AppCompatActivity {
                 showDialog(DATE_ID);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.trip_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.btnConfirm) {
+            searchForTrip();
+        }
+        else if(id == android.R.id.home)
+            onBackPressed();
+        return true;
     }
 
     protected DatePickerDialog.OnDateSetListener dateListener = new DatePickerDialog.OnDateSetListener() {
@@ -125,36 +144,32 @@ public class TripSearch_Activity extends AppCompatActivity {
                 });
         showDateDialog();
         showTimeDialog();
+    }
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
+    public void searchForTrip(){
+        if(!noEmptyFields())
+            return;
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                if(!noEmptyFields())
-                    return;
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(!dataSnapshot.hasChild(searchDate))
-                            Toast.makeText(getApplicationContext(), "Pasirinktą dieną kelionių nerasta!",
-                                    Toast.LENGTH_SHORT).show();
-                        else openFoundTripListActivity();
-                    }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(!dataSnapshot.hasChild(searchDate))
+                    Toast.makeText(getApplicationContext(), "Pasirinktą dieną kelionių nerasta!",
+                            Toast.LENGTH_SHORT).show();
+                else openFoundTripListActivity();
+            }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(getApplicationContext(), "Database error",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), "Database error",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        finish();
+//        return true;
+//    }
 
     private void openFoundTripListActivity() {
         Intent intent = new Intent(this, AvailableTrips_Activity.class);
@@ -174,7 +189,6 @@ public class TripSearch_Activity extends AppCompatActivity {
         toSpinner.setTitle("Pasirinkite atvykimo miestą");
         toSpinner.setPositiveButton("Atšaukti");
         fromSpinner.setPositiveButton("Atšaukti");
-        searchButton = findViewById(R.id.btnSearch);
         etDate = findViewById(R.id.etDate);
         etTime = findViewById(R.id.etTime);
         erFrom = findViewById(R.id.erFrom);

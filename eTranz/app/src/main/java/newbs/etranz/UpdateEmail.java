@@ -3,6 +3,7 @@ package newbs.etranz;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +24,7 @@ public class UpdateEmail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_email);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         update = findViewById(R.id.btnUpdateEmail);
         newEmail = findViewById(R.id.etNewEmail);
 
@@ -52,6 +53,11 @@ public class UpdateEmail extends AppCompatActivity {
 
             }
         });
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
     }
 
     private boolean noEmptyFields(){
