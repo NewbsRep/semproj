@@ -65,7 +65,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
                 int passengerCounter = Integer.parseInt(stringPassengerCounter);
                 int freeSeats = Integer.parseInt(stringFreeSeats);
                 String userUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                if(freeSeats > 0 && (!trip.getUid().equals(userUid))) {
+                if (freeSeats > 0 && (!trip.getUid().equals(userUid))) {
                     Map<String, Object> passengerUpdates = new HashMap<>();
                     passengerUpdates.put(stringPassengerCounter, userUid);
                     databaseReference.child("trips").child(departureDate).child(trip.getTripKey()).child("passengers").updateChildren(passengerUpdates);
@@ -76,21 +76,13 @@ public class Selected_Trip_Activity extends AppCompatActivity {
                     tripUpdates.put("freeSpace", Integer.toString(freeSeats));
                     tripUpdates.put("passengerCounter", Integer.toString(passengerCounter));
                     databaseReference.child("trips").child(departureDate).child(trip.getTripKey()).updateChildren(tripUpdates);
-                    tvFreeSeats.setText(""+freeSeats);
+                    tvFreeSeats.setText("" + freeSeats);
 
                     Toast.makeText(getApplicationContext(), "Sėkmingai rezervavote vietą!", Toast.LENGTH_LONG).show();
                 } else if (freeSeats <= 0)
                     Toast.makeText(getApplicationContext(), "Nebėra laisvų vietų!", Toast.LENGTH_LONG).show();
-                else Toast.makeText(getApplicationContext(), "Jūs vairuotojas!", Toast.LENGTH_LONG).show();
-            }
-
-            public void updateDatabase(int freeSeats) {
-                freeSeats--;
-                trip.setFreeSpace(""+freeSeats);
-                databaseReference.child("trips").child(departureDate).child(trip.getTripKey()).setValue(trip);
-                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                databaseReference.child("trips").child(departureDate).child(trip.getTripKey()).child("passengers").setValue(uid);
-                tvFreeSeats.setText(""+freeSeats);
+                else
+                    Toast.makeText(getApplicationContext(), "Jūs vairuotojas!", Toast.LENGTH_LONG).show();
             }
 
             @Override
