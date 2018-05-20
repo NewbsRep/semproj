@@ -1,5 +1,6 @@
 package newbs.etranz;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -47,16 +49,20 @@ public class MyTrips_Activity extends AppCompatActivity {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference();
 
+    public static final String EXTRA_TRIP = "newbs.etranz.EXTRA_TRIP";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initializeObjects();
 
-        //Toast.makeText(getApplicationContext(), firebaseAuth.getUid(), Toast.LENGTH_SHORT).show();
-
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        updateListView();
+    }
+
+    public void updateListView(){
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -64,6 +70,7 @@ public class MyTrips_Activity extends AppCompatActivity {
                 initializeListViews();
 
                 // Generate driver's trip list
+
                 for (DataSnapshot date : dataSnapshot.child("trips").getChildren()){
                     for (DataSnapshot trip : date.getChildren()){
                         String given_uid = trip.child("uid").getValue().toString();
@@ -78,10 +85,33 @@ public class MyTrips_Activity extends AppCompatActivity {
                 if(mDriverTripList.size() != 0)
                     displayDriverTrips();
                 else
-                    Toast.makeText(getApplicationContext(), "Kelionių nerasta!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "DRIVER kelionių nerasta!", Toast.LENGTH_LONG).show();
 
 
                 // Generate passenger's trip list
+
+                for (DataSnapshot date : dataSnapshot.child("trips").getChildren()){
+                    for (DataSnapshot trip : date.getChildren()){
+                        if(trip.hasChild("passengers")){
+                            String given_uid;
+                            String needed_uid = firebaseAuth.getUid();
+
+                            for (DataSnapshot passenger : trip.child("passengers").getChildren()){
+                                given_uid = passenger.getValue().toString();
+                                if(needed_uid.equals(given_uid)){
+                                    String driver = trip.child("uid").getValue().toString();
+                                    driverName = dataSnapshot.child("users").child(driver).child("usrName").getValue().toString();
+                                    addTripToPassengerList(trip);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if(mPassengerTripList.size() != 0)
+                    displayPassengerTrips();
+                else
+                    Toast.makeText(getApplicationContext(), "PASSENGER kelionių nerasta!", Toast.LENGTH_LONG).show();
             }
 
             private void initializeListViews(){
@@ -127,16 +157,6 @@ public class MyTrips_Activity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
-
-        /*
-        lvTrip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), "Driver = " + view.getTag(),
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-        */
     }
 
     private void setupViewPager(ViewPager viewPager){
@@ -152,6 +172,13 @@ public class MyTrips_Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
+    }
+
+    private void openSelectedTripActivity(Trip_Data extra) {
+        Intent intent = new Intent(this, Selected_Trip_Activity.class);
+        intent.putExtra("date", extra.getDeparture());
+        intent.putExtra(EXTRA_TRIP,  extra);
+        startActivity(intent);
     }
 
     private void initializeObjects() {
