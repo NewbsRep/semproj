@@ -18,14 +18,14 @@
             android:divider="@color/transparent">
         </ListView>
 
-        <TextView
-            android:id="@+id/tv_Passenger"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:textSize="25dp"
-            android:text="!Vairuoju LIST"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:layout_marginTop="40dp"/>
+        <!--<TextView-->
+            <!--android:id="@+id/tv_Passenger"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:textSize="25dp"-->
+            <!--android:text="!Vairuoju LIST"-->
+            <!--android:gravity="center"-->
+            <!--android:textAlignment="center"-->
+            <!--android:layout_marginTop="40dp"/>-->
 </android.support.constraint.ConstraintLayout>

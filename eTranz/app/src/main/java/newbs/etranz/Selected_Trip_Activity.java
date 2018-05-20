@@ -3,6 +3,7 @@ package newbs.etranz;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
 
     private String departureDate;
     private Trip_Data trip;
+    private boolean reserveButtonVisibility;
 
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -47,12 +49,22 @@ public class Selected_Trip_Activity extends AppCompatActivity {
         initializeViews();
         populateViews();
 
-        btnReserve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                reserveSeat();
-            }
-        });
+        if(reserveButtonVisibility)
+            btnReserve.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    reserveSeat();
+                }
+            });
+        else {
+            btnReserve.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
     }
 
     private void reserveSeat() {
@@ -104,6 +116,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
         Intent intent = getIntent();
         departureDate = intent.getStringExtra("date");
         trip = intent.getParcelableExtra(AvailableTrips_Activity.EXTRA_TRIP);
+        reserveButtonVisibility = intent.getBooleanExtra("isFromMyTrips", true);
     }
 
     private void initializeViews() {
@@ -117,7 +130,6 @@ public class Selected_Trip_Activity extends AppCompatActivity {
         tvToCity = findViewById(R.id.tvToCity);
         tvFromCity = findViewById(R.id.tvFromCity);
         tvDescription = findViewById(R.id.tvDescription);
-
         btnReserve = findViewById(R.id.btnTakeSeat);
         civPhoto = findViewById(R.id.civDriverPicture);
     }
