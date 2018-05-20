@@ -32,7 +32,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".HomeScreen_Activity"
-            android:launchMode="singleTop"
+            android:clearTaskOnLaunch="true"
+            android:finishOnTaskLaunch="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,7 +48,7 @@
         <activity
             android:name=".Settings_Activity"
             android:parentActivityName=".HomeScreen_Activity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TripSearch_Activity"
             android:parentActivityName=".HomeScreen_Activity"
@@ -55,17 +56,33 @@
         <activity
             android:name=".New_Trip_Activity"
             android:label="@string/newTripAB"
-            android:windowSoftInputMode="stateHidden"
+            android:parentActivityName=".HomeScreen_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".AvailableTrips_Activity"
+            android:label="Rastos kelionės"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".TripSearch_Activity" />
+        <activity
+            android:name=".UpdateProfile" />
+        <activity
+            android:name=".UpdatePassword" />
+        <activity
+            android:name=".UpdateEmail" />
+        <activity
+            android:name=".PassReset_Activity"
+            android:parentActivityName=".Login_Activity" />
+        <activity
+            android:name=".MyTrips_Activity"
+            android:label="@string/title_activity_my_trips"
             android:parentActivityName=".HomeScreen_Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".AvailableTrips_Activity"
-            android:parentActivityName=".TripSearch_Activity"
-            android:label="Rastos kelionės"></activity>
-        <activity android:name=".UpdateProfile" />
-        <activity android:name=".UpdatePassword" />
-        <activity android:name=".UpdateEmail"></activity>
-        <activity android:name=".PassReset_Activity"
-            android:parentActivityName=".Login_Activity"></activity>
+        <activity
+            android:name=".Selected_Trip_Activity"
+            android:label="Kelionės informacija"
+            android:parentActivityName=".AvailableTrips_Activity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -154,7 +154,9 @@ public class New_Trip_Activity extends AppCompatActivity {
         if (id == R.id.btnConfirm) {
             uploadData();
         }
-        return super.onOptionsItemSelected(item);
+
+        finish();
+        return true;
     }
 
     public void initializeObj() {
@@ -199,6 +201,7 @@ public class New_Trip_Activity extends AppCompatActivity {
             DatabaseReference ref = firebaseDatabase.getReference();
             String key = ref.child("trips").push().getKey();
             Task upload = ref.child("trips").child(ogDate).child(key).setValue(data);
+            ref.child("trips").child(ogDate).child(key).child("passengerCounter").setValue("0");
             upload.addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {

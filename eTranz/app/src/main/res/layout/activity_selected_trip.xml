@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="179dp"
+    tools:context=".Selected_Trip_Activity">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/civDriverPicture"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/profile_img"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="0.5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDriver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Vairuotojas"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/civDriverPicture"
+        app:layout_constraintTop_toTopOf="@+id/civDriverPicture" />
+
+    <ImageView
+        android:id="@+id/ivDriversCar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="6dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/ivStarIcon"
+        app:layout_constraintTop_toBottomOf="@+id/ivStarIcon"
+        app:srcCompat="@drawable/car_icon" />
+
+    <ImageView
+        android:id="@+id/ivCalendar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/ivMapPin"
+        app:layout_constraintTop_toBottomOf="@+id/ivMapPin"
+        app:srcCompat="@drawable/ic_date_range_black_24dp" />
+
+    <ImageView
+        android:id="@+id/ivTime"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/ivCalendar"
+        app:layout_constraintTop_toBottomOf="@+id/ivCalendar"
+        app:srcCompat="@drawable/ic_time_black_24dp" />
+
+    <ImageView
+        android:id="@+id/ivFreeSeats"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/ivTime"
+        app:layout_constraintTop_toBottomOf="@+id/ivTime"
+        app:srcCompat="@drawable/ic_person_black_24dp" />
+
+    <ImageView
+        android:id="@+id/ivPrice"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@+id/ivFreeSeats"
+        app:layout_constraintTop_toBottomOf="@+id/ivFreeSeats"
+        app:srcCompat="@drawable/pair_of_banknotes" />
+
+    <ImageView
+        android:id="@+id/ivStarIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="@+id/tvDriver"
+        app:layout_constraintTop_toBottomOf="@+id/tvDriver"
+        app:srcCompat="@drawable/icon_star" />
+
+    <TextView
+        android:id="@+id/tvDriversCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Automobilis"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/ivDriversCar"
+        app:layout_constraintStart_toEndOf="@+id/ivDriversCar" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Data"
+        app:layout_constraintStart_toStartOf="@+id/tvFromCity"
+        app:layout_constraintTop_toTopOf="@+id/ivCalendar" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Laikas"
+        app:layout_constraintStart_toStartOf="@+id/tvDate"
+        app:layout_constraintTop_toTopOf="@+id/ivTime" />
+
+    <TextView
+        android:id="@+id/tvFreeSeats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Laisvos vietos"
+        app:layout_constraintStart_toStartOf="@+id/tvTime"
+        app:layout_constraintTop_toTopOf="@+id/ivFreeSeats" />
+
+    <TextView
+        android:id="@+id/tvDriverRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
+        android:text="0 (0)"
+        app:layout_constraintStart_toEndOf="@+id/ivStarIcon"
+        app:layout_constraintTop_toTopOf="@+id/ivStarIcon" />
+
+    <Button
+        android:id="@+id/btnTakeSeat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Rezervuoti vietą"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Kaina"
+        app:layout_constraintStart_toStartOf="@+id/tvFreeSeats"
+        app:layout_constraintTop_toTopOf="@+id/ivPrice" />
+
+    <ImageView
+        android:id="@+id/ivDescription"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/ivPrice"
+        app:layout_constraintTop_toBottomOf="@+id/ivPrice"
+        app:srcCompat="@drawable/ic_description_black_24dp" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="294dp"
+        android:layout_height="77dp"
+        android:visibility="invisible"
+        android:text="Papildoma informacija yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada yada "
+        app:layout_constraintStart_toStartOf="@+id/tvPrice"
+        app:layout_constraintTop_toTopOf="@+id/ivDescription" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/colorGrayBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/civDriverPicture" />
+
+    <ImageView
+        android:id="@+id/ivMapPin"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        app:srcCompat="@drawable/ic_place_black_24dp" />
+
+    <TextView
+        android:id="@+id/tvFromCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="3dp"
+        android:text="Pradžios miestas"
+        app:layout_constraintStart_toEndOf="@+id/ivMapPin"
+        app:layout_constraintTop_toTopOf="@+id/ivMapPin" />
+
+    <ImageView
+        android:id="@+id/ivArrowRight"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/tvFromCity"
+        app:layout_constraintTop_toTopOf="@+id/ivMapPin"
+        app:srcCompat="@drawable/ic_trending_flat_black_24dp" />
+
+    <TextView
+        android:id="@+id/tvToCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Pabaigos miestas"
+        app:layout_constraintStart_toEndOf="@+id/ivArrowRight"
+        app:layout_constraintTop_toTopOf="@+id/tvFromCity" />
+
+</android.support.constraint.ConstraintLayout>

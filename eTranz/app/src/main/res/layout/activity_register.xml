@@ -111,6 +111,7 @@
         android:layout_marginTop="8dp"
         android:editable="false"
         android:clickable="true"
+        android:focusable="false"
         android:ems="10"
         android:hint="@string/registerBirthDate"
         android:textSize="14sp"
