@@ -154,8 +154,8 @@ public class New_Trip_Activity extends AppCompatActivity {
         if (id == R.id.btnConfirm) {
             uploadData();
         }
-
-        finish();
+        else if(id == android.R.id.home)
+            onBackPressed();
         return true;
     }
 
@@ -201,6 +201,7 @@ public class New_Trip_Activity extends AppCompatActivity {
             DatabaseReference ref = firebaseDatabase.getReference();
             String key = ref.child("trips").push().getKey();
             Task upload = ref.child("trips").child(ogDate).child(key).setValue(data);
+            ref.child("trips").child(ogDate).child(key).child("passengerCounter").setValue("0");
             upload.addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -307,7 +308,7 @@ public class New_Trip_Activity extends AppCompatActivity {
             etErrTo.setError(getResources().getString(R.string.emptyFieldMsg));
             etErrTo.requestFocus();
             return false;
-        } else if (etSeats.getText().toString().equals("0")) {
+        } else if (seatCounter == 0) {
             etSeats.setError("Negali būti 0 laisvų vietų");
             etSeats.requestFocus();
             return false;

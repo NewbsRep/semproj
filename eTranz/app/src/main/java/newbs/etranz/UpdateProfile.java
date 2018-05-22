@@ -1,10 +1,13 @@
 package newbs.etranz;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -33,7 +36,7 @@ public class UpdateProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         newName = findViewById(R.id.etNameUpdate);
         newBirth = findViewById(R.id.etBirthUpdate);
         save = (Button) findViewById(R.id.btnSave);
@@ -99,8 +102,13 @@ public class UpdateProfile extends AppCompatActivity {
                     UserData userData = new UserData(name, birth);
 
                     databaseReference.setValue(userData);
-
-                    finish();
+                    Toast.makeText(UpdateProfile.this, "Pakeitimai išsaugoti", Toast.LENGTH_SHORT).show();
+                    try {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
                 }
             }
         });
@@ -119,6 +127,10 @@ public class UpdateProfile extends AppCompatActivity {
         });
     }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        onBackPressed();
+        return true;
+    }
     private String determineMonth(int month) {
         switch(month) {
             case 0:

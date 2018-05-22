@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,25 +35,37 @@ public class AvailableTrips_Activity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         initializeObjects();
 
-        mTripList = new ArrayList<>();
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        updateListView();
+
+        lvTrip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Trip_Data a = (Trip_Data) view.getTag(); // Parselable Tag
+                openSelectedTripActivity(a);
+            }
+        });
+    }
+
+    private void updateListView() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                mTripList.clear();
+                mTripList = new ArrayList<>();
                 if(dataSnapshot.child("trips").hasChild(departureDate)) {
-                    fillAvailableTrips((Map<String, Object>) dataSnapshot.child("trips").child(departureDate).getValue(),
-                            dataSnapshot.child("users"));
+                    Map<String, Object> tripsOnDate = (Map<String, Object>) dataSnapshot.child("trips").child(departureDate).getValue();
+                    DataSnapshot users = dataSnapshot.child("users");
+                    fillTripDataList(tripsOnDate, users);
                     if(mTripList.size() != 0)
                         displayTrips();
                     else
-                        Toast.makeText(getApplicationContext(), "Kelionių nerasta!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Tinkamų kelionių nerasta!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Kelionių nerasta!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Kelionių nerasta tą dieną!", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(AvailableTrips_Activity.this, TripSearch_Activity.class));
                 }
             }
 
-            private void fillAvailableTrips(Map<String, Object> trips, DataSnapshot users) {
+            private void fillTripDataList(Map<String, Object> trips, DataSnapshot users) {
                 for(Map.Entry<String, Object> entry : trips.entrySet()) {
                     String tripKey = entry.getKey();
                     Map singleTrip = (Map) entry.getValue();
@@ -90,16 +101,6 @@ public class AvailableTrips_Activity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getApplicationContext(), "Database error",
                         Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        lvTrip.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Trip_Data a = (Trip_Data) view.getTag();
-                /*Toast.makeText(getApplicationContext(), "Driver = " + a.getUid(),
-                        Toast.LENGTH_SHORT).show();*/
-                openSelectedTripActivity(a);
             }
         });
     }
