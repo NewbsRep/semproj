@@ -7,15 +7,16 @@ import java.util.Date;
  */
 
 public class UserData {
-    private String usrName, birthDay;
+    private String usrName, birthDay, phoneNum;
     private int rating;
 
     public UserData(){}
 
-    public UserData(String usrName, String birthDay)
+    public UserData(String usrName, String birthDay, String phoneNum)
     {
         this.usrName = usrName;
         this.birthDay = birthDay;
+        this.phoneNum = phoneNum;
         this.rating = 0;
     }
 
@@ -45,5 +46,13 @@ public class UserData {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public String getPhone() {
+        return phoneNum;
+    }
+
+    public void setPhone(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 }

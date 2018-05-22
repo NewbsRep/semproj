@@ -36,7 +36,7 @@ import java.util.Calendar;
 
 public class registerActivity extends AppCompatActivity {
 
-    private EditText eMail, name, dateOfBirth, password, passwordRepeat;
+    private EditText eMail, name, dateOfBirth, password, passwordRepeat, phone;
     private Button btnRegister;
     private TextView hasAcc;
     private FirebaseAuth firebaseAuth;
@@ -190,7 +190,12 @@ public class registerActivity extends AppCompatActivity {
                  passwordRepeat.setError(getResources().getString(R.string.emptyFieldMsg));
                  passwordRepeat.requestFocus();
                  return false;
-             }
+            }
+            if (phone.getText().toString().isEmpty()) {
+                phone.setError(getResources().getString(R.string.emptyFieldMsg));
+                phone.requestFocus();
+                return false;
+            }
             return true;
     }
 
@@ -220,6 +225,7 @@ public class registerActivity extends AppCompatActivity {
         profilePic = (ImageView) findViewById(R.id.profile_image);
         firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
+        phone = findViewById(R.id.etPhone);
     }
 
     private void uploadUsrData() {
@@ -237,7 +243,8 @@ public class registerActivity extends AppCompatActivity {
         DatabaseReference dbRef = firebaseDatabase.getReference();
         String usrName = name.getText().toString();
         String bDay = dateOfBirth.getText().toString();
-        UserData userData = new UserData(usrName, bDay);
+        String phoneNum = phone.getText().toString();
+        UserData userData = new UserData(usrName, bDay, phoneNum);
         dbRef.child("users").child(firebaseAuth.getUid()).setValue(userData).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {

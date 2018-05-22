@@ -195,4 +195,5 @@
     <string name="tvPicMsg">Profilio nuotrauka</string>
     <string name="tvRatingMsg">Reitingas</string>
     <string name="txtEdit">Redaguoti</string>
+    <string name="phoneNum">Telefono nr.</string>
 </resources>

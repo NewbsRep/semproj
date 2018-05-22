@@ -28,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Selected_Trip_Activity extends AppCompatActivity {
     private CircleImageView civPhoto;
-    private TextView tvDriver, tvDriversCar, tvDate, tvTime, tvFreeSeats, tvDriverRating, tvPrice;
+    private TextView tvDriver, tvPhone, tvDate, tvTime, tvFreeSeats, tvDriverRating, tvPrice;
     private TextView tvToCity, tvFromCity, tvDescription;
     private Button btnReserve;
 
@@ -125,7 +125,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
 
     private void initializeViews() {
         tvDriver = findViewById(R.id.tvDriver);
-        tvDriversCar = findViewById(R.id.tvDriversCar);
+        tvPhone = findViewById(R.id.tvPhoneNum);
         tvDate = findViewById(R.id.tvDate);
         tvTime = findViewById(R.id.tvTime);
         tvFreeSeats = findViewById(R.id.tvFreeSeats);
@@ -146,6 +146,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
         tvTime.setText(trip.getDepartureTime());
         tvFreeSeats.setText(trip.getFreeSpace());
         tvPrice.setText(trip.getPrice());
+        tvPhone.setText(trip.get);
 
         storageReference = storageReference.child(trip.getUid()).child("Images").child("ProfilePic");
         Glide.with(Selected_Trip_Activity.this)
