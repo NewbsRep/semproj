@@ -7,16 +7,16 @@ import java.util.Date;
  */
 
 public class UserData {
-    private String usrName, birthDay, phoneNum;
+    private String usrName, birthDay, phone;
     private int rating;
 
     public UserData(){}
 
-    public UserData(String usrName, String birthDay, String phoneNum)
+    public UserData(String usrName, String birthDay, String phone)
     {
         this.usrName = usrName;
         this.birthDay = birthDay;
-        this.phoneNum = phoneNum;
+        this.phone = phone;
         this.rating = 0;
     }
 
@@ -25,7 +25,7 @@ public class UserData {
             return usrName;
         }
 
-        return "";
+        return null;
     }
 
     public void setUsrName(String usrName) {
@@ -49,10 +49,10 @@ public class UserData {
     }
 
     public String getPhone() {
-        return phoneNum;
+        return phone;
     }
 
     public void setPhone(String phoneNum) {
-        this.phoneNum = phoneNum;
+        this.phone= phoneNum;
     }
 }

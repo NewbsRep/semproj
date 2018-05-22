@@ -30,7 +30,7 @@ public class Profile_Activity extends AppCompatActivity {
 
     public Button btn;
 
-    private TextView name, rate, birth;
+    private TextView name, rate, birth, phone;
     private TextView email;
     private CircleImageView photo;
 
@@ -77,6 +77,7 @@ public class Profile_Activity extends AppCompatActivity {
         name = findViewById(R.id.tvName);
         rate = findViewById(R.id.tvRate);
         birth = findViewById(R.id.tvBirth);
+        phone = findViewById(R.id.tvPhone);
 
         storageReference = firebaseStorage.getReference().child(firebaseAuth.getUid()).child("Images").child("ProfilePic");
         databaseReference = firebaseDatabase.getReference().child("users").child(firebaseAuth.getUid());
@@ -95,6 +96,9 @@ public class Profile_Activity extends AppCompatActivity {
 
                     birth.setText(userData.getBirthDay());
                     birth.setVisibility(View.VISIBLE);
+
+                    phone.setText(userData.getPhone());
+                    phone.setVisibility(View.VISIBLE);
 
                     photo = findViewById(R.id.civPhoto);
                     Glide.with(Profile_Activity.this)

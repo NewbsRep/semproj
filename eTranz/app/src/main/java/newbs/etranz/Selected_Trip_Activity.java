@@ -1,11 +1,13 @@
 package newbs.etranz;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +33,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
     private TextView tvDriver, tvPhone, tvDate, tvTime, tvFreeSeats, tvDriverRating, tvPrice;
     private TextView tvToCity, tvFromCity, tvDescription;
     private Button btnReserve;
+    private ImageView call, message;
 
     boolean btnPressed = false;
 
@@ -60,6 +63,24 @@ public class Selected_Trip_Activity extends AppCompatActivity {
         else {
             btnReserve.setVisibility(View.INVISIBLE);
         }
+
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String phone = tvPhone.getText().toString();
+                Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.fromParts(
+                        "tel", phone, null));
+                startActivity(phoneIntent);
+            }
+        });
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                sendIntent.setData(Uri.parse("sms:" + tvPhone.getText().toString()));
+                startActivity(sendIntent);
+            }
+        });
     }
 
     @Override
@@ -138,17 +159,32 @@ public class Selected_Trip_Activity extends AppCompatActivity {
         tvDescription = findViewById(R.id.tvDescription);
         btnReserve = findViewById(R.id.btnTakeSeat);
         civPhoto = findViewById(R.id.civDriverPicture);
+        call = findViewById(R.id.ivCall);
+        message = findViewById(R.id.ivMessage);
     }
 
     private void populateViews() {
-        tvDriver.setText(trip.getDriverName());
         tvFromCity.setText(trip.getFromCity());
         tvToCity.setText(trip.getToCity());
         tvDate.setText(trip.getDeparture());
         tvTime.setText(trip.getDepartureTime());
         tvFreeSeats.setText(trip.getFreeSpace());
         tvPrice.setText(trip.getPrice());
-        tvPhone.setText(trip.get);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("users").child(trip.getUid()).child("phone").exists())
+                    tvPhone.setText(dataSnapshot.child("users").child(trip.getUid()).child("phone").getValue(String.class));
+                if(dataSnapshot.child("users").child(trip.getUid()).child("usrName").exists())
+                    tvDriver.setText(dataSnapshot.child("users").child(trip.getUid()).child("usrName").getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+
+            }
+        });
 
         storageReference = storageReference.child(trip.getUid()).child("Images").child("ProfilePic");
         Glide.with(Selected_Trip_Activity.this)

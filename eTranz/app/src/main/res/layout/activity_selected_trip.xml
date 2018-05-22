@@ -38,7 +38,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="6dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/ivStarIcon"
         app:layout_constraintTop_toBottomOf="@+id/ivStarIcon"
         app:srcCompat="@drawable/baseline_phone_android_black_24dp" />
@@ -95,8 +95,8 @@
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:text="Telefono numeris"
-        android:visibility="invisible"
+        android:text="+37068091369"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/ivPhoneNum"
         app:layout_constraintStart_toEndOf="@+id/ivPhoneNum" />
 
@@ -230,5 +230,37 @@
         android:text="Pabaigos miestas"
         app:layout_constraintStart_toEndOf="@+id/ivArrowRight"
         app:layout_constraintTop_toTopOf="@+id/tvFromCity" />
+
+    <ImageView
+        android:id="@+id/ivMessage"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvToCity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvPhoneNum"
+        app:srcCompat="@drawable/baseline_message_black_48dp" />
+
+    <ImageView
+        android:id="@+id/ivCall"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/ivMessage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintStart_toEndOf="@+id/tvDriver"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/baseline_call_black_48dp" />
 
 </android.support.constraint.ConstraintLayout>

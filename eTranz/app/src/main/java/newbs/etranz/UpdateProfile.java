@@ -25,7 +25,7 @@ import java.util.Date;
 
 public class UpdateProfile extends AppCompatActivity {
 
-    private EditText newName, newBirth;
+    private EditText newName, newBirth, phoneNum;
     private Button save, changePsw, changeEmail;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -39,6 +39,7 @@ public class UpdateProfile extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         newName = findViewById(R.id.etNameUpdate);
         newBirth = findViewById(R.id.etBirthUpdate);
+        phoneNum = findViewById(R.id.etPhone);
         save = (Button) findViewById(R.id.btnSave);
         changePsw = (Button) findViewById((R.id.btnChangePsw));
         changeEmail = (Button) findViewById((R.id.btnChangeEmail));
@@ -57,6 +58,7 @@ public class UpdateProfile extends AppCompatActivity {
                 try {
                     newName.setText(userData.getUsrName());
                     newBirth.setText(userData.getBirthDay());
+                    phoneNum.setText(userData.getPhone());
 
                 } catch (Exception ex){
                     Toast.makeText(UpdateProfile.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -98,8 +100,8 @@ public class UpdateProfile extends AppCompatActivity {
                 if (noEmptyFields()) {
                     String name = newName.getText().toString();
                     String birth = newBirth.getText().toString();
-
-                    UserData userData = new UserData(name, birth);
+                    String newPhone = phoneNum.getText().toString();
+                    UserData userData = new UserData(name, birth, newPhone);
 
                     databaseReference.setValue(userData);
                     Toast.makeText(UpdateProfile.this, "Pakeitimai išsaugoti", Toast.LENGTH_SHORT).show();
@@ -170,6 +172,11 @@ public class UpdateProfile extends AppCompatActivity {
         else if(newBirth.getText().toString().isEmpty()){
             newBirth.setError(getResources().getString(R.string.emptyFieldMsg));
             newBirth.requestFocus();
+            return false;
+        }
+        else if(phoneNum.getText().toString().isEmpty()){
+            phoneNum.setError(getResources().getString(R.string.emptyFieldMsg));
+            phoneNum.requestFocus();
             return false;
         }
         else {
