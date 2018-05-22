@@ -189,10 +189,10 @@
     <string name="tab_text_2">Keleivis</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="tvNameMsg">Vardas</string>
-    <string name="tvMailMsg">El. pašto adresas</string>
-    <string name="tvBirtgMsg">Gimimo data</string>
+    <string name="tvNameMsg">Vardas:</string>
+    <string name="tvMailMsg">El. paštas:</string>
+    <string name="tvBirtgMsg">Gimimo data:</string>
     <string name="tvPicMsg">Profilio nuotrauka</string>
-    <string name="tvRatingMsg">Reitingas</string>
+    <string name="tvRatingMsg">Reitingas:</string>
     <string name="txtEdit">Redaguoti</string>
 </resources>

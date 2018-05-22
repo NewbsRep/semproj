@@ -10,154 +10,124 @@
         android:id="@+id/civPhoto"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:layout_marginBottom="28dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvName"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32"
         app:srcCompat="@drawable/profilepic" />
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="193dp"
         android:layout_height="34dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="32dp"
         android:autoSizeTextType="uniform"
         android:textColor="@color/text_color_primary"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/tvEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.681"
-        app:layout_constraintStart_toEndOf="@+id/tvNameMsg" />
+        app:layout_constraintTop_toBottomOf="@+id/civPhoto" />
 
     <TextView
         android:id="@+id/tvEmail"
         android:layout_width="193dp"
         android:layout_height="38dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:autoSizeTextType="uniform"
         android:text="Email"
         android:textColor="@color/text_color_primary"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/tvBirth"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        app:layout_constraintStart_toEndOf="@+id/textView8" />
+        app:layout_constraintStart_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
     <TextView
         android:id="@+id/tvRate"
         android:layout_width="70dp"
         android:layout_height="37dp"
-        android:layout_marginBottom="52dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="0"
         android:textColor="@color/text_color_primary"
         android:textSize="15sp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/bEdit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.527"
-        app:layout_constraintStart_toEndOf="@+id/textView11" />
+        app:layout_constraintStart_toStartOf="@+id/tvBirth"
+        app:layout_constraintTop_toBottomOf="@+id/tvBirth" />
 
     <TextView
         android:id="@+id/tvBirth"
         android:layout_width="193dp"
         android:layout_height="37dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:textColor="@color/text_color_primary"
-        app:layout_constraintBottom_toTopOf="@+id/tvRate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.402"
-        app:layout_constraintStart_toEndOf="@+id/textView9" />
+        app:layout_constraintStart_toStartOf="@+id/tvEmail"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
 
     <TextView
         android:id="@+id/tvNameMsg"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:textStyle="bold"
         android:text="@string/tvNameMsg"
         android:textColor="@color/text_color_primary"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/civPhoto"
-        app:layout_constraintVertical_bias="0.957" />
+        app:layout_constraintEnd_toStartOf="@+id/tvName"
+        app:layout_constraintTop_toTopOf="@+id/tvName" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:text="@string/tvMailMsg"
+        android:textStyle="bold"
         android:textColor="@color/text_color_primary"
-        app:layout_constraintBottom_toTopOf="@+id/textView9"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/tvNameMsg"
+        app:layout_constraintTop_toTopOf="@+id/tvEmail" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:gravity="left"
+        android:textStyle="bold"
         android:text="@string/tvBirtgMsg"
         android:textAlignment="gravity"
         android:textColor="@color/text_color_primary"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvBirth"
+        app:layout_constraintEnd_toEndOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="88dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="32dp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
         android:gravity="left"
         android:text="@string/tvPicMsg"
         android:textAlignment="gravity"
         android:textColor="@color/text_color_primary"
-        app:layout_constraintBottom_toTopOf="@+id/tvNameMsg"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/civPhoto"
+        app:layout_constraintEnd_toStartOf="@+id/civPhoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/civPhoto" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_marginBottom="180dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:gravity="left"
+        android:textStyle="bold"
         android:text="@string/tvRatingMsg"
         android:textAlignment="gravity"
         android:textColor="@color/text_color_primary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/tvRate"
+        app:layout_constraintEnd_toEndOf="@+id/textView9" />
 
     <Button
         android:id="@+id/bEdit"
