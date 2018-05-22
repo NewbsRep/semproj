@@ -64,9 +64,9 @@ public class HomeScreen_Activity extends AppCompatActivity {
         initializeObj();
         checkUserStatus();
         if(isSignedIn) setUpProfileSettings();
-        loggedInAs();
+        //loggedInAs();
 
-        printVersion();
+        //printVersion();
 
         tv_PostATrip.setOnClickListener(new View.OnClickListener() {
             @Override

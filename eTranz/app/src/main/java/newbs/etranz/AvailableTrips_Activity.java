@@ -3,6 +3,7 @@ package newbs.etranz;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -45,7 +46,11 @@ public class AvailableTrips_Activity extends AppCompatActivity {
             }
         });
     }
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home)
+            onBackPressed();
+        return true;
+    }
     private void updateListView() {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -71,15 +76,16 @@ public class AvailableTrips_Activity extends AppCompatActivity {
                     Map singleTrip = (Map) entry.getValue();
 
                     String uid = (String) singleTrip.get("uid");
+                    if(!users.child(uid).exists())
+                        continue;
                     Map userData = (Map) users.child(uid).getValue();
-
+                    String driver = (String) userData.get("usrName");
                     String fromCity = (String) singleTrip.get("fromCity");
                     String toCity = (String) singleTrip.get("toCity");
                     String freeSpace = (String) singleTrip.get("freeSpace");
                     String price = (String) singleTrip.get("price");
                     String departure = (String) singleTrip.get("departure");
                     String departureTime = (String) singleTrip.get("departureTime");
-                    String driver = (String) userData.get("usrName");
 
                     int freeSeats = Integer.parseInt(freeSpace);
                     if(fromCity.equals(EXTRA_fromCity) && toCity.equals(EXTRA_toCity) && freeSeats > 0) {
