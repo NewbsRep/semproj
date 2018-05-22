@@ -84,12 +84,14 @@ public class Selected_Trip_Activity extends AppCompatActivity {
                         return;
                     }
                     DataSnapshot help = dataSnapshot.child("trips").child(departureDate).child(trip.getTripKey()).child("passengers");
-                    ArrayList<String> passengers = (ArrayList<String>) help.getValue();
-                    for(int i = 0; i < passengers.size(); i++){
-                        String passenger = passengers.get(i);
-                        if(passenger.equals(userUid)) {
-                            Toast.makeText(getApplicationContext(), "Jūs jau užsirezervavę!", Toast.LENGTH_LONG).show();
-                            return;
+                    if(help.exists()) {
+                        ArrayList<String> passengers = (ArrayList<String>) help.getValue();
+                        for (int i = 0; i < passengers.size(); i++) {
+                            String passenger = passengers.get(i);
+                            if (passenger.equals(userUid)) {
+                                Toast.makeText(getApplicationContext(), "Jūs jau užsirezervavę!", Toast.LENGTH_LONG).show();
+                                return;
+                            }
                         }
                     }
                     Map<String, Object> passengerUpdates = new HashMap<>();
