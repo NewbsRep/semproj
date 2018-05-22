@@ -185,8 +185,8 @@
     <string name="resetFail">Įvyko klaida mėginkite dar kartą</string>
 
     <string name="title_activity_my_trips">Mano kelionės</string>
-    <string name="tab_text_1">Vairuoju</string>
-    <string name="tab_text_2">!Vairuoju</string>
+    <string name="tab_text_1">Vairuotojas</string>
+    <string name="tab_text_2">Keleivis</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="tvNameMsg">Vardas</string>
