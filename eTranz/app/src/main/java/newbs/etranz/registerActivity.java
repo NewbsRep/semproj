@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -22,6 +23,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -126,7 +130,20 @@ public class registerActivity extends AppCompatActivity {
                                 uploadUsrData();
                                 sendEmailVerification();
                             } else {
-                                Toast.makeText(registerActivity.this, getString(R.string.MISTAKE_OCCURRED), Toast.LENGTH_SHORT).show();
+                                try {
+                                    throw task.getException();
+                                } catch(FirebaseAuthWeakPasswordException e) {
+                                    password.setError(getString(R.string.weakPass));
+                                    password.requestFocus();
+                                } catch(FirebaseAuthInvalidCredentialsException e) {
+                                    eMail.setError(getString(R.string.wrongMailFormat));
+                                    eMail.requestFocus();
+                                } catch(FirebaseAuthUserCollisionException e) {
+                                    eMail.setError(getString(R.string.userExists));
+                                    eMail.requestFocus();
+                                } catch(Exception e) {
+                                    Toast.makeText(registerActivity.this, getString(R.string.MISTAKE_OCCURRED), Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     });
