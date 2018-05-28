@@ -199,4 +199,6 @@
     <string name="weakPass">Slaptaždis per trumpas (min. 6)</string>
     <string name="userExists">Toks vartotojas jau egzistuoja</string>
     <string name="wrongMailFormat">Neteisingas el. pašto formatas</string>
+    <string name="rate">Įvertinkite vairuotoją!</string>
+    <string name="ratingTitle">Kaip vertinate vairuotoją?</string>
 </resources>

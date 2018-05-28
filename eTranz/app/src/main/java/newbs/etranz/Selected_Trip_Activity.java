@@ -1,5 +1,8 @@
 package newbs.etranz;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Selected_Trip_Activity extends AppCompatActivity {
     private CircleImageView civPhoto;
     private TextView tvDriver, tvPhone, tvDate, tvTime, tvFreeSeats, tvDriverRating, tvPrice;
-    private TextView tvToCity, tvFromCity, tvDescription;
+    private TextView tvToCity, tvFromCity, tvDescription, tvRate;
     private Button btnReserve;
     private ImageView call, message;
 
@@ -52,6 +56,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
         getExtrasFromIntent();
         initializeViews();
         populateViews();
+        initializeRating();
 
         if(reserveButtonVisibility)
             btnReserve.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +92,38 @@ public class Selected_Trip_Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
+    }
+
+    private void initializeRating(){
+        tvRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog();
+            }
+        });
+    }
+
+    private void AlertDialog(){
+        new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.rate))
+                .setMessage(getResources().getString(R.string.ratingTitle))
+                .setNegativeButton("Neigiamai", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(Selected_Trip_Activity.this, "Neigimas vertinimas", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setPositiveButton("Teigiamai", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(Selected_Trip_Activity.this, "Teigiamas vertinimas", Toast.LENGTH_SHORT).show();
+                    }
+                }).setNeutralButton("Atšaukti", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(Selected_Trip_Activity.this, "Neutralus", Toast.LENGTH_SHORT).show();
+                    }
+                }).create().show();
     }
 
     private void reserveSeat() {
@@ -161,6 +198,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
         civPhoto = findViewById(R.id.civDriverPicture);
         call = findViewById(R.id.ivCall);
         message = findViewById(R.id.ivMessage);
+        tvRate = findViewById(R.id.tvRate);
     }
 
     private void populateViews() {
