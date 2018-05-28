@@ -120,13 +120,18 @@ public class registerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (noEmptyFields() && passwordMatches()) {
-                    String mail = eMail.getText().toString().trim();
-                    String pass = password.getText().toString().trim();
+                    final String mail = eMail.getText().toString().trim();
+                    final String pass = password.getText().toString().trim();
 
                     firebaseAuth.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                try {
+                                    Thread.sleep(3000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                                 uploadUsrData();
                                 sendEmailVerification();
                             } else {
