@@ -3,6 +3,7 @@ package newbs.etranz;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 public class UpdateEmail extends AppCompatActivity {
@@ -45,7 +49,18 @@ public class UpdateEmail extends AppCompatActivity {
                             Toast.makeText(UpdateEmail.this, "El. Paštas Pakeistas", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
-                            Toast.makeText(UpdateEmail.this, "El. Pašto Pakeisti Nepavyko", Toast.LENGTH_SHORT).show();
+                            try {
+                                throw task.getException();
+                            } catch(FirebaseAuthInvalidCredentialsException e) {
+                                newEmail.setError(getString(R.string.wrongMailFormat));
+                                newEmail.requestFocus();
+                            } catch(FirebaseAuthUserCollisionException e) {
+                                newEmail.setError(getString(R.string.userExists));
+                                newEmail.requestFocus();
+                            } catch(Exception e) {
+                                Log.d("klaida", e.toString());
+                                Toast.makeText(UpdateEmail.this, getString(R.string.MISTAKE_OCCURRED), Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 });
