@@ -177,6 +177,7 @@
         <item>Panemunė</item>
     </string-array>
     <string name="emptyFieldMsg">Laukelis negali būti tuščias</string>
+    <string name="sameTownsMsg">Negalite keliauti į tą patį miestą</string>
     <string name="search">Ieškoti</string>
     <string name="resetBtnText">Atstatyti slaptažodį</string>
     <string name="resetExpl">Kad atstatytumėte slaptažodį, įveskite savo paskyros el. paštą, paspauskite mygtuką ir sekite instrukcijas kurias gausite į el. paštą</string>

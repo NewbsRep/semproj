@@ -308,6 +308,10 @@ public class New_Trip_Activity extends AppCompatActivity {
             etErrTo.setError(getResources().getString(R.string.emptyFieldMsg));
             etErrTo.requestFocus();
             return false;
+        } else if (posFrom == posTo) {
+            etErrTo.setError(getResources().getString(R.string.sameTownsMsg));
+            etErrTo.requestFocus();
+            return false;
         } else if (seatCounter == 0) {
             etSeats.setError("Negali būti 0 laisvų vietų");
             etSeats.requestFocus();
