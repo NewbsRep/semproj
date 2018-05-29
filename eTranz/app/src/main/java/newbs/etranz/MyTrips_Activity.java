@@ -179,8 +179,8 @@ public class MyTrips_Activity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager){
         MyTrips_SectionsPageAdapter adapter = new MyTrips_SectionsPageAdapter(getSupportFragmentManager());
 
-        adapter.addFragment(new MyTrips_Driver_Fragment(), "Vairuoju");
-        adapter.addFragment(new MyTrips_Passenger_Fragment(), "!Vairuoju");
+        adapter.addFragment(new MyTrips_Driver_Fragment(), "Vairuotojas");
+        adapter.addFragment(new MyTrips_Passenger_Fragment(), "Keleivis");
 
         viewPager.setAdapter(adapter);
     }

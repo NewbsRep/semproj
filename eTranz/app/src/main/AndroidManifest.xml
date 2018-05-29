@@ -62,15 +62,13 @@
         <activity
             android:name=".AvailableTrips_Activity"
             android:label="Rastos kelionės"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".TripSearch_Activity" />
+            android:parentActivityName=".TripSearch_Activity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".UpdateProfile"
-            android:label="Profilio redagavimas"/>
-        <activity
-            android:name=".UpdatePassword" />
-        <activity
-            android:name=".UpdateEmail" />
+            android:label="Profilio redagavimas" />
+        <activity android:name=".UpdatePassword" />
+        <activity android:name=".UpdateEmail" />
         <activity
             android:name=".PassReset_Activity"
             android:parentActivityName=".Login_Activity" />

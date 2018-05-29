@@ -1,5 +1,8 @@
 package newbs.etranz;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -8,12 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,16 +36,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class Selected_Trip_Activity extends AppCompatActivity {
     private CircleImageView civPhoto;
     private TextView tvDriver, tvPhone, tvDate, tvTime, tvFreeSeats, tvDriverRating, tvPrice;
-    private TextView tvToCity, tvFromCity, tvDescription;
+    private TextView tvToCity, tvFromCity, tvDescription, tvRate;
     private Button btnReserve;
     private ImageView call, message;
 
     boolean btnPressed = false;
 
-    private String departureDate;
+    private String departureDate, uid;
     private Trip_Data trip;
     private boolean reserveButtonVisibility;
 
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -52,6 +58,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
         getExtrasFromIntent();
         initializeViews();
         populateViews();
+        initializeRating();
 
         if(reserveButtonVisibility)
             btnReserve.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +94,118 @@ public class Selected_Trip_Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
+    }
+
+    private void initializeRating(){
+        if(uid.equals(firebaseAuth.getUid())){
+            tvRate.setVisibility(View.INVISIBLE);
+            return;
+        }
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("users").child(uid).child("raters").child(firebaseAuth.getCurrentUser().getUid()).exists()){
+                    tvRate.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        tvRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog();
+            }
+        });
+    }
+
+    private void AlertDialog(){
+        new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.rate))
+                .setMessage(getResources().getString(R.string.ratingTitle))
+                .setNegativeButton("Neigiamai", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(Selected_Trip_Activity.this, "Neigimas vertinimas", Toast.LENGTH_SHORT).show();
+
+                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                                String currentUid = currentUser.getUid();
+
+                                if(dataSnapshot.child("users").child(uid).exists() && !uid.equals(currentUid)){
+                                    Map user = (Map) dataSnapshot.child("users").child(uid).getValue();
+                                    Long userRating = (Long) user.get("rating");
+                                    userRating--;
+
+                                    Map<String, Object> ratingUpdate = new HashMap<>();
+                                    ratingUpdate.put("rating", userRating);
+                                    databaseReference.child("users").child(uid).updateChildren(ratingUpdate);
+                                    databaseReference.child("users").child(uid).child("raters").child(currentUid).setValue(true);
+
+                                    Toast.makeText(Selected_Trip_Activity.this, "Ačiū! Jūsų neigiamas įvertinimas gautas.", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(Selected_Trip_Activity.this, "Atsiprašome, įvyko nenumatyta klaida.", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                })
+                .setPositiveButton("Teigiamai", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(Selected_Trip_Activity.this, "Teigiamas vertinimas", Toast.LENGTH_SHORT).show();
+
+
+                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                                String currentUid = currentUser.getUid();
+
+                                if(dataSnapshot.child("users").child(uid).exists() && !uid.equals(currentUid)){
+                                    Map user = (Map) dataSnapshot.child("users").child(uid).getValue();
+                                    Long userRating = (Long) user.get("rating");
+                                    userRating++;
+
+                                    Map<String, Object> ratingUpdate = new HashMap<>();
+                                    ratingUpdate.put("rating", userRating);
+                                    databaseReference.child("users").child(uid).updateChildren(ratingUpdate);
+                                    databaseReference.child("users").child(uid).child("raters").child(currentUid).setValue(true);
+
+                                    Toast.makeText(Selected_Trip_Activity.this, "Ačiū! Jūsų teigiamas įvertinimas gautas.", Toast.LENGTH_SHORT).show();
+                                } else if(uid.equals(currentUid)){
+                                    Toast.makeText(Selected_Trip_Activity.this, "Nebūk naivus!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(Selected_Trip_Activity.this, "Atsiprašome, įvyko nenumatyta klaida.", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                }).setNeutralButton("Atšaukti", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Toast.makeText(Selected_Trip_Activity.this, "Neutralus", Toast.LENGTH_SHORT).show();
+
+
+                    }
+                }).create().show();
     }
 
     private void reserveSeat() {
@@ -147,6 +266,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
     }
 
     private void initializeViews() {
+        uid  = trip.getUid();
         tvDriver = findViewById(R.id.tvDriver);
         tvPhone = findViewById(R.id.tvPhoneNum);
         tvDate = findViewById(R.id.tvDate);
@@ -161,6 +281,7 @@ public class Selected_Trip_Activity extends AppCompatActivity {
         civPhoto = findViewById(R.id.civDriverPicture);
         call = findViewById(R.id.ivCall);
         message = findViewById(R.id.ivMessage);
+        tvRate = findViewById(R.id.tvRate);
     }
 
     private void populateViews() {
@@ -177,6 +298,8 @@ public class Selected_Trip_Activity extends AppCompatActivity {
                     tvPhone.setText(dataSnapshot.child("users").child(trip.getUid()).child("phone").getValue(String.class));
                 if(dataSnapshot.child("users").child(trip.getUid()).child("usrName").exists())
                     tvDriver.setText(dataSnapshot.child("users").child(trip.getUid()).child("usrName").getValue(String.class));
+                if(dataSnapshot.child("users").child(trip.getUid()).child("rating").exists())
+                    tvDriverRating.setText(dataSnapshot.child("users").child(trip.getUid()).child("rating").getValue(Long.class).toString());
             }
 
             @Override
