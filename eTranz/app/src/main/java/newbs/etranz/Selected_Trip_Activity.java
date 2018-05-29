@@ -71,6 +71,9 @@ public class Selected_Trip_Activity extends AppCompatActivity {
             btnReserve.setVisibility(View.INVISIBLE);
         }
 
+        if(!reserveButtonVisibility)
+            btnReserve.setVisibility(View.INVISIBLE);
+
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
