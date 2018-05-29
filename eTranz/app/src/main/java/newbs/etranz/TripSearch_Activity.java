@@ -208,6 +208,10 @@ public class TripSearch_Activity extends AppCompatActivity {
             erTo.setError(getResources().getString(R.string.emptyFieldMsg));
             erTo.requestFocus();
             return false;
+        } else if (posFrom == posTo) {
+            erTo.setError(getResources().getString(R.string.sameTownsMsg));
+            erTo.requestFocus();
+            return false;
         } else if (etDate.getText().toString().isEmpty()) {
             erDate.setError(getResources().getString(R.string.emptyFieldMsg));
             erDate.requestFocus();
