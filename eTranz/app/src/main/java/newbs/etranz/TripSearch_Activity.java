@@ -147,38 +147,71 @@ public class TripSearch_Activity extends AppCompatActivity {
     }
 
     public void searchForTrip(){
-        if(!noEmptyFields())
-            return;
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(!dataSnapshot.hasChild(searchDate))
-                    Toast.makeText(getApplicationContext(), "Pasirinktą dieną kelionių nerasta!",
-                            Toast.LENGTH_SHORT).show();
-                else openFoundTripListActivity();
-            }
+        if(allFieldsEmpty()){
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(!dataSnapshot.hasChildren())
+                        Toast.makeText(getApplicationContext(), "Kelionių nerasta!",
+                                Toast.LENGTH_SHORT).show();
+                    else openFoundTripListActivity();
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Database error",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "Database error",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else if(noEmptyFields()) {
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(!dataSnapshot.hasChild(searchDate))
+                        Toast.makeText(getApplicationContext(), "Pasirinktą dieną kelionių nerasta!",
+                                Toast.LENGTH_SHORT).show();
+                    else openFoundTripListActivity();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getApplicationContext(), "Database error",
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        finish();
 //        return true;
 //    }
+    private boolean isAnyVariableNull(){
+        if(fromSpinner.getSelectedItem() == null)
+            return true;
+        if(toSpinner.getSelectedItem() == null)
+            return true;
+        if(searchDate == null)
+            return true;
+
+        return false;
+    }
 
     private void openFoundTripListActivity() {
         Intent intent = new Intent(this, AvailableTrips_Activity.class);
-        String fromCity = fromSpinner.getSelectedItem().toString();
-        String toCity = toSpinner.getSelectedItem().toString();
-        String departureDate = searchDate;
-        intent.putExtra(EXTRA_FROM_CITY, fromCity);
-        intent.putExtra(EXTRA_TO_CITY, toCity);
-        intent.putExtra(EXTRA_DEPARTURE_DATE, departureDate);
+        if(isAnyVariableNull()){
+            intent.putExtra(EXTRA_FROM_CITY, "");
+            intent.putExtra(EXTRA_TO_CITY, "");
+            intent.putExtra(EXTRA_DEPARTURE_DATE, "");
+        } else {
+            String fromCity = fromSpinner.getSelectedItem().toString();
+            String toCity = toSpinner.getSelectedItem().toString();
+            String departureDate = searchDate;
+            intent.putExtra(EXTRA_FROM_CITY, fromCity);
+            intent.putExtra(EXTRA_TO_CITY, toCity);
+            intent.putExtra(EXTRA_DEPARTURE_DATE, departureDate);
+        }
+
         startActivity(intent);
     }
 
@@ -219,6 +252,17 @@ public class TripSearch_Activity extends AppCompatActivity {
         } else if (etTime.getText().toString().isEmpty()) {
             erTime.setError(getResources().getString(R.string.emptyFieldMsg));
             erTime.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean allFieldsEmpty(){
+        int posFrom = fromSpinner.getSelectedItemPosition();
+        int posTo = toSpinner.getSelectedItemPosition();
+        if ( (posFrom != -1) || (posTo != -1) || (!etDate.getText().toString().isEmpty()) || (!etTime.getText().toString().isEmpty()) ) {
+            //erFrom.setError(getResources().getString(R.string.emptyFieldMsg));
+            //erFrom.requestFocus();
             return false;
         }
         return true;

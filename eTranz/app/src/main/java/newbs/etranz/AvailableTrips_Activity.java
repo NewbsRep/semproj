@@ -15,8 +15,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class AvailableTrips_Activity extends AppCompatActivity {
@@ -27,6 +30,10 @@ public class AvailableTrips_Activity extends AppCompatActivity {
     private String EXTRA_fromCity, EXTRA_toCity, departureDate;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference();
+
+    private Calendar calendar = Calendar.getInstance();
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+    private String currentDate;
 
     public static final String EXTRA_TRIP = "newbs.etranz.EXTRA_TRIP";
 
@@ -56,17 +63,38 @@ public class AvailableTrips_Activity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mTripList = new ArrayList<>();
-                if(dataSnapshot.child("trips").hasChild(departureDate)) {
-                    Map<String, Object> tripsOnDate = (Map<String, Object>) dataSnapshot.child("trips").child(departureDate).getValue();
-                    DataSnapshot users = dataSnapshot.child("users");
-                    fillTripDataList(tripsOnDate, users);
-                    if(mTripList.size() != 0)
-                        displayTrips();
-                    else
-                        Toast.makeText(getApplicationContext(), "Tinkamų kelionių nerasta!", Toast.LENGTH_LONG).show();
+
+                if(!departureDate.equals("")){
+                    if(dataSnapshot.child("trips").hasChild(departureDate)) {
+                        Map<String, Object> tripsOnDate = (Map<String, Object>) dataSnapshot.child("trips").child(departureDate).getValue();
+                        DataSnapshot users = dataSnapshot.child("users");
+                        fillTripDataList(tripsOnDate, users);
+                        if(mTripList.size() != 0)
+                            displayTrips();
+                        else
+                            Toast.makeText(getApplicationContext(), "Tinkamų kelionių nerasta!", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Kelionių nurodytą dieną nerasta!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(AvailableTrips_Activity.this, TripSearch_Activity.class));
+                    }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Kelionių nerasta tą dieną!", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(AvailableTrips_Activity.this, TripSearch_Activity.class));
+                    if(dataSnapshot.child("trips").hasChildren()) {
+                        for (DataSnapshot child : dataSnapshot.child("trips").getChildren()){
+                            if(child.getKey().compareTo(currentDate + 1) >= 0){
+                                Map<String, Object> allTrips = (Map<String, Object>) child.getValue();
+                                DataSnapshot users = dataSnapshot.child("users");
+                                fillTripDataList(allTrips, users);
+                            }
+                        }
+
+                        if(mTripList.size() != 0)
+                            displayTrips();
+                        else
+                            Toast.makeText(getApplicationContext(), "Kelionių nerasta!", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Kelionių nerasta!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(AvailableTrips_Activity.this, TripSearch_Activity.class));
+                    }
                 }
             }
 
@@ -88,12 +116,22 @@ public class AvailableTrips_Activity extends AppCompatActivity {
                     String departureTime = (String) singleTrip.get("departureTime");
 
                     int freeSeats = Integer.parseInt(freeSpace);
-                    if(fromCity.equals(EXTRA_fromCity) && toCity.equals(EXTRA_toCity) && freeSeats > 0) {
-                        Trip_Data availableTrip = new Trip_Data(fromCity, toCity, freeSpace, price, departure,
-                                departureTime, uid);
-                        availableTrip.setDriverName(driver);
-                        availableTrip.setTripKey(tripKey);
-                        mTripList.add(availableTrip);
+                    if (!EXTRA_fromCity.equals("") && !EXTRA_toCity.equals("")){
+                        if(fromCity.equals(EXTRA_fromCity) && toCity.equals(EXTRA_toCity) && freeSeats > 0) {
+                            Trip_Data availableTrip = new Trip_Data(fromCity, toCity, freeSpace, price, departure,
+                                    departureTime, uid);
+                            availableTrip.setDriverName(driver);
+                            availableTrip.setTripKey(tripKey);
+                            mTripList.add(availableTrip);
+                        }
+                    } else {
+                        if(freeSeats > 0) {
+                            Trip_Data availableTrip = new Trip_Data(fromCity, toCity, freeSpace, price, departure,
+                                    departureTime, uid);
+                            availableTrip.setDriverName(driver);
+                            availableTrip.setTripKey(tripKey);
+                            mTripList.add(availableTrip);
+                        }
                     }
                 }
             }
@@ -126,6 +164,17 @@ public class AvailableTrips_Activity extends AppCompatActivity {
         EXTRA_fromCity = intent.getStringExtra(TripSearch_Activity.EXTRA_FROM_CITY);
         EXTRA_toCity = intent.getStringExtra(TripSearch_Activity.EXTRA_TO_CITY);
         departureDate = intent.getStringExtra(TripSearch_Activity.EXTRA_DEPARTURE_DATE);
+
+        calendar.add(Calendar.DATE, 0);
+        calendar.add(Calendar.MONTH, -1);
+//        if(Calendar.DAY_OF_MONTH < 31)
+//            calendar.add(Calendar.DAY_OF_MONTH, 1);
+//        else calendar.add(Calendar.DAY_OF_MONTH, 0);
+
+        //calendar.set(Calendar.YEAR, Calendar.MONTH - 1, Calendar.DAY_OF_MONTH);
+        currentDate = dateFormat.format(calendar.getTime());
+
+        Toast.makeText(AvailableTrips_Activity.this, currentDate, Toast.LENGTH_SHORT).show();
 
         lvTrip = (ListView)findViewById(R.id.listView_trip);
     }
