@@ -1,6 +1,6 @@
 <resources>
     // GENERAL
-    <string name="appName">eTranz</string>
+    <string name="appName"><b><i>eTranz</i></b></string>
 
     //activity_login
     <string name="mailText">El. pašto adr.</string>
