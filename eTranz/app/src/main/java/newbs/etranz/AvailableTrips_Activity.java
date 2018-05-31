@@ -167,14 +167,7 @@ public class AvailableTrips_Activity extends AppCompatActivity {
 
         calendar.add(Calendar.DATE, 0);
         calendar.add(Calendar.MONTH, -1);
-//        if(Calendar.DAY_OF_MONTH < 31)
-//            calendar.add(Calendar.DAY_OF_MONTH, 1);
-//        else calendar.add(Calendar.DAY_OF_MONTH, 0);
-
-        //calendar.set(Calendar.YEAR, Calendar.MONTH - 1, Calendar.DAY_OF_MONTH);
         currentDate = dateFormat.format(calendar.getTime());
-
-        Toast.makeText(AvailableTrips_Activity.this, currentDate, Toast.LENGTH_SHORT).show();
 
         lvTrip = (ListView)findViewById(R.id.listView_trip);
     }
