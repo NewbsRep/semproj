@@ -23,7 +23,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="61" />
+                                                <entry key="scalingPercent" value="62" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -57,8 +57,11 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundColor" value="ffffff" />
-                                      <entry key="backgroundImage" value="C:\Users\Edvinas\Desktop\3d-map-pointer-vector-red-navigator-symbol-isolated-on-checkered-background-J9741N.png" />
-                                      <entry key="foregroundImage" value="C:\Users\Edvinas\Desktop\3d-map-pointer-vector-red-navigator-symbol-isolated-on-checkered-background-J9741N.png" />
+                                      <entry key="backgroundImage" value="C:\Users\Edvinas\Desktop\launcherIconBlue.png" />
+                                      <entry key="foregroundImage" value="C:\Users\Edvinas\Desktop\launcherIconBlue.png" />
+                                      <entry key="generateRoundIcon" value="false" />
+                                      <entry key="legacyIconShape" value="NONE" />
+                                      <entry key="webIconShape" value="NONE" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -92,11 +95,6 @@
                                 </PersistentState>
                               </value>
                             </entry>
-                          </map>
-                        </option>
-                        <option name="values">
-                          <map>
-                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>
